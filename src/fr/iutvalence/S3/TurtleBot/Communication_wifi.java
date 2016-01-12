@@ -3,6 +3,7 @@ package fr.iutvalence.S3.TurtleBot;
 public class Communication_wifi {
 
 	private String ip_address_robot;
+	
 	private boolean FALSE;
 	
 	public Communication_wifi(String ip){

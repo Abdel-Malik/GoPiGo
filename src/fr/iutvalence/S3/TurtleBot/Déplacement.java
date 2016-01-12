@@ -3,6 +3,7 @@ package fr.iutvalence.S3.TurtleBot;
 public class Déplacement {
 	
 	double VITESSE_MAX_DEPLACEMENT;
+	
 	double VITESSE_MIN_DEPLACEMENT;
 		
 	public Déplacement(){

@@ -41,7 +41,8 @@ public class PagePrincipale {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 603, 445);
+		frame.setResizable(false);
+		frame.setBounds(100, 100, 603, 446);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -74,18 +75,18 @@ public class PagePrincipale {
 		
 		//conteneur gauche
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(10, 98, 339, 224);
+		panel_2.setBounds(20, 98, 322, 224);
 		frame.getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
 		//bouton modifier vitesse
 		JButton btnNewButton = new JButton("Modifier la vitesse du Robot");
-		btnNewButton.setBounds(29, 162, 300, 51);
+		btnNewButton.setBounds(10, 162, 300, 51);
 		panel_2.add(btnNewButton);
 		
 		//bouton déplacer robot
 		JButton btnNewButton_1 = new JButton("D\u00E9placer le robot\r\n");
-		btnNewButton_1.setBounds(29, 11, 300, 51);
+		btnNewButton_1.setBounds(10, 11, 300, 51);
 		panel_2.add(btnNewButton_1);
 	}
 }

@@ -42,7 +42,8 @@ public class PageCarte {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 300, 450);
+		frame.setResizable(false);
+		frame.setBounds(100, 100, 287, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		

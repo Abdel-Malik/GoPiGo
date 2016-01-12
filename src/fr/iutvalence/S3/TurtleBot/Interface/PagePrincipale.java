@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class PagePrincipale {
 
@@ -45,11 +46,12 @@ public class PagePrincipale {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		//Titre
-		JLabel lblContrleDunRobot = new JLabel("- Contr\u00F4le d'un robot TurtleBot -");
-		lblContrleDunRobot.setBounds(0, 0, 597, 33);
-		lblContrleDunRobot.setHorizontalAlignment(SwingConstants.CENTER);
-		frame.getContentPane().add(lblContrleDunRobot);
+		//titre
+		JLabel lblContrleDun = new JLabel("- Contr\u00F4le d'un robot TurtleBot -\r\n");
+		lblContrleDun.setHorizontalAlignment(SwingConstants.CENTER);
+		lblContrleDun.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblContrleDun.setBounds(0, 9, 597, 39);
+		frame.getContentPane().add(lblContrleDun);
 		
 		//bouton modifier vitesse
 		JButton btnNewButton = new JButton("Modifier la vitesse du Robot");
@@ -63,7 +65,7 @@ public class PagePrincipale {
 		
 		//bouton carte
 		JButton btnNewButton_2 = new JButton("\r\n");
-		btnNewButton_2.setBounds(440, 44, 111, 75);
+		btnNewButton_2.setBounds(433, 59, 111, 75);
 		frame.getContentPane().add(btnNewButton_2);
 		btnNewButton_2.setIcon(new ImageIcon(PagePrincipale.class.getResource("/fr/iutvalence/S3/TurtleBot/Ic\u00F4nes/Sans titre-2.png")));
 		JLabel thumb = new JLabel();

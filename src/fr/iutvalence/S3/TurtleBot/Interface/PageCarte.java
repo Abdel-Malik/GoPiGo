@@ -5,10 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.ImageIcon;
+
 import javax.swing.UIManager;
+import java.awt.Font;
 
 public class PageCarte {
 
@@ -48,22 +47,17 @@ public class PageCarte {
 		frame.getContentPane().setLayout(null);
 		
 		//Titre
-		JLabel lblContrleDunRobot = new JLabel("- Carte -");
-		lblContrleDunRobot.setBounds(0, 0, 284, 33);
-		lblContrleDunRobot.setHorizontalAlignment(SwingConstants.CENTER);
-		frame.getContentPane().add(lblContrleDunRobot);
-		
-		//conteneur carte
-		JPanel panel = new JPanel();
-		panel.setBounds(10, 49, 264, 352);
-		frame.getContentPane().add(panel);
-		panel.setLayout(null);
+		JLabel lblCarte = new JLabel("- Carte -\r\n");
+		lblCarte.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCarte.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblCarte.setBounds(0, 11, 284, 39);
+		frame.getContentPane().add(lblCarte);
 		
 		//carte
 		JLabel lblNewLabel = new JLabel("Carte");
+		lblNewLabel.setBounds(10, 59, 264, 352);
+		frame.getContentPane().add(lblNewLabel);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(0, 0, 264, 352);
-		lblNewLabel.setBackground(UIManager.getColor("Button.darkShadow"));
-		panel.add(lblNewLabel);
+		lblNewLabel.setBackground(UIManager.getColor("CheckBox.focus"));
 	}
 }

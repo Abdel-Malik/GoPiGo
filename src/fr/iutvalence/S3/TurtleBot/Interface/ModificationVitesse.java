@@ -49,7 +49,7 @@ public class ModificationVitesse {
 		JLabel lblVitesseModifier = new JLabel("- S\u00E9l\u00E9ction de la vitesse \u00E0 modifier -");
 		lblVitesseModifier.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblVitesseModifier.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVitesseModifier.setBounds(0, 0, 587, 39);
+		lblVitesseModifier.setBounds(0, 11, 597, 39);
 		frame.getContentPane().add(lblVitesseModifier);
 		
 		JButton btnNewButton = new JButton("- Vitesse Globale -");

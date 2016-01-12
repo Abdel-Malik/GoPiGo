@@ -53,13 +53,6 @@ public class PageCarte {
 		lblContrleDunRobot.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(lblContrleDunRobot);
 		
-		//Bouton fermeture
-		JButton button = new JButton("");
-		button.setBackground(UIManager.getColor("Button.background"));
-		button.setIcon(new ImageIcon(PageCarte.class.getResource("/fr/iutvalence/S3/TurtleBot/Ic\u00F4nes/croix2.png")));
-		button.setBounds(244, 0, 40, 40);
-		frame.getContentPane().add(button);
-		
 		//conteneur carte
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 49, 264, 352);

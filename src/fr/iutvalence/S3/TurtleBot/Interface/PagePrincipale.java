@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 
 public class PagePrincipale {
@@ -48,45 +47,29 @@ public class PagePrincipale {
 		
 		//Titre
 		JLabel lblContrleDunRobot = new JLabel("- Contr\u00F4le d'un robot TurtleBot -");
-		lblContrleDunRobot.setBounds(0, 0, 587, 33);
+		lblContrleDunRobot.setBounds(0, 0, 597, 33);
 		lblContrleDunRobot.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(lblContrleDunRobot);
 		
-		//conteneur droit
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(342, 33, 235, 363);
-		frame.getContentPane().add(panel_4);
-		panel_4.setLayout(null);
-		
-		//image du turtlebot
-		JPanel panel = new JPanel();
-		panel.setBounds(76, 162, 133, 190);
-		JLabel thumb = new JLabel();
-		thumb.setSize(133,190);
-		thumb.setIcon(new ImageIcon(PagePrincipale.class.getResource("/fr/iutvalence/S3/TurtleBot/Ic\u00F4nes/Sans titre-3.png")));
-		panel.add(thumb);
-		panel_4.add(panel);
-		
-		//bouton carte
-		JButton btnNewButton_2 = new JButton("\r\n");
-		btnNewButton_2.setIcon(new ImageIcon(PagePrincipale.class.getResource("/fr/iutvalence/S3/TurtleBot/Ic\u00F4nes/Sans titre-2.png")));
-		btnNewButton_2.setBounds(76, 11, 111, 75);
-		panel_4.add(btnNewButton_2);
-		
-		//conteneur gauche
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(20, 98, 322, 224);
-		frame.getContentPane().add(panel_2);
-		panel_2.setLayout(null);
-		
 		//bouton modifier vitesse
 		JButton btnNewButton = new JButton("Modifier la vitesse du Robot");
-		btnNewButton.setBounds(10, 162, 300, 51);
-		panel_2.add(btnNewButton);
+		btnNewButton.setBounds(32, 238, 300, 51);
+		frame.getContentPane().add(btnNewButton);
 		
 		//bouton déplacer robot
 		JButton btnNewButton_1 = new JButton("D\u00E9placer le robot\r\n");
-		btnNewButton_1.setBounds(10, 11, 300, 51);
-		panel_2.add(btnNewButton_1);
+		btnNewButton_1.setBounds(32, 108, 300, 51);
+		frame.getContentPane().add(btnNewButton_1);
+		
+		//bouton carte
+		JButton btnNewButton_2 = new JButton("\r\n");
+		btnNewButton_2.setBounds(440, 44, 111, 75);
+		frame.getContentPane().add(btnNewButton_2);
+		btnNewButton_2.setIcon(new ImageIcon(PagePrincipale.class.getResource("/fr/iutvalence/S3/TurtleBot/Ic\u00F4nes/Sans titre-2.png")));
+		JLabel thumb = new JLabel();
+		thumb.setLocation(433, 206);
+		frame.getContentPane().add(thumb);
+		thumb.setSize(130,190);
+		thumb.setIcon(new ImageIcon(PagePrincipale.class.getResource("/fr/iutvalence/S3/TurtleBot/Ic\u00F4nes/Sans titre-3.png")));
 	}
 }

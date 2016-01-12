@@ -64,9 +64,9 @@ public class ModificationVitesse {
 		btnNewButton_2.setBounds(69, 275, 457, 54);
 		frame.getContentPane().add(btnNewButton_2);
 		
-		JButton btnNewButton_3 = new JButton("\r\n");
+		JButton btnNewButton_3 = new JButton("");
 		btnNewButton_3.setIcon(new ImageIcon(ModificationVitesse.class.getResource("/fr/iutvalence/S3/TurtleBot/Ic\u00F4nes/home.png")));
-		btnNewButton_3.setBounds(490, 347, 87, 50);
+		btnNewButton_3.setBounds(537, 357, 50, 50);
 		frame.getContentPane().add(btnNewButton_3);
 	}
 

@@ -4,12 +4,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
-import javax.swing.JSplitPane;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
+import javax.swing.UIManager;
 
 public class PageCarte {
 
@@ -43,51 +42,34 @@ public class PageCarte {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 603, 445);
+		frame.setBounds(100, 100, 300, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		//Titre
-		JLabel lblContrleDunRobot = new JLabel("- Contr\u00F4le d'un robot TurtleBot -");
-		lblContrleDunRobot.setBounds(0, 0, 587, 33);
+		JLabel lblContrleDunRobot = new JLabel("- Carte -");
+		lblContrleDunRobot.setBounds(0, 0, 284, 33);
 		lblContrleDunRobot.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(lblContrleDunRobot);
 		
-		//conteneur droit
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(342, 33, 235, 363);
-		frame.getContentPane().add(panel_4);
-		panel_4.setLayout(null);
+		//Bouton fermeture
+		JButton button = new JButton("");
+		button.setBackground(UIManager.getColor("Button.background"));
+		button.setIcon(new ImageIcon(PageCarte.class.getResource("/fr/iutvalence/S3/TurtleBot/Ic\u00F4nes/croix2.png")));
+		button.setBounds(244, 0, 40, 40);
+		frame.getContentPane().add(button);
 		
-		//image du turtlebot
+		//conteneur carte
 		JPanel panel = new JPanel();
-		panel.setBounds(76, 162, 133, 190);
-		JLabel thumb = new JLabel();
-		thumb.setSize(133,190);
-		thumb.setIcon(new ImageIcon(PageCarte.class.getResource("/fr/iutvalence/S3/TurtleBot/Ic\u00F4nes/Sans titre-3.png")));
-		panel.add(thumb);
-		panel_4.add(panel);
+		panel.setBounds(10, 49, 264, 352);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
 		
-		//bouton carte
-		JButton btnNewButton_2 = new JButton("\r\n");
-		btnNewButton_2.setIcon(new ImageIcon(PageCarte.class.getResource("/fr/iutvalence/S3/TurtleBot/Ic\u00F4nes/Sans titre-2.png")));
-		btnNewButton_2.setBounds(76, 11, 111, 75);
-		panel_4.add(btnNewButton_2);
-		
-		//conteneur gauche
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(10, 98, 339, 224);
-		frame.getContentPane().add(panel_2);
-		panel_2.setLayout(null);
-		
-		//bouton modifier vitesse
-		JButton btnNewButton = new JButton("Modifier la vitesse du Robot");
-		btnNewButton.setBounds(29, 162, 300, 51);
-		panel_2.add(btnNewButton);
-		
-		//bouton déplacer robot
-		JButton btnNewButton_1 = new JButton("D\u00E9placer le robot\r\n");
-		btnNewButton_1.setBounds(29, 11, 300, 51);
-		panel_2.add(btnNewButton_1);
+		//carte
+		JLabel lblNewLabel = new JLabel("Carte");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(0, 0, 264, 352);
+		lblNewLabel.setBackground(UIManager.getColor("Button.darkShadow"));
+		panel.add(lblNewLabel);
 	}
 }

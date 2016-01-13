@@ -1,6 +1,6 @@
 package fr.iutvalence.S3.TurtleBot;
 
-public class Rotation {
+public class Rotation extends Information{
 
 	double VITESSE_MAX_ROTATION;
 	

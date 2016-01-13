@@ -1,10 +1,10 @@
 package fr.iutvalence.S3.TurtleBot;
 
-public class Déplacement {
+public class Déplacement extends Information {
 	
-	double VITESSE_MAX_DEPLACEMENT;
+	public double VITESSE_MAX_DEPLACEMENT;
 	
-	double VITESSE_MIN_DEPLACEMENT;
+	public double VITESSE_MIN_DEPLACEMENT;
 		
 	public Déplacement(){
 		

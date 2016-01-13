@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 
 public class Application {
 	
-	/*private Communication_wifi comWifi;
+	private Communication_wifi comWifi;
 	
 	public Application(Communication_wifi comWifi){
 		this.comWifi = comWifi;
@@ -19,12 +19,16 @@ public class Application {
 		//TODO
 	}
 	
-	private void etablirConnexion(){
+	public void etablirConnexion(){
 		this.comWifi.seConnecter();
 	}
 	
-	private void envoyerDonnees(){
+	public void envoyerDonnees(){
 		this.comWifi.envoyerDonnees();
+	}
+	
+	public void lireDonneesServeur(){
+		this.comWifi.lireDonneesServeur();
 	}
 	
 	public void montrerCarte(Position p){
@@ -34,6 +38,6 @@ public class Application {
 	public void terminerConnexion()
 	{
 		this.comWifi.fermerConnexion();
-	}*/
+	}
 	
 }

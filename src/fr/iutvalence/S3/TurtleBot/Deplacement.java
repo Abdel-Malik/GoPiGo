@@ -1,16 +1,16 @@
 package fr.iutvalence.S3.TurtleBot;
 
-public class Déplacement extends Information {
+public class Deplacement extends Information {
 	
 	public final static double VITESSE_MAX_DEPLACEMENT = 0.6;
 	
 	public final static double VITESSE_MIN_DEPLACEMENT = 0.1;
 		
-	public Déplacement(){
+	public Deplacement(){
 		
 	}
 	
-	public void seDeplacer(Sens_déplacement sens){
+	public void seDeplacer(Sens_deplacement sens){
 		//TODO
 	}
 	

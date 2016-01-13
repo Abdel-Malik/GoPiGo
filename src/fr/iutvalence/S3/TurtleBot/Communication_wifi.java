@@ -1,24 +1,31 @@
 package fr.iutvalence.S3.TurtleBot;
-
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.io.*;
+import java.net.*;
 
 public class Communication_wifi {
 
 	private String ip_address_robot;
+	private String character;
+	private String modifiedCharacter;
 	
-	private Socket socket;
+	private BufferedReader inFromUser;
+	private DataOutputStream outToServer;
+	private BufferedReader inFromServer;
 	
-	public Communication_wifi(String ip){
+	private Socket socketClient;
+	
+	public Communication_wifi(String ip) throws IOException
+	{
 		this.ip_address_robot=ip;
 	}
 	
 	public boolean seConnecter(){
 		try 
 		{			
-		     this.socket = new Socket(this.ip_address_robot,8080);
+		     this.socketClient = new Socket(this.ip_address_robot,8080);
+		     this.inFromUser = new BufferedReader(new InputStreamReader(System.in));
+		     this.outToServer = new DataOutputStream(socketClient.getOutputStream());
+		     this.inFromServer = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
 		     return true;
 		}
 		catch (UnknownHostException e) 
@@ -33,12 +40,15 @@ public class Communication_wifi {
 		}
 	}
 	
-	public void envoyerDonnees(Information info){
-		DataOutputStream out;
+	public void envoyerDonnees(){
 		try 
 		{
-			out=new DataOutputStream(socket.getOutputStream());  
-		    
+			while(true)
+			{
+				this.character = this.inFromUser.readLine();
+				if(!(character == null))
+					this.outToServer.writeBytes(this.character);
+			}
 		} 
 		catch (IOException e) 
 		{
@@ -46,10 +56,21 @@ public class Communication_wifi {
 		}
 	}
 	
+	public void lireDonneesServeur()
+	{
+		try {
+			this.modifiedCharacter = inFromServer.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("FROM SERVER :" + modifiedCharacter);
+	}
+	
 	public void fermerConnexion(){
 		try 
 		{
-			socket.close();
+			this.socketClient.close();
 		} 
 		catch (IOException e) 
 		{

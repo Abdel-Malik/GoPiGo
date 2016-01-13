@@ -5,15 +5,15 @@ public class Vitesse {
 	private double vitesseActuelle;
 	
 	public Vitesse(){
-		
+		this.vitesseActuelle = 0;
 	}
 	
 	public void incrementerVitesse(){
-		this.vitesseActuelle++;
+		this.vitesseActuelle = vitesseActuelle + 0.2;
 	}
 	
 	public void decrementerVitesse(){
-		this.vitesseActuelle--;
+		this.vitesseActuelle = vitesseActuelle - 0.2;
 	}
 	
 	public void modifierVitesse(double vitesse){

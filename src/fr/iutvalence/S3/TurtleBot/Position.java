@@ -8,8 +8,10 @@ public class Position {
 
 	private int zPosition;
 	
-	public Position(){
-		
+	public Position(int xPosition, int yPosition, int zPosition){
+		this.xPosition = xPosition;
+		this.yPosition = yPosition;
+		this.zPosition = zPosition;
 	}
 	
 	public int getX(){

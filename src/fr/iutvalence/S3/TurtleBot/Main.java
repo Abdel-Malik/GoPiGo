@@ -2,8 +2,6 @@ package fr.iutvalence.S3.TurtleBot;
 
 import java.io.IOException;
 
-import javax.swing.JFrame;
-
 
 public class Main 
 {

@@ -1,6 +1,5 @@
 package fr.iutvalence.S3.TurtleBot.Interface;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -65,8 +64,8 @@ public class ModificationVitesse {
 		frame.getContentPane().add(vitesseDeplacement);
 		
 		JButton btnNewButton_3 = new JButton("");
-		btnNewButton_3.setIcon(new ImageIcon(ModificationVitesse.class.getResource("/fr/iutvalence/S3/TurtleBot/Ic\u00F4nes/home.png")));
-		btnNewButton_3.setBounds(537, 357, 50, 50);
+		btnNewButton_3.setIcon(new ImageIcon(ModificationVitesse.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/home.png")));
+		btnNewButton_3.setBounds(514, 356, 50, 50);
 		frame.getContentPane().add(btnNewButton_3);
 	}
 

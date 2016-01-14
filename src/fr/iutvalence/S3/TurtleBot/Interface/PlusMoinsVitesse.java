@@ -1,7 +1,5 @@
 package fr.iutvalence.S3.TurtleBot.Interface;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -49,33 +47,33 @@ public class PlusMoinsVitesse {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblTitre = new JLabel("- Titre -");
-		lblTitre.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitre.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblTitre.setBounds(0, 0, 414, 39);
-		frame.getContentPane().add(lblTitre);
+		JLabel titre = new JLabel("- Titre -");
+		titre.setHorizontalAlignment(SwingConstants.CENTER);
+		titre.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		titre.setBounds(0, 0, 414, 39);
+		frame.getContentPane().add(titre);
 		
 		JProgressBar progressBar = new JProgressBar();
 		progressBar.setBounds(114, 70, 186, 14);
 		frame.getContentPane().add(progressBar);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(PlusMoinsVitesse.class.getResource("/fr/iutvalence/S3/TurtleBot/Ic\u00F4nes/moins4.png")));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton buttonMinus = new JButton("");
+		buttonMinus.setIcon(new ImageIcon(PlusMoinsVitesse.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png")));
+		buttonMinus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton.setBounds(42, 50, 50, 50);
-		frame.getContentPane().add(btnNewButton);
+		buttonMinus.setBounds(42, 50, 50, 50);
+		frame.getContentPane().add(buttonMinus);
 		
-		JButton button = new JButton("");
-		button.setIcon(new ImageIcon(PlusMoinsVitesse.class.getResource("/fr/iutvalence/S3/TurtleBot/Ic\u00F4nes/plus2.png")));
-		button.setBounds(325, 50, 50, 50);
-		frame.getContentPane().add(button);
+		JButton buttonPlus = new JButton("");
+		buttonPlus.setIcon(new ImageIcon(PlusMoinsVitesse.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png")));
+		buttonPlus.setBounds(325, 50, 50, 50);
+		frame.getContentPane().add(buttonPlus);
 		
-		JButton btnNewButton_1 = new JButton("");
-		btnNewButton_1.setIcon(new ImageIcon(PlusMoinsVitesse.class.getResource("/fr/iutvalence/S3/TurtleBot/Ic\u00F4nes/home.png")));
-		btnNewButton_1.setBounds(354, 111, 50, 50);
-		frame.getContentPane().add(btnNewButton_1);
+		JButton buttonHome = new JButton("");
+		buttonHome.setIcon(new ImageIcon(PlusMoinsVitesse.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/home.png")));
+		buttonHome.setBounds(354, 111, 50, 50);
+		frame.getContentPane().add(buttonHome);
 	}
 }

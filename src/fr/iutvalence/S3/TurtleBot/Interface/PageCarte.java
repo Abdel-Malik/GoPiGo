@@ -1,13 +1,11 @@
 package fr.iutvalence.S3.TurtleBot.Interface;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
-import javax.swing.UIManager;
 import java.awt.Font;
+import java.awt.BorderLayout;
+import java.awt.Color;
 
 public class PageCarte {
 
@@ -41,23 +39,18 @@ public class PageCarte {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setResizable(false);
 		frame.setBounds(100, 100, 287, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		//Titre
-		JLabel lblCarte = new JLabel("- Carte -\r\n");
-		lblCarte.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCarte.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblCarte.setBounds(0, 11, 284, 39);
-		frame.getContentPane().add(lblCarte);
+		JLabel label = new JLabel("- Carte -");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		frame.getContentPane().add(label, BorderLayout.NORTH);
 		
-		//carte
-		JLabel lblNewLabel = new JLabel("Carte");
-		lblNewLabel.setBounds(10, 59, 264, 352);
-		frame.getContentPane().add(lblNewLabel);
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBackground(UIManager.getColor("CheckBox.focus"));
+		JLabel label_1 = new JLabel("Carte");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setBackground(Color.BLACK);
+		frame.getContentPane().add(label_1, BorderLayout.CENTER);
 	}
 }

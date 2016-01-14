@@ -11,10 +11,7 @@ public class Main
 	public static void main(String[] args) throws IOException 
 	{
 		PageConnexion connexion = new PageConnexion();
-		
-		
-			
-			
-			
+	
+		//coucou
 		}
 }

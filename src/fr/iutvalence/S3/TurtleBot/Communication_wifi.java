@@ -5,6 +5,7 @@ import java.net.*;
 public class Communication_wifi {
 
 	private String ip_address_robot;
+	private int port;
 	private String character;
 	private String modifiedCharacter;
 	
@@ -14,15 +15,17 @@ public class Communication_wifi {
 	
 	private Socket socketClient;
 	
-	public Communication_wifi(String ip) throws IOException
+	public Communication_wifi(String ip, int port) throws IOException
 	{
 		this.ip_address_robot=ip;
+		this.port = port;
 	}
 	
-	public boolean seConnecter(){
+	public boolean seConnecter()
+	{
 		try 
 		{			
-		     this.socketClient = new Socket(this.ip_address_robot,8080);
+		     this.socketClient = new Socket(this.ip_address_robot, this.port);
 		     this.inFromUser = new BufferedReader(new InputStreamReader(System.in));
 		     this.outToServer = new DataOutputStream(socketClient.getOutputStream());
 		     this.inFromServer = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
@@ -40,7 +43,8 @@ public class Communication_wifi {
 		}
 	}
 	
-	public void envoyerDonnees(){
+	public void envoyerDonnees()
+	{
 		try 
 		{
 			while(true)
@@ -67,7 +71,8 @@ public class Communication_wifi {
 		System.out.println("FROM SERVER :" + modifiedCharacter);
 	}
 	
-	public void fermerConnexion(){
+	public void fermerConnexion()
+	{
 		try 
 		{
 			this.socketClient.close();

@@ -1,8 +1,10 @@
 package fr.iutvalence.S3.TurtleBot;
 
-public class Information {
+public class Information 
+{
 
-	public Information(){
+	public Information()
+	{
 		
 	}
 	

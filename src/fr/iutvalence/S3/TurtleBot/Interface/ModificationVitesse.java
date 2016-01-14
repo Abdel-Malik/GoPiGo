@@ -52,17 +52,17 @@ public class ModificationVitesse {
 		lblVitesseModifier.setBounds(0, 11, 597, 39);
 		frame.getContentPane().add(lblVitesseModifier);
 		
-		JButton btnNewButton = new JButton("- Vitesse Globale -");
-		btnNewButton.setBounds(69, 74, 457, 54);
-		frame.getContentPane().add(btnNewButton);
+		JButton vitesseGlobale = new JButton("- Vitesse Globale -");
+		vitesseGlobale.setBounds(69, 74, 457, 54);
+		frame.getContentPane().add(vitesseGlobale);
 		
-		JButton btnNewButton_1 = new JButton("- Vitesse Rotation -");
-		btnNewButton_1.setBounds(69, 173, 457, 54);
-		frame.getContentPane().add(btnNewButton_1);
+		JButton vitesseRotation = new JButton("- Vitesse Rotation -");
+		vitesseRotation.setBounds(69, 173, 457, 54);
+		frame.getContentPane().add(vitesseRotation);
 		
-		JButton btnNewButton_2 = new JButton("- Vitesse D\u00E9placement -");
-		btnNewButton_2.setBounds(69, 275, 457, 54);
-		frame.getContentPane().add(btnNewButton_2);
+		JButton vitesseDeplacement = new JButton("- Vitesse D\u00E9placement -");
+		vitesseDeplacement.setBounds(69, 275, 457, 54);
+		frame.getContentPane().add(vitesseDeplacement);
 		
 		JButton btnNewButton_3 = new JButton("");
 		btnNewButton_3.setIcon(new ImageIcon(ModificationVitesse.class.getResource("/fr/iutvalence/S3/TurtleBot/Ic\u00F4nes/home.png")));

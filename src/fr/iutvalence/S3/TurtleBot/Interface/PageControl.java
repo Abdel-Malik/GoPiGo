@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 import fr.iutvalence.S3.TurtleBot.Application;
-import fr.iutvalence.S3.TurtleBot.Deplacement;
 import fr.iutvalence.S3.TurtleBot.Sens_deplacement;
 import fr.iutvalence.S3.TurtleBot.Sens_rotation;
 
@@ -22,8 +21,6 @@ import java.awt.event.ActionEvent;
 public class PageControl {
 
 	private JFrame frame;
-	private Deplacement deplacement;
-	private Application application;
 
 	/**
 	 * Create the application.
@@ -37,9 +34,7 @@ public class PageControl {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(Application application)
-	{
-		this.deplacement = new Deplacement();
-		
+	{		
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 700, 500);

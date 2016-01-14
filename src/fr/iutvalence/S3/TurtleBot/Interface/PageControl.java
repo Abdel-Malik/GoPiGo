@@ -11,8 +11,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
+import fr.iutvalence.S3.TurtleBot.Application;
 import fr.iutvalence.S3.TurtleBot.Deplacement;
 import fr.iutvalence.S3.TurtleBot.Sens_deplacement;
+import fr.iutvalence.S3.TurtleBot.Sens_rotation;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -21,19 +23,20 @@ public class PageControl {
 
 	private JFrame frame;
 	private Deplacement deplacement;
+	private Application application;
 
 	/**
 	 * Create the application.
 	 */
-	public PageControl() 
+	public PageControl(Application application) 
 	{
-		initialize();
+		initialize(application);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize()
+	private void initialize(Application application)
 	{
 		this.deplacement = new Deplacement();
 		
@@ -65,6 +68,14 @@ public class PageControl {
 		panelGauche.setLayout(null);
 		
 		JButton avGauche = new JButton("");
+		avGauche.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				String str = application.deplacement(Sens_deplacement.AVANT, Sens_rotation.GAUCHE);
+				application.envoyerDonnees(str);
+			}
+		});
 		avGauche.setBounds(82, 70, 50, 50);
 		panelGauche.add(avGauche);
 		
@@ -74,41 +85,94 @@ public class PageControl {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				deplacement.seDeplacer(Sens_deplacement.AVANT);
+				String str = application.deplacement(Sens_deplacement.AVANT, Sens_rotation.RIEN);
+				application.envoyerDonnees(str);
 			}
 		});
 		avancer.setBounds(142, 70, 50, 50);
 		panelGauche.add(avancer);
 		
 		JButton avDroite = new JButton("");
+		avDroite.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				String str = application.deplacement(Sens_deplacement.AVANT, Sens_rotation.DROITE);
+				application.envoyerDonnees(str);
+			}
+		});
 		avDroite.setBounds(202, 70, 50, 50);
 		panelGauche.add(avDroite);
 		
 		JButton gauche = new JButton("");
+		gauche.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				String str = application.deplacement(Sens_deplacement.RIEN, Sens_rotation.GAUCHE);
+				application.envoyerDonnees(str);
+			}
+		});
 		gauche.setBounds(82, 131, 50, 50);
 		panelGauche.add(gauche);
 		
 		JButton stop = new JButton("");
-		stop.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		stop.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				String str = application.deplacement(Sens_deplacement.RIEN, Sens_rotation.RIEN);
+				application.envoyerDonnees(str);
 			}
 		});
 		stop.setBounds(142, 131, 50, 50);
 		panelGauche.add(stop);
 		
 		JButton droite = new JButton("");
+		droite.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				String str = application.deplacement(Sens_deplacement.RIEN, Sens_rotation.DROITE);
+				application.envoyerDonnees(str);
+			}
+		});
 		droite.setBounds(202, 131, 50, 50);
 		panelGauche.add(droite);
 		
 		JButton recGauche = new JButton("");
+		recGauche.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				String str = application.deplacement(Sens_deplacement.ARRIERE, Sens_rotation.GAUCHE);
+				application.envoyerDonnees(str);
+			}
+		});
 		recGauche.setBounds(82, 192, 50, 50);
 		panelGauche.add(recGauche);
 		
 		JButton reculer = new JButton("");
+		reculer.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				String str = application.deplacement(Sens_deplacement.ARRIERE, Sens_rotation.RIEN);
+				application.envoyerDonnees(str);
+			}
+		});
 		reculer.setBounds(142, 192, 50, 50);
 		panelGauche.add(reculer);
 		
 		JButton recDroite = new JButton("");
+		recDroite.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				String str = application.deplacement(Sens_deplacement.ARRIERE, Sens_rotation.DROITE);
+				application.envoyerDonnees(str);
+			}
+		});
 		recDroite.setBounds(202, 192, 50, 50);
 		panelGauche.add(recDroite);
 		
@@ -134,11 +198,25 @@ public class PageControl {
 		panelDroit.add(progressBarVitDep);
 		
 		JButton buttonMinusDep = new JButton("");
+		buttonMinusDep.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				application.envoyerDonnees(",");
+			}
+		});
 		buttonMinusDep.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png")));
 		buttonMinusDep.setBounds(42, 80, 50, 50);
 		panelDroit.add(buttonMinusDep);
 		
 		JButton buttonPlusDep = new JButton("");
+		buttonPlusDep.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				application.envoyerDonnees(";");
+			}
+		});
 		buttonPlusDep.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png")));
 		buttonPlusDep.setBounds(289, 80, 50, 50);
 		panelDroit.add(buttonPlusDep);
@@ -154,11 +232,25 @@ public class PageControl {
 		panelDroit.add(progressBarVitRot);
 		
 		JButton buttonMinusRot = new JButton("");
+		buttonMinusRot.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				application.envoyerDonnees(":");
+			}
+		});
 		buttonMinusRot.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png")));
 		buttonMinusRot.setBounds(42, 258, 50, 50);
 		panelDroit.add(buttonMinusRot);
 		
 		JButton buttonPlusRot = new JButton("");
+		buttonPlusRot.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				application.envoyerDonnees("!");
+			}
+		});
 		buttonPlusRot.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png")));
 		buttonPlusRot.setBounds(289, 258, 50, 50);
 		panelDroit.add(buttonPlusRot);

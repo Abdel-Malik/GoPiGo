@@ -43,16 +43,13 @@ public class Communication_wifi {
 		}
 	}
 	
-	public void envoyerDonnees()
+	public void envoyerDonnees(String str)
 	{
 		try 
 		{
-			while(true)
-			{
-				this.character = this.inFromUser.readLine();
-				if(!(character == null))
-					this.outToServer.writeBytes(this.character);
-			}
+				//this.character = this.inFromUser.readLine();
+				//if(!(str == null))
+				this.outToServer.writeBytes(str);
 		} 
 		catch (IOException e) 
 		{

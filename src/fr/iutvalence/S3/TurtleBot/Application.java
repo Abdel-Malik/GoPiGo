@@ -4,10 +4,12 @@ package fr.iutvalence.S3.TurtleBot;
 public class Application {
 	
 	private Communication_wifi comWifi;
+	private Mouvement mouvement;
 	
 	public Application(Communication_wifi comWifi)
 	{
 		this.comWifi = comWifi;
+		this.mouvement = new Mouvement();
 	}
 	
 	//Methode run dans un jeu
@@ -21,9 +23,9 @@ public class Application {
 		this.comWifi.seConnecter();
 	}
 	
-	public void envoyerDonnees()
+	public void envoyerDonnees(String str)
 	{
-		this.comWifi.envoyerDonnees();
+		this.comWifi.envoyerDonnees(str);
 	}
 	
 	public void lireDonneesServeur()
@@ -39,6 +41,11 @@ public class Application {
 	public void terminerConnexion()
 	{
 		this.comWifi.fermerConnexion();
+	}
+	
+	public String deplacement(Sens_deplacement dep, Sens_rotation rot)
+	{
+		return this.mouvement.deplacement(dep, rot);
 	}
 	
 }

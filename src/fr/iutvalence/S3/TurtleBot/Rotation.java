@@ -13,8 +13,6 @@ public class Rotation
 	
 	public String effectuerUneRotation(Sens_rotation sens)
 	{
-		String string = new String();
-		string+=sens.toString();
-		return string;
+		return sens.toString();
 	}
 }

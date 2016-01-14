@@ -3,9 +3,11 @@ package fr.iutvalence.S3.TurtleBot;
 public enum Sens_rotation
 {
 	
-	GAUCHE ("Gauche"),
+	GAUCHE ("G"),
 	
-	DROITE ("Droite");
+	DROITE ("D"),
+	
+	RIEN ("");
 
 	private String rotation="";
 	

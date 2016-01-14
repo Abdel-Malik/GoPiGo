@@ -31,6 +31,8 @@ public class PageConnexion implements ActionListener
 	private Panel panel;
 	private JLabel lblPort;
 	private JButton btnConnexion;
+	
+	private Application application;
 
 	/**
 	 * Create the application.
@@ -43,14 +45,13 @@ public class PageConnexion implements ActionListener
 	
 	public void actionPerformed(ActionEvent e) 
 	{
-		Application application;
 		try 
 		{
 			int newPort = Integer.parseInt(port.getText());
-			application = new Application(new Communication_wifi(ipAdress.getText(), newPort));
-			application.etablirConnexion();
+			this.application = new Application(new Communication_wifi(ipAdress.getText(), newPort));
+			this.application.etablirConnexion();
 			this.frame.setVisible(false);
-			PageControl control = new PageControl();
+			PageControl control = new PageControl(application);
 			
 		} 
 		catch (NumberFormatException | IOException e1) 

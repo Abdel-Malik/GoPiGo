@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
-import fr.iutvalence.S3.TurtleBot.Interface.Connexion;
 
 public class Main 
 {
@@ -18,7 +17,5 @@ public class Main
 			application.lireDonneesServeur();
 			application.terminerConnexion();*/
 			
-			Connexion window = new Connexion();
-			window.frame.setVisible(true);
 		}
 }

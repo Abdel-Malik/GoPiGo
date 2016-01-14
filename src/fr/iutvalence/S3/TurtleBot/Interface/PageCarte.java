@@ -7,37 +7,24 @@ import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
-public class PageCarte {
+public class PageCarte 
+{
 
 	private JFrame frame;
 
 	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PageCarte window = new PageCarte();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
 	 * Create the application.
 	 */
-	public PageCarte() {
+	public PageCarte() 
+	{
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() 
+	{
 		frame = new JFrame();
 		frame.setBounds(100, 100, 287, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

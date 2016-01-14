@@ -5,50 +5,70 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+
 import java.awt.Font;
+
 import javax.swing.JTextField;
 
-public class PageConnexion {
+import fr.iutvalence.S3.TurtleBot.Application;
+import fr.iutvalence.S3.TurtleBot.Communication_wifi;
+
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+
+public class PageConnexion implements ActionListener
+{
 
 	private JFrame frame;
 	private JTextField port;
 	private JTextField ipAdress;
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PagePrincipale window = new PagePrincipale();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+	
+	private JLabel titre;
+	private JLabel lblAdresseIp;
+	private Panel panel;
+	private JLabel lblPort;
+	private JButton btnConnexion;
 
 	/**
 	 * Create the application.
 	 */
-	public PageConnexion() {
+	public PageConnexion() 
+	{
 		initialize();
 	}
 
+	
+	public void actionPerformed(ActionEvent e) 
+	{
+		Application application;
+		try 
+		{
+			application = new Application(new Communication_wifi(ipAdress.getText(), Integer.parseInt(port.getText())));
+			application.etablirConnexion();
+		} 
+		catch (NumberFormatException | IOException e1) 
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize()
+	{
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 500, 320);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
 		
 		//titre
-		JLabel titre = new JLabel("- Connexion au Robot -\r\n");
+		titre = new JLabel("- Connexion au Robot -\r\n");
 		titre.setHorizontalAlignment(SwingConstants.CENTER);
 		titre.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		titre.setBounds(0, 9, 494, 39);
@@ -59,29 +79,37 @@ public class PageConnexion {
 		imageTurtleBot.setSize(130,190);
 		imageTurtleBot.setIcon(new ImageIcon(PageConnexion.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/Sans titre-3.png")));
 		
+		panel = new Panel();
+		panel.setBounds(72, 61, 270, 190);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		lblAdresseIp = new JLabel("Adresse IP");
+		lblAdresseIp.setBounds(0, 24, 270, 14);
+		panel.add(lblAdresseIp);
+		lblAdresseIp.setHorizontalAlignment(SwingConstants.CENTER);
+		
 		ipAdress = new JTextField();
+		ipAdress.setBounds(0, 91, 270, 20);
+		panel.add(ipAdress);
 		ipAdress.setHorizontalAlignment(SwingConstants.LEFT);
-		ipAdress.setBounds(72, 102, 270, 20);
-		frame.getContentPane().add(ipAdress);
 		ipAdress.setColumns(10);
 		
+		lblPort = new JLabel("Port");
+		lblPort.setBounds(0, 72, 270, 14);
+		panel.add(lblPort);
+		lblPort.setHorizontalAlignment(SwingConstants.CENTER);
+		
 		port = new JTextField();
-		port.setBounds(72, 170, 270, 20);
-		frame.getContentPane().add(port);
+		port.setBounds(0, 41, 270, 20);
+		panel.add(port);
 		port.setColumns(10);
 		
-		JLabel lblAdresseIp = new JLabel("Adresse IP");
-		lblAdresseIp.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAdresseIp.setBounds(72, 77, 270, 14);
-		frame.getContentPane().add(lblAdresseIp);
-		
-		JLabel lblPort = new JLabel("Port");
-		lblPort.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPort.setBounds(72, 145, 270, 14);
-		frame.getContentPane().add(lblPort);
-		
-		JButton btnConnexion = new JButton("Connexion");
-		btnConnexion.setBounds(162, 222, 89, 23);
-		frame.getContentPane().add(btnConnexion);
+		btnConnexion = new JButton("Connexion");
+		btnConnexion.setBounds(80, 135, 102, 23);
+		panel.add(btnConnexion);
+		btnConnexion.addActionListener(this);
+		panel.setVisible(true);
 	}
+
 }

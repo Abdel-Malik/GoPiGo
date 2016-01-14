@@ -16,32 +16,18 @@ public class PageControle {
 	private JFrame frame;
 
 	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PageControle window = new PageControle();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
 	 * Create the application.
 	 */
-	public PageControle() {
+	public PageControle() 
+	{
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize()
+	{
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 700, 500);
@@ -123,16 +109,16 @@ public class PageControle {
 		panel_1.add(lblVitesseDplacement);
 		
 		JProgressBar progressBarVitDep = new JProgressBar();
-		progressBarVitDep.setBounds(114, 100, 136, 14);
+		progressBarVitDep.setBounds(114, 100, 165, 14);
 		panel_1.add(progressBarVitDep);
 		
 		JButton buttonMinusDep = new JButton("");
-		buttonMinusDep.setIcon(new ImageIcon(PlusMoinsVitesse.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png")));
+		buttonMinusDep.setIcon(new ImageIcon("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png"));
 		buttonMinusDep.setBounds(42, 80, 50, 50);
 		panel_1.add(buttonMinusDep);
 		
 		JButton buttonPlusDep = new JButton("");
-		buttonPlusDep.setIcon(new ImageIcon(PlusMoinsVitesse.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png")));
+		buttonPlusDep.setIcon(new ImageIcon("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png"));
 		buttonPlusDep.setBounds(289, 80, 50, 50);
 		panel_1.add(buttonPlusDep);
 		
@@ -143,16 +129,16 @@ public class PageControle {
 		panel_1.add(lblVitesseRotation);
 		
 		JProgressBar progressBarVitRot = new JProgressBar();
-		progressBarVitRot.setBounds(114, 278, 163, 14);
+		progressBarVitRot.setBounds(114, 278, 165, 14);
 		panel_1.add(progressBarVitRot);
 		
 		JButton buttonMinusRot = new JButton("");
-		buttonMinusRot.setIcon(new ImageIcon(PlusMoinsVitesse.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png")));
+		buttonMinusRot.setIcon(new ImageIcon("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png"));
 		buttonMinusRot.setBounds(42, 258, 50, 50);
 		panel_1.add(buttonMinusRot);
 		
 		JButton buttonPlusRot = new JButton("");
-		buttonPlusRot.setIcon(new ImageIcon(PlusMoinsVitesse.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png")));
+		buttonPlusRot.setIcon(new ImageIcon("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png"));
 		buttonPlusRot.setBounds(289, 258, 50, 50);
 		panel_1.add(buttonPlusRot);
 	}

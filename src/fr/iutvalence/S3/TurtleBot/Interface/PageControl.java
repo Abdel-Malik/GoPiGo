@@ -11,14 +11,21 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-public class PageControle {
+import fr.iutvalence.S3.TurtleBot.Deplacement;
+import fr.iutvalence.S3.TurtleBot.Sens_deplacement;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class PageControl {
 
 	private JFrame frame;
+	private Deplacement deplacement;
 
 	/**
 	 * Create the application.
 	 */
-	public PageControle() 
+	public PageControl() 
 	{
 		initialize();
 	}
@@ -28,6 +35,8 @@ public class PageControle {
 	 */
 	private void initialize()
 	{
+		this.deplacement = new Deplacement();
+		
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 700, 500);
@@ -40,106 +49,122 @@ public class PageControle {
 		lblDplacementDu.setBounds(0, 11, 694, 39);
 		frame.getContentPane().add(lblDplacementDu);
 		
-		JButton button = new JButton("");
-		button.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/home.png")));
-		button.setBounds(634, 410, 50, 50);
-		frame.getContentPane().add(button);
+		JButton deconnexion = new JButton("");
+		deconnexion.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/home.png")));
+		deconnexion.setBounds(634, 410, 50, 50);
+		frame.getContentPane().add(deconnexion);
 		
-		JButton btnNewButton_5 = new JButton("");
-		btnNewButton_5.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/Sans titre-2.png")));
-		btnNewButton_5.setBounds(10, 385, 75, 75);
-		frame.getContentPane().add(btnNewButton_5);
+		JButton carte = new JButton("");
+		carte.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/Sans titre-2.png")));
+		carte.setBounds(10, 385, 75, 75);
+		frame.getContentPane().add(carte);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 61, 341, 410);
-		frame.getContentPane().add(panel);
-		panel.setLayout(null);
+		JPanel panelGauche = new JPanel();
+		panelGauche.setBounds(0, 61, 341, 410);
+		frame.getContentPane().add(panelGauche);
+		panelGauche.setLayout(null);
 		
 		JButton avGauche = new JButton("");
 		avGauche.setBounds(82, 70, 50, 50);
-		panel.add(avGauche);
+		panelGauche.add(avGauche);
 		
 		JButton avancer = new JButton("");
+		avancer.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/home.png")));
+		avancer.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				deplacement.seDeplacer(Sens_deplacement.AVANT);
+			}
+		});
 		avancer.setBounds(142, 70, 50, 50);
-		panel.add(avancer);
+		panelGauche.add(avancer);
 		
 		JButton avDroite = new JButton("");
 		avDroite.setBounds(202, 70, 50, 50);
-		panel.add(avDroite);
+		panelGauche.add(avDroite);
 		
 		JButton gauche = new JButton("");
 		gauche.setBounds(82, 131, 50, 50);
-		panel.add(gauche);
+		panelGauche.add(gauche);
 		
 		JButton stop = new JButton("");
+		stop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		stop.setBounds(142, 131, 50, 50);
-		panel.add(stop);
+		panelGauche.add(stop);
 		
 		JButton droite = new JButton("");
 		droite.setBounds(202, 131, 50, 50);
-		panel.add(droite);
+		panelGauche.add(droite);
 		
 		JButton recGauche = new JButton("");
 		recGauche.setBounds(82, 192, 50, 50);
-		panel.add(recGauche);
+		panelGauche.add(recGauche);
 		
 		JButton reculer = new JButton("");
 		reculer.setBounds(142, 192, 50, 50);
-		panel.add(reculer);
+		panelGauche.add(reculer);
 		
 		JButton recDroite = new JButton("");
 		recDroite.setBounds(202, 192, 50, 50);
-		panel.add(recDroite);
+		panelGauche.add(recDroite);
 		
 		JLabel lblDplacement = new JLabel("D\u00E9placement");
 		lblDplacement.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblDplacement.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDplacement.setBounds(0, 31, 341, 28);
-		panel.add(lblDplacement);
+		panelGauche.add(lblDplacement);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(345, 61, 349, 410);
-		frame.getContentPane().add(panel_1);
-		panel_1.setLayout(null);
+		JPanel panelDroit = new JPanel();
+		panelDroit.setBounds(345, 61, 349, 410);
+		frame.getContentPane().add(panelDroit);
+		panelDroit.setLayout(null);
 		
 		JLabel lblVitesseDplacement = new JLabel("Vitesse de D\u00E9placement");
 		lblVitesseDplacement.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVitesseDplacement.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblVitesseDplacement.setBounds(0, 30, 349, 39);
-		panel_1.add(lblVitesseDplacement);
+		panelDroit.add(lblVitesseDplacement);
 		
 		JProgressBar progressBarVitDep = new JProgressBar();
 		progressBarVitDep.setBounds(114, 100, 165, 14);
-		panel_1.add(progressBarVitDep);
+		panelDroit.add(progressBarVitDep);
 		
 		JButton buttonMinusDep = new JButton("");
-		buttonMinusDep.setIcon(new ImageIcon("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png"));
+		buttonMinusDep.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png")));
 		buttonMinusDep.setBounds(42, 80, 50, 50);
-		panel_1.add(buttonMinusDep);
+		panelDroit.add(buttonMinusDep);
 		
 		JButton buttonPlusDep = new JButton("");
-		buttonPlusDep.setIcon(new ImageIcon("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png"));
+		buttonPlusDep.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png")));
 		buttonPlusDep.setBounds(289, 80, 50, 50);
-		panel_1.add(buttonPlusDep);
+		panelDroit.add(buttonPlusDep);
 		
 		JLabel lblVitesseRotation = new JLabel(" Vitesse de Rotation");
 		lblVitesseRotation.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVitesseRotation.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblVitesseRotation.setBounds(0, 208, 349, 39);
-		panel_1.add(lblVitesseRotation);
+		panelDroit.add(lblVitesseRotation);
 		
 		JProgressBar progressBarVitRot = new JProgressBar();
 		progressBarVitRot.setBounds(114, 278, 165, 14);
-		panel_1.add(progressBarVitRot);
+		panelDroit.add(progressBarVitRot);
 		
 		JButton buttonMinusRot = new JButton("");
-		buttonMinusRot.setIcon(new ImageIcon("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png"));
+		buttonMinusRot.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png")));
 		buttonMinusRot.setBounds(42, 258, 50, 50);
-		panel_1.add(buttonMinusRot);
+		panelDroit.add(buttonMinusRot);
 		
 		JButton buttonPlusRot = new JButton("");
-		buttonPlusRot.setIcon(new ImageIcon("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png"));
+		buttonPlusRot.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png")));
 		buttonPlusRot.setBounds(289, 258, 50, 50);
-		panel_1.add(buttonPlusRot);
+		panelDroit.add(buttonPlusRot);
+		
+		frame.setVisible(true);
+		panelGauche.setVisible(true);
+		panelDroit.setVisible(true);
 	}
 }

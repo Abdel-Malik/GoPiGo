@@ -2,6 +2,7 @@ package fr.iutvalence.S3.TurtleBot.Interface;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -45,8 +46,12 @@ public class PageConnexion implements ActionListener
 		Application application;
 		try 
 		{
-			application = new Application(new Communication_wifi(ipAdress.getText(), Integer.parseInt(port.getText())));
+			int newPort = Integer.parseInt(port.getText());
+			application = new Application(new Communication_wifi(ipAdress.getText(), newPort));
 			application.etablirConnexion();
+			this.frame.setVisible(false);
+			PageControl control = new PageControl();
+			
 		} 
 		catch (NumberFormatException | IOException e1) 
 		{
@@ -65,7 +70,7 @@ public class PageConnexion implements ActionListener
 		frame.setBounds(100, 100, 500, 320);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		frame.setVisible(true);
+		
 		
 		//titre
 		titre = new JLabel("- Connexion au Robot -\r\n");
@@ -90,7 +95,7 @@ public class PageConnexion implements ActionListener
 		lblAdresseIp.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		ipAdress = new JTextField();
-		ipAdress.setBounds(0, 91, 270, 20);
+		ipAdress.setBounds(0, 41, 270, 20);
 		panel.add(ipAdress);
 		ipAdress.setHorizontalAlignment(SwingConstants.LEFT);
 		ipAdress.setColumns(10);
@@ -101,7 +106,7 @@ public class PageConnexion implements ActionListener
 		lblPort.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		port = new JTextField();
-		port.setBounds(0, 41, 270, 20);
+		port.setBounds(0, 87, 270, 20);
 		panel.add(port);
 		port.setColumns(10);
 		
@@ -110,6 +115,7 @@ public class PageConnexion implements ActionListener
 		panel.add(btnConnexion);
 		btnConnexion.addActionListener(this);
 		panel.setVisible(true);
+		frame.setVisible(true);
 	}
 
 }

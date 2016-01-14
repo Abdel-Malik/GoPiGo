@@ -1,6 +1,6 @@
 package fr.iutvalence.S3.TurtleBot;
 
-public class Rotation extends Information
+public class Rotation
 {
 
 	public final static double VITESSE_MAX_ROTATION = 2.6;
@@ -11,8 +11,10 @@ public class Rotation extends Information
 		
 	}
 	
-	public void effectuerUneRotation(Sens_rotation sens)
+	public String effectuerUneRotation(Sens_rotation sens)
 	{
-		//TODO
+		String string = new String();
+		string+=sens.toString();
+		return string;
 	}
 }

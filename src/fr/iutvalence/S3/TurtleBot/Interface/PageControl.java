@@ -53,6 +53,11 @@ public class PageControl {
 		frame.getContentPane().add(deconnexion);
 		
 		JButton carte = new JButton("");
+		carte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PageCarte pageCarte = new PageCarte();
+			}
+		});
 		carte.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/Sans titre-2.png")));
 		carte.setBounds(10, 385, 75, 75);
 		frame.getContentPane().add(carte);

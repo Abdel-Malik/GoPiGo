@@ -39,5 +39,7 @@ public class PageCarte
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setBackground(Color.BLACK);
 		frame.getContentPane().add(label_1, BorderLayout.CENTER);
+		
+		frame.setVisible(true);
 	}
 }

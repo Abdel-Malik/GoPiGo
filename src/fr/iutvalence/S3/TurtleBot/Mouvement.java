@@ -1,12 +1,10 @@
 package fr.iutvalence.S3.TurtleBot;
 
 public class Mouvement 
-{
-	
+{	
 	private Rotation rot;
 	private Deplacement dep;
 	
-
 	public Mouvement()
 	{
 		this.rot = new Rotation();

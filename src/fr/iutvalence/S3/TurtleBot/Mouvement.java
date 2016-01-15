@@ -17,7 +17,7 @@ public class Mouvement
 		String string = new String();
 		string+=dep.seDeplacer(sensDeplacement);
 		string+=rot.effectuerUneRotation(sensRotation);
-		string+="0";
+		string+="\0";
 		return string;
 	}
 	

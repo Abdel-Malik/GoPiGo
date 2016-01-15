@@ -63,6 +63,7 @@ public class PageControl {
 		panelGauche.setLayout(null);
 		
 		JButton avGauche = new JButton("");
+		avGauche.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/hautGauche.png")));
 		avGauche.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -75,7 +76,7 @@ public class PageControl {
 		panelGauche.add(avGauche);
 		
 		JButton avancer = new JButton("");
-		avancer.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/home.png")));
+		avancer.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/haut.png")));
 		avancer.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -88,6 +89,7 @@ public class PageControl {
 		panelGauche.add(avancer);
 		
 		JButton avDroite = new JButton("");
+		avDroite.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/hautDroit.png")));
 		avDroite.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -100,6 +102,7 @@ public class PageControl {
 		panelGauche.add(avDroite);
 		
 		JButton gauche = new JButton("");
+		gauche.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/gauche.png")));
 		gauche.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -112,6 +115,7 @@ public class PageControl {
 		panelGauche.add(gauche);
 		
 		JButton stop = new JButton("");
+		stop.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/stop.png")));
 		stop.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -124,6 +128,7 @@ public class PageControl {
 		panelGauche.add(stop);
 		
 		JButton droite = new JButton("");
+		droite.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/droite.png")));
 		droite.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -136,6 +141,7 @@ public class PageControl {
 		panelGauche.add(droite);
 		
 		JButton recGauche = new JButton("");
+		recGauche.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/basGauche.png")));
 		recGauche.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -148,6 +154,7 @@ public class PageControl {
 		panelGauche.add(recGauche);
 		
 		JButton reculer = new JButton("");
+		reculer.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/bas.png")));
 		reculer.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -160,6 +167,7 @@ public class PageControl {
 		panelGauche.add(reculer);
 		
 		JButton recDroite = new JButton("");
+		recDroite.setIcon(new ImageIcon(PageControl.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/basDroite.png")));
 		recDroite.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 

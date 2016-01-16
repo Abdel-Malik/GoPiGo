@@ -1,21 +1,47 @@
 package fr.iutvalence.S3.TurtleBot;
 
+import java.io.IOException;
 
 public class Application {
 	
 	private Communication_wifi comWifi;
 	private Mouvement mouvement;
+	private InterfaceEntree interfaceEntree;
 	
-	public Application(Communication_wifi comWifi)
+	public Application(InterfaceEntree interfaceEntree)
 	{
-		this.comWifi = comWifi;
+		//this.comWifi = comWifi;
 		this.mouvement = new Mouvement();
+		this.interfaceEntree = interfaceEntree;
+	}
+	
+	public void creationCommunication()
+	{
+		InformationConnexion info = this.interfaceEntree.demandeInformationsConnexion();
+		
+		if (info == null)
+			System.exit(0);
+		
+		try
+		{
+			this.comWifi = new Communication_wifi(info.getAdresse(), info.getPort());
+			this.etablirConnexion();
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	//Methode run dans un jeu
 	public void fonctionner()
 	{
-		//TODO
+		while (true)
+		{
+			String choix = this.interfaceEntree.demandeAction();
+			
+			this.envoyerDonnees(choix);
+		}
 	}
 	
 	public void etablirConnexion()
@@ -45,7 +71,7 @@ public class Application {
 	
 	public String deplacement(Sens_deplacement dep, Sens_rotation rot)
 	{
-		return this.mouvement.deplacement(dep, rot);
+		return Mouvement.obtenirLeDeplacementQuiCorrespondA(dep, rot);
 	}
 	
 }

@@ -2,8 +2,10 @@ package fr.iutvalence.S3.TurtleBot.Interface;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.ImageIcon;
 
 import java.awt.Font;
@@ -12,36 +14,34 @@ import javax.swing.JTextField;
 
 import fr.iutvalence.S3.TurtleBot.Application;
 import fr.iutvalence.S3.TurtleBot.Communication_wifi;
+import fr.iutvalence.S3.TurtleBot.InformationConnexion;
 
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class PageConnexion implements ActionListener
+public class PageConnexion extends JDialog implements ActionListener
 {
-
-	private JFrame frame;
-	private JTextField port;
-	private JTextField ipAdress;
+	private JTextField champIp;
 	
-	private JLabel titre;
-	private JLabel lblAdresseIp;
-	private Panel panel;
-	private JLabel lblPort;
+	private JTextField champPort;
+	
 	private JButton btnConnexion;
 	
 	private Application application;
 
-	/**
-	 * Create the application.
-	 */
-	public PageConnexion() 
+	private boolean ok;
+
+	
+	
+	public PageConnexion(JFrame frame) 
 	{
+		super(frame, "Connexion", true);
 		initialize();
 	}
 
-	
+	/*
 	public void actionPerformed(ActionEvent e) 
 	{
 		try 
@@ -59,63 +59,82 @@ public class PageConnexion implements ActionListener
 			e1.printStackTrace();
 		}
 		
+	}*/
+	
+	public void actionPerformed (ActionEvent e)
+	{ 
+		if (e.getSource() == btnConnexion)
+		{ 
+			ok = true ; 
+			setVisible (false) ;
+		}
 	}
+	
+	public InformationConnexion lanceDialogue()
+	{ 
+		ok = false ;
+		setVisible (true) ;
+		
+		if (ok)
+			return new InformationConnexion(this.champIp.getText(), Integer.parseInt(this.champPort.getText())) ;
+		else 
+			return null ;
+	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize()
 	{
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 500, 320);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		this.setResizable(false);
+		this.setBounds(100, 100, 500, 320);
+		this.getContentPane().setLayout(null);
+		this.setLocationRelativeTo(null);
 		
-		
-		//titre
-		titre = new JLabel("- Connexion au Robot -\r\n");
+		JLabel titre = new JLabel("- Connexion au Robot -\r\n");
 		titre.setHorizontalAlignment(SwingConstants.CENTER);
 		titre.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		titre.setBounds(0, 9, 494, 39);
-		frame.getContentPane().add(titre);
+		this.getContentPane().add(titre);
+		
 		JLabel imageTurtleBot = new JLabel();
 		imageTurtleBot.setLocation(364, 102);
-		frame.getContentPane().add(imageTurtleBot);
+		this.getContentPane().add(imageTurtleBot);
 		imageTurtleBot.setSize(130,190);
 		imageTurtleBot.setIcon(new ImageIcon(PageConnexion.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/Sans titre-3.png")));
 		
-		panel = new Panel();
+		JPanel panel = new JPanel();
 		panel.setBounds(72, 61, 270, 190);
-		frame.getContentPane().add(panel);
+		this.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		lblAdresseIp = new JLabel("Adresse IP");
+		JLabel lblAdresseIp = new JLabel("Adresse IP");
 		lblAdresseIp.setBounds(0, 24, 270, 14);
 		panel.add(lblAdresseIp);
 		lblAdresseIp.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		ipAdress = new JTextField();
-		ipAdress.setBounds(0, 41, 270, 20);
-		panel.add(ipAdress);
-		ipAdress.setHorizontalAlignment(SwingConstants.LEFT);
-		ipAdress.setColumns(10);
+		this.champIp = new JTextField();
+		champIp.setBounds(0, 41, 270, 20);
+		panel.add(champIp);
+		champIp.setHorizontalAlignment(SwingConstants.LEFT);
+		champIp.setColumns(10);
 		
-		lblPort = new JLabel("Port");
+		JLabel lblPort = new JLabel("Port");
 		lblPort.setBounds(0, 72, 270, 14);
 		panel.add(lblPort);
 		lblPort.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		port = new JTextField();
-		port.setBounds(0, 87, 270, 20);
-		panel.add(port);
-		port.setColumns(10);
+		this.champPort = new JTextField();
+		champPort.setBounds(0, 87, 270, 20);
+		panel.add(champPort);
+		champPort.setColumns(10);
 		
 		btnConnexion = new JButton("Connexion");
 		btnConnexion.setBounds(80, 135, 102, 23);
 		panel.add(btnConnexion);
 		btnConnexion.addActionListener(this);
 		panel.setVisible(true);
-		frame.setVisible(true);
+
 	}
 
 }

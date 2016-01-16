@@ -7,12 +7,4 @@ public class Rotation
 	
 	public final static double VITESSE_MIN_ROTATION = 0;
 	
-	public Rotation(){
-		
-	}
-	
-	public String effectuerUneRotation(Sens_rotation sens)
-	{
-		return sens.toString();
-	}
 }

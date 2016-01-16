@@ -1,6 +1,6 @@
 package fr.iutvalence.S3.TurtleBot;
 
-public enum Sens_deplacement
+public enum Sens_deplacement 
 {	
 	AVANT ("A"),
 	

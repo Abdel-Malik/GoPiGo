@@ -1,16 +1,13 @@
 package fr.iutvalence.S3.TurtleBot;
 
-import java.io.IOException;
-
 public class Application {
 	
 	private Communication_wifi comWifi;
-	private Mouvement mouvement;
 	private InterfaceEntree interfaceEntree;
+	private Mouvement mouvement;
 	
 	public Application(InterfaceEntree interfaceEntree)
 	{
-		//this.comWifi = comWifi;
 		this.mouvement = new Mouvement();
 		this.interfaceEntree = interfaceEntree;
 	}
@@ -71,7 +68,7 @@ public class Application {
 	
 	public String deplacement(Sens_deplacement dep, Sens_rotation rot)
 	{
-		return Mouvement.obtenirLeDeplacementQuiCorrespondA(dep, rot);
+		return this.mouvement.obtenirLeDeplacementQuiCorrespondA(dep, rot);
 	}
 	
 }

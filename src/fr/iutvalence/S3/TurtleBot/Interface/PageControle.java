@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import fr.iutvalence.S3.TurtleBot.Application;
+
 import fr.iutvalence.S3.TurtleBot.InformationConnexion;
 import fr.iutvalence.S3.TurtleBot.InterfaceEntree;
 import fr.iutvalence.S3.TurtleBot.Mouvement;
@@ -24,9 +24,15 @@ import java.awt.event.ActionEvent;
 public class PageControle extends JFrame implements ActionListener, InterfaceEntree, Runnable
 {
 
+	private Mouvement mouvement;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	//Déclaration des boutons
-	private JButton carte;
+	//private JButton carte;
 	private JButton avGauche;
 	private JButton avancer;
 	private JButton avDroite;
@@ -49,6 +55,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	public PageControle() 
 	{
 		super("Contrôle du robot");
+		this.mouvement = new Mouvement();
 
 		initialize();
 	}
@@ -59,7 +66,6 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 
 		this.setResizable(false);
 		this.setBounds(100, 100, 700, 500);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.getContentPane().setLayout(null);
 		
@@ -70,21 +76,15 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelGauche.setLayout(null);
 		
 		JPanel panelDroit = new JPanel();
-		panelDroit.setBounds(345, 61, 349, 410);
+		panelDroit.setBounds(365, 61, 329, 410);
 		this.getContentPane().add(panelDroit);
 		panelDroit.setLayout(null);
 		
-		//Création des boutons
-		this.deconnexion = new JButton("");
-		this.deconnexion.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/home.png")));
-		this.deconnexion.setBounds(634, 410, 50, 50);
-		this.getContentPane().add(this.deconnexion);
-		
-		this.carte = new JButton("");		
+		/*this.carte = new JButton("");		
 		this.carte.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/Sans titre-2.png")));
 		this.carte.setBounds(10, 385, 75, 75);
 		this.getContentPane().add(this.carte);
-		this.carte.addActionListener(this);
+		this.carte.addActionListener(this);*/
 		
 		this.avGauche = new JButton("");
 		this.avGauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/hautGauche.png")));
@@ -140,37 +140,44 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelGauche.add(this.recDroite);
 		this.recDroite.addActionListener(this);
 		
+		//Création des boutons
+		this.deconnexion = new JButton("");
+		deconnexion.setBounds(269, 349, 50, 50);
+		panelDroit.add(deconnexion);
+		this.deconnexion.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/deconnexion.png")));
+		this.deconnexion.addActionListener(this);
+		
 		this.buttonMinusDep = new JButton("");
 		this.buttonMinusDep.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png")));
-		this.buttonMinusDep.setBounds(42, 80, 50, 50);
+		this.buttonMinusDep.setBounds(10, 80, 50, 50);
 		panelDroit.add(buttonMinusDep);
 		this.buttonMinusDep.addActionListener(this);
 		
 		this.buttonPlusDep = new JButton("");
 		buttonPlusDep.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png")));
-		buttonPlusDep.setBounds(289, 80, 50, 50);
+		buttonPlusDep.setBounds(245, 80, 50, 50);
 		panelDroit.add(buttonPlusDep);
 		buttonPlusDep.addActionListener(this);
 		
 		this.buttonMinusRot = new JButton("");
 		this.buttonMinusRot.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png")));
-		this.buttonMinusRot.setBounds(42, 258, 50, 50);
+		this.buttonMinusRot.setBounds(10, 258, 50, 50);
 		panelDroit.add(this.buttonMinusRot);
 		this.buttonMinusRot.addActionListener(this);
 		
 		this.buttonPlusRot = new JButton("");
 		this.buttonPlusRot.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png")));
-		this.buttonPlusRot.setBounds(289, 258, 50, 50);
+		this.buttonPlusRot.setBounds(245, 258, 50, 50);
 		panelDroit.add(this.buttonPlusRot);
 		this.buttonPlusRot.addActionListener(this);
 		
 		//Création des JProgressBars
 		JProgressBar progressBarVitDep = new JProgressBar();
-		progressBarVitDep.setBounds(114, 100, 165, 14);
+		progressBarVitDep.setBounds(70, 99, 165, 14);
 		panelDroit.add(progressBarVitDep);
 		
 		JProgressBar progressBarVitRot = new JProgressBar();
-		progressBarVitRot.setBounds(114, 278, 165, 14);
+		progressBarVitRot.setBounds(70, 277, 165, 14);
 		panelDroit.add(progressBarVitRot);
 		
 		
@@ -191,13 +198,13 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		JLabel lblVitesseDplacement = new JLabel("Vitesse de D\u00E9placement");
 		lblVitesseDplacement.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVitesseDplacement.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblVitesseDplacement.setBounds(0, 30, 349, 39);
+		lblVitesseDplacement.setBounds(68, 30, 167, 39);
 		panelDroit.add(lblVitesseDplacement);
 		
 		JLabel lblVitesseRotation = new JLabel(" Vitesse de Rotation");
 		lblVitesseRotation.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVitesseRotation.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblVitesseRotation.setBounds(0, 208, 349, 39);
+		lblVitesseRotation.setBounds(70, 208, 165, 39);
 		panelDroit.add(lblVitesseRotation);
 		
 		//Rendre visible les fenêtres et les JPanels
@@ -216,68 +223,74 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 		if(e.getSource() == this.avGauche)
 		{
-			this.choixUtilisateur = Mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.AVANT, Sens_rotation.GAUCHE);
+			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.AVANT, Sens_rotation.GAUCHE);
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.avancer)
 		{
-			this.choixUtilisateur = Mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.AVANT, Sens_rotation.RIEN);
+			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.AVANT, Sens_rotation.RIEN);
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource()== this.avDroite)
 		{
-			this.choixUtilisateur = Mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.AVANT, Sens_rotation.DROITE);
+			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.AVANT, Sens_rotation.DROITE);
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.gauche)
 		{
-			this.choixUtilisateur = Mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.RIEN, Sens_rotation.GAUCHE);
+			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.RIEN, Sens_rotation.GAUCHE);
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.stop)
 		{
-			this.choixUtilisateur = Mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.RIEN, Sens_rotation.RIEN);
+			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.RIEN, Sens_rotation.RIEN);
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.droite)
 		{
-			this.choixUtilisateur = Mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.RIEN, Sens_rotation.DROITE);
+			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.RIEN, Sens_rotation.DROITE);
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.recGauche)
 		{
-			this.choixUtilisateur = Mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.ARRIERE, Sens_rotation.GAUCHE);
+			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.ARRIERE, Sens_rotation.GAUCHE);
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.reculer)
 		{
-			this.choixUtilisateur = Mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.ARRIERE, Sens_rotation.RIEN);
+			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.ARRIERE, Sens_rotation.RIEN);
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.recDroite)
 		{
-			this.choixUtilisateur = Mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.ARRIERE, Sens_rotation.DROITE);
+			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.ARRIERE, Sens_rotation.DROITE);
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.buttonMinusDep)
 		{
-			this.choixUtilisateur = ",";
+			this.choixUtilisateur = mouvement.getDeplacement().diminuerVitesse();
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.buttonPlusDep)
 		{
-			this.choixUtilisateur = ";";
+			this.choixUtilisateur = mouvement.getDeplacement().augmenterVitesse();
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.buttonMinusRot)
 		{
-			this.choixUtilisateur = ":";
+			this.choixUtilisateur = mouvement.getRotation().diminuerVitesse();
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.buttonMinusRot)
 		{
-			this.choixUtilisateur = "!";
+			this.choixUtilisateur = mouvement.getRotation().augmenterVitesse();
 			this.leChoixEstFait = true;
+		}
+		else if(e.getSource() == this.deconnexion)
+		{
+			this.choixUtilisateur = "STOP";
+			this.leChoixEstFait = true;
+			System.exit(0);
 		}
 	}
 

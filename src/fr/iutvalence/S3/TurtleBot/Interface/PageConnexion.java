@@ -12,24 +12,24 @@ import java.awt.Font;
 
 import javax.swing.JTextField;
 
-import fr.iutvalence.S3.TurtleBot.Application;
-import fr.iutvalence.S3.TurtleBot.Communication_wifi;
 import fr.iutvalence.S3.TurtleBot.InformationConnexion;
 
-import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+
 
 public class PageConnexion extends JDialog implements ActionListener
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private JTextField champIp;
 	
 	private JTextField champPort;
 	
 	private JButton btnConnexion;
-	
-	private Application application;
 
 	private boolean ok;
 
@@ -40,26 +40,6 @@ public class PageConnexion extends JDialog implements ActionListener
 		super(frame, "Connexion", true);
 		initialize();
 	}
-
-	/*
-	public void actionPerformed(ActionEvent e) 
-	{
-		try 
-		{
-			int newPort = Integer.parseInt(port.getText());
-			this.application = new Application(new Communication_wifi(ipAdress.getText(), newPort));
-			this.application.etablirConnexion();
-			this.frame.setVisible(false);
-			PageControl control = new PageControl(application);
-			
-		} 
-		catch (NumberFormatException | IOException e1) 
-		{
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-	}*/
 	
 	public void actionPerformed (ActionEvent e)
 	{ 

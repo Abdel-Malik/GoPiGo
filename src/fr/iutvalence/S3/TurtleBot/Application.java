@@ -36,7 +36,7 @@ public class Application {
 		while (true)
 		{
 			String choix = this.interfaceEntree.demandeAction();
-			
+			choix += "\0";
 			this.envoyerDonnees(choix);
 		}
 	}

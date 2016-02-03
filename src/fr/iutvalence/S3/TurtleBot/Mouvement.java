@@ -13,10 +13,9 @@ public class Mouvement
 	
 	public String obtenirLeDeplacementQuiCorrespondA(Sens_deplacement sensDeplacement, Sens_rotation sensRotation)
 	{
-		String string = new String();
+		String string = "";
 		string += sensDeplacement.toString();
 		string += sensRotation.toString();
-		string += "\0";
 		
 		return string;
 	}

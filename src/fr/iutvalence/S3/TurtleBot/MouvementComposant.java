@@ -22,15 +22,15 @@ public class MouvementComposant
 	
 	public int progression()
 	{
-		return (int)((this.vitesseActuelle - vitesseMin)/(vitesseMax - vitesseMin) * 100);
+		return (int)((this.vitesseActuelle - this.vitesseMin)/(this.vitesseMax - this.vitesseMin) * 100);
 	} 
 	
 	public String augmenterVitesse()
 	{
 		String chaine = "";
-		if (this.vitesseActuelle+pas <= vitesseMax)
+		if (this.vitesseActuelle <= this.vitesseMax)
 		{
-			this.vitesseActuelle += pas;
+			this.vitesseActuelle += this.pas;
 			chaine = this.carUp;	
 		}
 		else 
@@ -43,15 +43,20 @@ public class MouvementComposant
 	public String diminuerVitesse()
 	{
 		String chaine = "";
-		if (this.vitesseActuelle-pas >= vitesseMin)
+		if (this.vitesseActuelle >= this.vitesseMin)
 		{
-			this.vitesseActuelle -= pas;
+			this.vitesseActuelle -= this.pas;
 			chaine = this.carDown;	
 		}
 		else 
 		{
-			this.vitesseActuelle = vitesseMin;
+			this.vitesseActuelle = this.vitesseMin;
 		}
 		return chaine;
+	}
+	
+	public double obtenirVitesseActuelle()
+	{
+		return this.vitesseActuelle;
 	}
 }

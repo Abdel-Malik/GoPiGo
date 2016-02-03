@@ -12,9 +12,15 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 
+
+
+
+import fr.iutvalence.S3.TurtleBot.Deplacement;
 import fr.iutvalence.S3.TurtleBot.InformationConnexion;
 import fr.iutvalence.S3.TurtleBot.InterfaceEntree;
 import fr.iutvalence.S3.TurtleBot.Mouvement;
+import fr.iutvalence.S3.TurtleBot.MouvementComposant;
+import fr.iutvalence.S3.TurtleBot.Rotation;
 import fr.iutvalence.S3.TurtleBot.Sens_deplacement;
 import fr.iutvalence.S3.TurtleBot.Sens_rotation;
 
@@ -25,6 +31,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 {
 
 	private Mouvement mouvement;
+	private MouvementComposant mouvementComposant;
 	
 	/**
 	 * 
@@ -47,6 +54,8 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	private JButton buttonMinusRot;
 	private JButton buttonPlusRot;
 	private JButton deconnexion;
+	private JProgressBar progressBarVitDep;
+	private JProgressBar progressBarVitRot;
 	
 	private volatile boolean leChoixEstFait;
 	private String choixUtilisateur;
@@ -172,13 +181,19 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.buttonPlusRot.addActionListener(this);
 		
 		//Création des JProgressBars
-		JProgressBar progressBarVitDep = new JProgressBar();
-		progressBarVitDep.setBounds(70, 99, 165, 14);
-		panelDroit.add(progressBarVitDep);
+		this.progressBarVitDep = new JProgressBar();
+		this.progressBarVitDep.setBounds(70, 99, 165, 14);
+		this.progressBarVitDep.setMaximum(100);
+		this.progressBarVitDep.setMinimum(0);
+		this.progressBarVitDep.setValue(2);
+		panelDroit.add(this.progressBarVitDep);
 		
-		JProgressBar progressBarVitRot = new JProgressBar();
-		progressBarVitRot.setBounds(70, 277, 165, 14);
-		panelDroit.add(progressBarVitRot);
+		this.progressBarVitRot = new JProgressBar();
+		this.progressBarVitRot.setMaximum(100);
+		this.progressBarVitRot.setMinimum(0);
+		this.progressBarVitDep.setValue(60);
+		this.progressBarVitRot.setBounds(70, 277, 165, 14);
+		panelDroit.add(this.progressBarVitRot);
 		
 		
 		//Création des labels
@@ -269,21 +284,26 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		else if(e.getSource() == this.buttonMinusDep)
 		{
 			this.choixUtilisateur = mouvement.getDeplacement().diminuerVitesse();
+			this.progressBarVitDep.setValue(this.mouvement.getDeplacement().progression());
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.buttonPlusDep)
 		{
+			
 			this.choixUtilisateur = mouvement.getDeplacement().augmenterVitesse();
+			this.progressBarVitDep.setValue(this.mouvement.getDeplacement().progression());
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.buttonMinusRot)
 		{
 			this.choixUtilisateur = mouvement.getRotation().diminuerVitesse();
+			this.progressBarVitRot.setValue(this.mouvement.getRotation().progression());
 			this.leChoixEstFait = true;
 		}
-		else if(e.getSource() == this.buttonMinusRot)
+		else if(e.getSource() == this.buttonPlusRot)
 		{
 			this.choixUtilisateur = mouvement.getRotation().augmenterVitesse();
+			this.progressBarVitRot.setValue(this.mouvement.getRotation().progression());
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.deconnexion)
@@ -313,6 +333,4 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 		return this.choixUtilisateur;
 	}
-
-
 }

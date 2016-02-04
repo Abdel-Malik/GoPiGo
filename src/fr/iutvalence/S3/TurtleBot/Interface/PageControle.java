@@ -185,14 +185,14 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.progressBarVitDep.setBounds(70, 99, 165, 14);
 		this.progressBarVitDep.setMaximum(100);
 		this.progressBarVitDep.setMinimum(0);
-		this.progressBarVitDep.setValue(2);
+		this.progressBarVitDep.setValue(this.mouvement.getDeplacement().progression());
 		panelDroit.add(this.progressBarVitDep);
 		
 		this.progressBarVitRot = new JProgressBar();
+		this.progressBarVitRot.setBounds(70, 277, 165, 14);
 		this.progressBarVitRot.setMaximum(100);
 		this.progressBarVitRot.setMinimum(0);
-		this.progressBarVitDep.setValue(60);
-		this.progressBarVitRot.setBounds(70, 277, 165, 14);
+		this.progressBarVitRot.setValue(this.mouvement.getRotation().progression());
 		panelDroit.add(this.progressBarVitRot);
 		
 		

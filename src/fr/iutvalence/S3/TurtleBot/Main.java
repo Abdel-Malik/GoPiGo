@@ -2,6 +2,7 @@ package fr.iutvalence.S3.TurtleBot;
 
 import java.io.IOException;
 
+import javax.jws.Oneway;
 import javax.swing.SwingUtilities;
 
 import fr.iutvalence.S3.TurtleBot.Interface.PageControle;
@@ -16,6 +17,7 @@ public class Main
 		
 		Application application = new Application(pageControle);
 		application.creationCommunication();
+		application.envoyerDonnees("La connexion avec un client est établie");
 		application.fonctionner();
 	}
 }

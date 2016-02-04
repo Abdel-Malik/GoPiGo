@@ -28,7 +28,7 @@ public class MouvementComposant
 	public String augmenterVitesse()
 	{
 		String chaine = "";
-		if (this.vitesseActuelle <= this.vitesseMax)
+		if (this.vitesseActuelle < this.vitesseMax)
 		{
 			this.vitesseActuelle += this.pas;
 			chaine = this.carUp;	
@@ -43,7 +43,7 @@ public class MouvementComposant
 	public String diminuerVitesse()
 	{
 		String chaine = "";
-		if (this.vitesseActuelle >= this.vitesseMin)
+		if (this.vitesseActuelle > this.vitesseMin)
 		{
 			this.vitesseActuelle -= this.pas;
 			chaine = this.carDown;	

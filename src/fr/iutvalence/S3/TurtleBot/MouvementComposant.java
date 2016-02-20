@@ -1,5 +1,8 @@
 package fr.iutvalence.S3.TurtleBot;
 
+import javax.swing.JButton;
+import javax.swing.JTextField;
+
 public class MouvementComposant 
 {	
 	private final double vitesseMax;
@@ -28,35 +31,54 @@ public class MouvementComposant
 	public String augmenterVitesse()
 	{
 		String chaine = "";
-		if (this.vitesseActuelle < this.vitesseMax)
+		this.vitesseActuelle += this.pas;
+		this.vitesseActuelle = ((double)((int)(vitesseActuelle * 100))/100);
+		if (this.vitesseActuelle <= this.vitesseMax)
 		{
-			this.vitesseActuelle += this.pas;
-			chaine = this.carUp;	
+			chaine = this.carUp;
 		}
 		else 
 		{
-			this.vitesseActuelle = vitesseMax;
+			this.vitesseActuelle -= this.pas;
 		}
+		this.vitesseActuelle = ((double)((int)(vitesseActuelle * 100))/100);
 		return chaine;
 	}
 	
 	public String diminuerVitesse()
 	{
 		String chaine = "";
-		if (this.vitesseActuelle > this.vitesseMin)
+		this.vitesseActuelle -= this.pas;
+		this.vitesseActuelle = ((double)((int)(vitesseActuelle * 100))/100);
+		if (this.vitesseActuelle >= this.vitesseMin)
 		{
-			this.vitesseActuelle -= this.pas;
 			chaine = this.carDown;	
 		}
 		else 
 		{
-			this.vitesseActuelle = this.vitesseMin;
+			this.vitesseActuelle += this.pas;
 		}
+		this.vitesseActuelle = ((double)((int)(vitesseActuelle * 100))/100);
 		return chaine;
 	}
 	
 	public double obtenirVitesseActuelle()
 	{
 		return this.vitesseActuelle;
+	}
+	
+	public String convertirPourcentageVitesse(JTextField pourcentageVitesse)
+	{
+		String texteBouton = pourcentageVitesse.getText();
+		Double vitesse;
+		int pourcentage = Integer.parseInt(texteBouton);
+		if (pourcentage < 0 || pourcentage > 100)
+			return "";
+		else
+		{
+			vitesse = (double)((pourcentage * (this.vitesseMax - this.vitesseMin) / 100) + this.vitesseMin);
+			this.vitesseActuelle = vitesse;
+			return Double.toString(vitesse);
+		}	
 	}
 }

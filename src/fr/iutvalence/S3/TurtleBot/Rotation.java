@@ -6,9 +6,9 @@ public class Rotation
 	
 	public final static double VITESSE_MIN = 0.2;
 	
-	public final static String CAR_UP = "ROT+";
+	public final static String CAR_UP = "ROTP";
 	
-	public final static String CAR_DOWN = "ROT-";
+	public final static String CAR_DOWN = "ROTM";
 		
 	public final static double PAS = 0.2;
 

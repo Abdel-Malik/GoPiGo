@@ -15,6 +15,7 @@ import javax.swing.JProgressBar;
 
 
 
+
 import fr.iutvalence.S3.TurtleBot.Deplacement;
 import fr.iutvalence.S3.TurtleBot.InformationConnexion;
 import fr.iutvalence.S3.TurtleBot.InterfaceEntree;
@@ -26,6 +27,8 @@ import fr.iutvalence.S3.TurtleBot.Sens_rotation;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import javax.swing.JTextField;
 
 public class PageControle extends JFrame implements ActionListener, InterfaceEntree, Runnable
 {
@@ -54,11 +57,16 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	private JButton buttonMinusRot;
 	private JButton buttonPlusRot;
 	private JButton deconnexion;
+	private JButton boutonVitesseRotation;
+	private JButton boutonVitesseDeplacement;
 	private JProgressBar progressBarVitDep;
 	private JProgressBar progressBarVitRot;
 	
+	
 	private volatile boolean leChoixEstFait;
 	private String choixUtilisateur;
+	private JTextField pourcentageDeplacement;
+	private JTextField pourcentageRotation;
 	
 	//Création de l'application
 	public PageControle() 
@@ -195,6 +203,16 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.progressBarVitRot.setValue(this.mouvement.getRotation().progression());
 		panelDroit.add(this.progressBarVitRot);
 		
+		// Création des JTextField
+		this.pourcentageDeplacement = new JTextField();
+		this.pourcentageDeplacement.setBounds(70, 140, 104, 20);
+		panelDroit.add(this.pourcentageDeplacement);
+		this.pourcentageDeplacement.setColumns(10);
+		
+		this.pourcentageRotation = new JTextField();
+		this.pourcentageRotation.setBounds(70, 318, 104, 20);
+		panelDroit.add(this.pourcentageRotation);
+		
 		
 		//Création des labels
 		JLabel lblDplacementDu = new JLabel("- Contr\u00F4le du Robot -");
@@ -213,14 +231,34 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		JLabel lblVitesseDplacement = new JLabel("Vitesse de D\u00E9placement");
 		lblVitesseDplacement.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVitesseDplacement.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblVitesseDplacement.setBounds(68, 30, 167, 39);
+		lblVitesseDplacement.setBounds(68, 37, 167, 39);
 		panelDroit.add(lblVitesseDplacement);
 		
 		JLabel lblVitesseRotation = new JLabel(" Vitesse de Rotation");
 		lblVitesseRotation.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVitesseRotation.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblVitesseRotation.setBounds(70, 208, 165, 39);
+		lblVitesseRotation.setBounds(70, 215, 165, 39);
 		panelDroit.add(lblVitesseRotation);
+		
+		JLabel lblChangerVitesseDeplacement = new JLabel("Entrez un pourcentage");
+		lblChangerVitesseDeplacement.setHorizontalAlignment(SwingConstants.CENTER);
+		lblChangerVitesseDeplacement.setBounds(70, 124, 165, 14);
+		panelDroit.add(lblChangerVitesseDeplacement);
+		
+		JLabel lblChangerVitesseRotation = new JLabel("Entrez un pourcentage");
+		lblChangerVitesseRotation.setHorizontalAlignment(SwingConstants.CENTER);
+		lblChangerVitesseRotation.setBounds(70, 302, 165, 14);
+		panelDroit.add(lblChangerVitesseRotation);
+		
+		this.boutonVitesseDeplacement = new JButton("✓");
+		this.boutonVitesseDeplacement.setBounds(184, 140, 51, 20);
+		panelDroit.add(this.boutonVitesseDeplacement);
+		this.boutonVitesseDeplacement.addActionListener(this);
+		
+		this.boutonVitesseRotation = new JButton("✓");
+		boutonVitesseRotation.setBounds(184, 318, 51, 20);
+		panelDroit.add(this.boutonVitesseRotation);
+		this.boutonVitesseRotation.addActionListener(this);
 		
 		//Rendre visible les fenêtres et les JPanels
 		panelGauche.setVisible(true);
@@ -312,6 +350,28 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			this.leChoixEstFait = true;
 			System.exit(0);
 		}
+		else if(e.getSource() == this.boutonVitesseDeplacement)
+		{
+			String pourcent = mouvement.getDeplacement().convertirPourcentageVitesse(this.pourcentageDeplacement);
+			if(pourcent != "")
+			{
+				this.choixUtilisateur = "VALL";
+				this.choixUtilisateur += pourcent;
+				this.progressBarVitDep.setValue(this.mouvement.getDeplacement().progression());
+			}
+			this.leChoixEstFait = true;
+		}
+		else if(e.getSource() == this.boutonVitesseRotation)
+		{
+			String pourcent = mouvement.getRotation().convertirPourcentageVitesse(this.pourcentageRotation);
+			if(pourcent != "")
+			{
+				this.choixUtilisateur = "VALR";
+				this.choixUtilisateur += pourcent;
+				this.progressBarVitRot.setValue(this.mouvement.getRotation().progression());
+			}
+			this.leChoixEstFait = true;
+		}
 	}
 
 	@Override
@@ -329,7 +389,6 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.leChoixEstFait = false;
 		
 		while (!leChoixEstFait) {};
-		
 		
 		return this.choixUtilisateur;
 	}

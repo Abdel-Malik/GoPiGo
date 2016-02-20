@@ -2,6 +2,7 @@ package fr.iutvalence.S3.TurtleBot.Interface;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -45,8 +46,16 @@ public class PageConnexion extends JDialog implements ActionListener
 	{ 
 		if (e.getSource() == btnConnexion)
 		{ 
-			ok = true ; 
-			setVisible (false) ;
+			if(this.champIp.getText() == "")
+				JOptionPane.showMessageDialog(this, "L'adresse IP n'est pas indiquée");
+			else if(this.champPort.getText() == "")
+				JOptionPane.showMessageDialog(this, "Le port n'est pas indiquée");
+			else 
+			{
+				ok = true; 
+				setVisible (false);
+			}
+			
 		}
 	}
 	

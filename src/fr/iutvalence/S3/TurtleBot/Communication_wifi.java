@@ -59,9 +59,11 @@ public class Communication_wifi {
 	
 	public void lireDonneesServeur()
 	{
-		try {
+		try 
+		{
 			this.modifiedCharacter = inFromServer.readLine();
-		} catch (IOException e) {
+		} 
+		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

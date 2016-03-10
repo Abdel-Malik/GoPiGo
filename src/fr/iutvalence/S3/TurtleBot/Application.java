@@ -14,7 +14,6 @@ public class Application {
 	
 	public void creationCommunication()
 	{
-		
 		try
 		{
 			do

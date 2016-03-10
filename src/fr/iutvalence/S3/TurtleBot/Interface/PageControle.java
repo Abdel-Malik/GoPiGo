@@ -11,17 +11,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-
-
-
-
-
-import fr.iutvalence.S3.TurtleBot.Deplacement;
 import fr.iutvalence.S3.TurtleBot.InformationConnexion;
 import fr.iutvalence.S3.TurtleBot.InterfaceEntree;
 import fr.iutvalence.S3.TurtleBot.Mouvement;
-import fr.iutvalence.S3.TurtleBot.MouvementComposant;
-import fr.iutvalence.S3.TurtleBot.Rotation;
 import fr.iutvalence.S3.TurtleBot.Sens_deplacement;
 import fr.iutvalence.S3.TurtleBot.Sens_rotation;
 
@@ -34,11 +26,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 {
 
 	private Mouvement mouvement;
-	private MouvementComposant mouvementComposant;
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	//Déclaration des boutons
@@ -67,6 +55,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	private String choixUtilisateur;
 	private JTextField pourcentageDeplacement;
 	private JTextField pourcentageRotation;
+	private PageConnexion pageConnexion;
 	
 	//Création de l'application
 	public PageControle() 
@@ -377,8 +366,8 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	@Override
 	public InformationConnexion demandeInformationsConnexion()
 	{
-		PageConnexion p = new PageConnexion(this);
-		InformationConnexion info = p.lanceDialogue();
+		this.pageConnexion = new PageConnexion(this);
+		InformationConnexion info = pageConnexion.lanceDialogue();
 		
 		return info;
 	}

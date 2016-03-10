@@ -14,15 +14,18 @@ public class Application {
 	
 	public void creationCommunication()
 	{
-		InformationConnexion info = this.interfaceEntree.demandeInformationsConnexion();
-		
-		if (info == null)
-			System.exit(0);
 		
 		try
 		{
-			this.comWifi = new Communication_wifi(info.getAdresse(), info.getPort());
-			this.etablirConnexion();
+			do
+			{
+				InformationConnexion info = this.interfaceEntree.demandeInformationsConnexion();
+				
+				if (info == null)
+					System.exit(0);
+				
+				this.comWifi = new Communication_wifi(info.getAdresse(), info.getPort());
+			}while(!this.etablirConnexion());
 		} 
 		catch (Exception e)
 		{
@@ -41,9 +44,9 @@ public class Application {
 		}
 	}
 	
-	public void etablirConnexion()
+	public boolean etablirConnexion()
 	{
-		this.comWifi.seConnecter();
+		return this.comWifi.seConnecter();
 	}
 	
 	public void envoyerDonnees(String str)

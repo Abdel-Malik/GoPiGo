@@ -43,15 +43,26 @@ public class PageConnexion extends JDialog implements ActionListener
 	}
 	
 	public void actionPerformed (ActionEvent e)
-	{ 
+	{
 		if (e.getSource() == btnConnexion)
-		{ 
-			if(this.champIp.getText() == "")
+		{
+			if(this.champIp.getText().equals(""))
+			{
 				JOptionPane.showMessageDialog(this, "L'adresse IP n'est pas indiquée");
-			else if(this.champPort.getText() == "")
+			}
+			else if(this.champPort.getText().equals(""))
 				JOptionPane.showMessageDialog(this, "Le port n'est pas indiquée");
 			else 
 			{
+				try
+				{
+					Integer.parseInt(this.champPort.getText());
+				}
+				catch(NumberFormatException et)
+				{
+					JOptionPane.showMessageDialog(this, "Le port doit être de type Entier");
+					return;
+				}
 				ok = true; 
 				setVisible (false);
 			}

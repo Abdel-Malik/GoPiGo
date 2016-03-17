@@ -20,11 +20,11 @@ public class Mouvement
 		return string;
 	}
 	
-	public MouvementComposant getRotation(){
+	public MouvementComposant obtenirRotation(){
 		return this.rotation;
 	}
 	
-	public MouvementComposant getDeplacement(){
+	public MouvementComposant obtenirDeplacement(){
 		return this.deplacement;
 	}
 }

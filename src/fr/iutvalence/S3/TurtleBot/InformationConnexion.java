@@ -13,12 +13,12 @@ public class InformationConnexion
 		this.port = port;
 	}
 	
-	public String getAdresse()
+	public String obtenirAdresse()
 	{
 		return this.adresse;
 	}
 
-	public int getPort()
+	public int obtenirPort()
 	{
 		return this.port;
 	}

@@ -51,7 +51,7 @@ public class PageConnexion extends JDialog implements ActionListener
 				JOptionPane.showMessageDialog(this, "L'adresse IP n'est pas indiquée");
 			}
 			else if(this.champPort.getText().equals(""))
-				JOptionPane.showMessageDialog(this, "Le port n'est pas indiquée");
+				JOptionPane.showMessageDialog(this, "Le port n'est pas indiqué");
 			else 
 			{
 				try
@@ -60,7 +60,7 @@ public class PageConnexion extends JDialog implements ActionListener
 				}
 				catch(NumberFormatException et)
 				{
-					JOptionPane.showMessageDialog(this, "Le port doit être de type Entier");
+					JOptionPane.showMessageDialog(this, "Le port doit être de type entier");
 					return;
 				}
 				ok = true; 

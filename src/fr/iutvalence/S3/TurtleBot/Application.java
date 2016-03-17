@@ -23,7 +23,7 @@ public class Application {
 				if (info == null)
 					System.exit(0);
 				
-				this.comWifi = new Communication_wifi(info.getAdresse(), info.getPort());
+				this.comWifi = new Communication_wifi(info.obtenirAdresse(), info.obtenirPort());
 			}while(!this.etablirConnexion());
 		} 
 		catch (Exception e)

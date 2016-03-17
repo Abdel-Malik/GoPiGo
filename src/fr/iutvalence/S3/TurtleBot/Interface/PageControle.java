@@ -182,14 +182,14 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.progressBarVitDep.setBounds(70, 99, 165, 14);
 		this.progressBarVitDep.setMaximum(100);
 		this.progressBarVitDep.setMinimum(0);
-		this.progressBarVitDep.setValue(this.mouvement.getDeplacement().progression());
+		this.progressBarVitDep.setValue(this.mouvement.obtenirDeplacement().progression());
 		panelDroit.add(this.progressBarVitDep);
 		
 		this.progressBarVitRot = new JProgressBar();
 		this.progressBarVitRot.setBounds(70, 277, 165, 14);
 		this.progressBarVitRot.setMaximum(100);
 		this.progressBarVitRot.setMinimum(0);
-		this.progressBarVitRot.setValue(this.mouvement.getRotation().progression());
+		this.progressBarVitRot.setValue(this.mouvement.obtenirRotation().progression());
 		panelDroit.add(this.progressBarVitRot);
 		
 		// Création des JTextField
@@ -310,27 +310,27 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		}
 		else if(e.getSource() == this.buttonMinusDep)
 		{
-			this.choixUtilisateur = mouvement.getDeplacement().diminuerVitesse();
-			this.progressBarVitDep.setValue(this.mouvement.getDeplacement().progression());
+			this.choixUtilisateur = mouvement.obtenirDeplacement().diminuerVitesse();
+			this.progressBarVitDep.setValue(this.mouvement.obtenirDeplacement().progression());
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.buttonPlusDep)
 		{
 			
-			this.choixUtilisateur = mouvement.getDeplacement().augmenterVitesse();
-			this.progressBarVitDep.setValue(this.mouvement.getDeplacement().progression());
+			this.choixUtilisateur = mouvement.obtenirDeplacement().augmenterVitesse();
+			this.progressBarVitDep.setValue(this.mouvement.obtenirDeplacement().progression());
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.buttonMinusRot)
 		{
-			this.choixUtilisateur = mouvement.getRotation().diminuerVitesse();
-			this.progressBarVitRot.setValue(this.mouvement.getRotation().progression());
+			this.choixUtilisateur = mouvement.obtenirRotation().diminuerVitesse();
+			this.progressBarVitRot.setValue(this.mouvement.obtenirRotation().progression());
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.buttonPlusRot)
 		{
-			this.choixUtilisateur = mouvement.getRotation().augmenterVitesse();
-			this.progressBarVitRot.setValue(this.mouvement.getRotation().progression());
+			this.choixUtilisateur = mouvement.obtenirRotation().augmenterVitesse();
+			this.progressBarVitRot.setValue(this.mouvement.obtenirRotation().progression());
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.deconnexion)
@@ -341,23 +341,23 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		}
 		else if(e.getSource() == this.boutonVitesseDeplacement)
 		{
-			String pourcent = mouvement.getDeplacement().convertirPourcentageVitesse(this.pourcentageDeplacement);
+			String pourcent = mouvement.obtenirDeplacement().convertirPourcentageVitesse(this.pourcentageDeplacement);
 			if(pourcent != "")
 			{
 				this.choixUtilisateur = "VALL";
 				this.choixUtilisateur += pourcent;
-				this.progressBarVitDep.setValue(this.mouvement.getDeplacement().progression());
+				this.progressBarVitDep.setValue(this.mouvement.obtenirDeplacement().progression());
 			}
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.boutonVitesseRotation)
 		{
-			String pourcent = mouvement.getRotation().convertirPourcentageVitesse(this.pourcentageRotation);
+			String pourcent = mouvement.obtenirRotation().convertirPourcentageVitesse(this.pourcentageRotation);
 			if(pourcent != "")
 			{
 				this.choixUtilisateur = "VALR";
 				this.choixUtilisateur += pourcent;
-				this.progressBarVitRot.setValue(this.mouvement.getRotation().progression());
+				this.progressBarVitRot.setValue(this.mouvement.obtenirRotation().progression());
 			}
 			this.leChoixEstFait = true;
 		}

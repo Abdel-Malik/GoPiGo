@@ -6,14 +6,13 @@ public class Communication_wifi {
 
 	private String adresseIpRobot;
 	private int port;
-	private String caractereModifie;
+	private String chaine;
 	
 	private BufferedReader provenanceDuClient;
 	private DataOutputStream versLeServeur;
 	private BufferedInputStream provenanceDuServeur;
 	
 	private Socket socketClient;
-	private Socket socketClient2;
 	public Communication_wifi(String ip, int port) throws IOException
 	{
 		this.adresseIpRobot=ip;
@@ -47,8 +46,6 @@ public class Communication_wifi {
 	{
 		try 
 		{
-				//this.character = this.inFromUser.readLine();
-				//if(!(str == null))
 				this.versLeServeur.writeBytes(str);
 		} 
 		catch (IOException e) 
@@ -61,24 +58,25 @@ public class Communication_wifi {
 	{
 		try 
 		{
-			//this.socketClient2 = new Socket(this.adresseIpRobot, this.port);
-			String chaine ="";
-			InputStream stream = socketClient.getInputStream();
-			byte[] data = new byte[8];
+			this.chaine = "";
+			byte[] data = new byte[50];
 			
 			int count = this.provenanceDuServeur.read(data);
 			System.out.println("nbbytes lus : "+count);
 			System.out.println("Donees lues :" + data.toString());
 			
 			for(int i=0; i < data.length; i++)
-			       chaine = chaine + (char) data[i];
+			       this.chaine += (char) data[i];
 			System.out.println("chaine lue: " + chaine);
 		}
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//System.out.println("Donnees recue par le serveur :" + caractereModifie);
+	}
+	
+	public String obtenirDonneesLues()
+	{
+		return this.chaine;
 	}
 	
 	public void fermerConnexion()

@@ -11,6 +11,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
+import fr.iutvalence.S3.TurtleBot.Application;
+import fr.iutvalence.S3.TurtleBot.Communication_wifi;
 import fr.iutvalence.S3.TurtleBot.InformationConnexion;
 import fr.iutvalence.S3.TurtleBot.InterfaceEntree;
 import fr.iutvalence.S3.TurtleBot.Mouvement;
@@ -21,16 +23,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 public class PageControle extends JFrame implements ActionListener, InterfaceEntree, Runnable
 {
 
 	private Mouvement mouvement;
+	private Application application;
 	
 	private static final long serialVersionUID = 1L;
 	
 	//Déclaration des boutons
-	//private JButton carte;
 	private JButton avGauche;
 	private JButton avancer;
 	private JButton avDroite;
@@ -47,7 +50,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	private JButton deconnexion;
 	private JButton boutonVitesseRotation;
 	private JButton boutonVitesseDeplacement;
-	private JButton carte;
+	private JButton localisation;
 	private JProgressBar progressBarVitDep;
 	private JProgressBar progressBarVitRot;
 	
@@ -58,6 +61,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	private JTextField pourcentageRotation;
 	private PageConnexion pageConnexion;
 	
+	private JLabel affichePosition;
 	//Création de l'application
 	public PageControle() 
 	{
@@ -87,12 +91,11 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.getContentPane().add(panelDroit);
 		panelDroit.setLayout(null);
 		
-		this.carte = new JButton("");		
-		this.carte.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/Sans titre-2.png")));
-		this.carte.setBounds(10, 324, 75, 75);
-		panelGauche.add(this.carte);
-		//this.getContentPane().add(this.carte);
-		this.carte.addActionListener(this);
+		this.localisation = new JButton("");		
+		this.localisation.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/localisation2.png")));
+		this.localisation.setBounds(142, 318, 50, 50);
+		panelGauche.add(this.localisation);
+		this.localisation.addActionListener(this);
 		
 		this.avGauche = new JButton("");
 		this.avGauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/hautGauche.png")));
@@ -206,6 +209,10 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 		
 		//Création des labels
+		this.affichePosition = new JLabel("");
+		this.affichePosition.setBounds(106, 379, 122, 14);
+		panelGauche.add(this.affichePosition);
+		
 		JLabel lblDplacementDu = new JLabel("- Contr\u00F4le du Robot -");
 		lblDplacementDu.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDplacementDu.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -216,8 +223,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		lblDplacement.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblDplacement.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDplacement.setBounds(0, 31, 341, 28);
-		panelGauche.add(lblDplacement);
-		
+		panelGauche.add(lblDplacement);		
 		
 		JLabel lblVitesseDplacement = new JLabel("Vitesse de D\u00E9placement");
 		lblVitesseDplacement.setHorizontalAlignment(SwingConstants.CENTER);
@@ -363,10 +369,21 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			}
 			this.leChoixEstFait = true;
 		}
-		else if(e.getSource() == this.carte)
+		else if(e.getSource() == this.localisation)
 		{
+			this.affichePosition.setText("En attente de la position...");
+			this.affichePosition.setHorizontalAlignment(JLabel.CENTER);
 			this.choixUtilisateur = "RECV";
 			this.leChoixEstFait = true;
+			
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			String obtenirDonneesLues = application.obtenirDonneesLues();
+			this.affichePosition.setText(obtenirDonneesLues);
 		}
 	}
 
@@ -384,8 +401,19 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	{
 		this.leChoixEstFait = false;
 		
-		while (!leChoixEstFait) {};
+		while (!leChoixEstFait) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		};
 		
 		return this.choixUtilisateur;
+	}
+
+	public void setApplication(Application application2) {
+		this.application = application2;
 	}
 }

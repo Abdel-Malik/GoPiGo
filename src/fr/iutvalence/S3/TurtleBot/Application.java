@@ -6,10 +6,13 @@ public class Application {
 	private InterfaceEntree interfaceEntree;
 	private Mouvement mouvement;
 	
+	private String donneesLues;
+	
 	public Application(InterfaceEntree interfaceEntree)
 	{
 		this.mouvement = new Mouvement();
 		this.interfaceEntree = interfaceEntree;
+		this.donneesLues = new String();
 	}
 	
 	public void creationCommunication()
@@ -40,7 +43,7 @@ public class Application {
 			String choix = this.interfaceEntree.demandeAction();
 			if(choix.equals("RECV"))
 			{
-				choix += "\0";
+				choix += '\0';
 				this.envoyerDonnees(choix);
 				lireDonneesServeur();
 			}
@@ -50,6 +53,11 @@ public class Application {
 				this.envoyerDonnees(choix);
 			}
 		}
+	}
+	
+	public String obtenirDonneesLues()
+	{
+		return this.comWifi.obtenirDonneesLues();
 	}
 	
 	public boolean etablirConnexion()
@@ -80,6 +88,11 @@ public class Application {
 	public String deplacement(Sens_deplacement dep, Sens_rotation rot)
 	{
 		return this.mouvement.obtenirLeDeplacementQuiCorrespondA(dep, rot);
+	}
+	
+	public String obtenirDonneesLuesParLeClient()
+	{
+		return this.donneesLues;
 	}
 	
 }

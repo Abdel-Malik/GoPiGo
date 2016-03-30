@@ -1,6 +1,6 @@
 package fr.iutvalence.S3.TurtleBot;
 
-import javax.swing.JButton;
+
 import javax.swing.JTextField;
 
 public class MouvementComposant 
@@ -10,16 +10,14 @@ public class MouvementComposant
 	private double vitesseActuelle;
 	private final double pas;
 	
-	private final String carUp;
-	private final String carDown;
+	private final String car;
 	
-	public MouvementComposant(double vitesseMax, double vitesseMin, double pas, double vitesseActuelle, String up, String down) 
+	public MouvementComposant(double vitesseMax, double vitesseMin, double pas, double vitesseActuelle, String car) 
 	{
 		this.vitesseMax = vitesseMax;
 		this.vitesseMin = vitesseMin;
 		this.vitesseActuelle = vitesseActuelle;
-		this.carDown = down;
-		this.carUp = up;
+		this.car = car;
 		this.pas = pas;
 	}
 	
@@ -32,16 +30,16 @@ public class MouvementComposant
 	{
 		String chaine = "";
 		this.vitesseActuelle += this.pas;
-		this.vitesseActuelle = ((double)((int)(vitesseActuelle * 100))/100);
+		this.vitesseActuelle = ((double)((int)(this.vitesseActuelle * 100))/100);
 		if (this.vitesseActuelle <= this.vitesseMax)
 		{
-			chaine = this.carUp;
+			chaine = "VAL"+this.car+Double.toString(this.vitesseActuelle+this.pas);
 		}
 		else 
 		{
-			this.vitesseActuelle -= this.pas;
+			chaine = "VAL"+this.car+Double.toString(this.vitesseMax);
 		}
-		this.vitesseActuelle = ((double)((int)(vitesseActuelle * 100))/100);
+		this.vitesseActuelle = ((double)((int)(this.vitesseActuelle * 100))/100);
 		return chaine;
 	}
 	
@@ -49,16 +47,16 @@ public class MouvementComposant
 	{
 		String chaine = "";
 		this.vitesseActuelle -= this.pas;
-		this.vitesseActuelle = ((double)((int)(vitesseActuelle * 100))/100);
+		this.vitesseActuelle = ((double)((int)(this.vitesseActuelle * 100))/100);
 		if (this.vitesseActuelle >= this.vitesseMin)
 		{
-			chaine = this.carDown;	
+			chaine = "VAL"+this.car+Double.toString(this.vitesseActuelle-this.pas);
 		}
 		else 
 		{
-			this.vitesseActuelle += this.pas;
+			chaine = "VAL"+this.car+Double.toString(this.vitesseMin);
 		}
-		this.vitesseActuelle = ((double)((int)(vitesseActuelle * 100))/100);
+		this.vitesseActuelle = ((double)((int)(this.vitesseActuelle * 100))/100);
 		return chaine;
 	}
 	

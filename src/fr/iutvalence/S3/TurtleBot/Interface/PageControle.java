@@ -47,6 +47,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	private JButton deconnexion;
 	private JButton boutonVitesseRotation;
 	private JButton boutonVitesseDeplacement;
+	private JButton carte;
 	private JProgressBar progressBarVitDep;
 	private JProgressBar progressBarVitRot;
 	
@@ -86,11 +87,12 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.getContentPane().add(panelDroit);
 		panelDroit.setLayout(null);
 		
-		/*this.carte = new JButton("");		
+		this.carte = new JButton("");		
 		this.carte.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/Sans titre-2.png")));
-		this.carte.setBounds(10, 385, 75, 75);
-		this.getContentPane().add(this.carte);
-		this.carte.addActionListener(this);*/
+		this.carte.setBounds(10, 324, 75, 75);
+		panelGauche.add(this.carte);
+		//this.getContentPane().add(this.carte);
+		this.carte.addActionListener(this);
 		
 		this.avGauche = new JButton("");
 		this.avGauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/hautGauche.png")));
@@ -359,6 +361,11 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 				this.choixUtilisateur += pourcent;
 				this.progressBarVitRot.setValue(this.mouvement.obtenirRotation().progression());
 			}
+			this.leChoixEstFait = true;
+		}
+		else if(e.getSource() == this.carte)
+		{
+			this.choixUtilisateur = "RECV";
 			this.leChoixEstFait = true;
 		}
 	}

@@ -6,9 +6,7 @@ public class Deplacement
 	
 	public final static double VITESSE_MIN = 0.04;
 	
-	public final static String CAR_UP = "DEPP";
-	
-	public final static String CAR_DOWN = "DEPM";
+	public final static String CAR = "L";
 	
 	public final static double PAS = 0.02;
 

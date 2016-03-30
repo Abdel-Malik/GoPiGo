@@ -7,8 +7,8 @@ public class Mouvement
 	
 	public Mouvement() 
 	{
-		this.rotation = new MouvementComposant(Rotation.VITESSE_MAX, Rotation.VITESSE_MIN, Rotation.PAS, Rotation.VITESSE_DEPART, Rotation.CAR_UP, Rotation.CAR_DOWN);
-		this.deplacement = new MouvementComposant(Deplacement.VITESSE_MAX, Deplacement.VITESSE_MIN, Deplacement.PAS, Deplacement.VITESSE_DEPART, Deplacement.CAR_UP, Deplacement.CAR_DOWN);
+		this.rotation = new MouvementComposant(Rotation.VITESSE_MAX, Rotation.VITESSE_MIN, Rotation.PAS, Rotation.VITESSE_DEPART, Rotation.CAR);
+		this.deplacement = new MouvementComposant(Deplacement.VITESSE_MAX, Deplacement.VITESSE_MIN, Deplacement.PAS, Deplacement.VITESSE_DEPART, Deplacement.CAR);
 	}
 	
 	public String obtenirLeDeplacementQuiCorrespondA(Sens_deplacement sensDeplacement, Sens_rotation sensRotation)

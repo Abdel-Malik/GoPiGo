@@ -1,5 +1,8 @@
 package fr.iutvalence.S3.TurtleBot;
 
+/**
+ * Classe permettant de mettre en place la protocole choisi pour l'avancement du robot
+ */
 public enum Sens_deplacement 
 {	
 	AVANT ("A"),

@@ -8,7 +8,6 @@ public class Communication_wifi {
 	private int port;
 	private String chaine;
 	
-	private BufferedReader provenanceDuClient;
 	private DataOutputStream versLeServeur;
 	private BufferedInputStream provenanceDuServeur;
 	
@@ -19,12 +18,16 @@ public class Communication_wifi {
 		this.port = port;
 	}
 	
+	
+	/**
+	 * Fonction appelée dans la classe application dans la fonction etablirConnexion
+	 * @return un booléen vrai quand les attributs ont pu être initilisés, faux sinon
+	 */
 	public boolean seConnecter()
 	{
 		try 
 		{			
 		     this.socketClient = new Socket(this.adresseIpRobot, this.port);
-		     this.provenanceDuClient = new BufferedReader(new InputStreamReader(System.in));
 		     this.versLeServeur = new DataOutputStream(socketClient.getOutputStream());
 		     this.provenanceDuServeur = new BufferedInputStream (socketClient.getInputStream());
 		     
@@ -42,6 +45,11 @@ public class Communication_wifi {
 		}
 	}
 	
+	
+	/**
+	 * Fonction qui permet l'envoi de commandes au serveur
+	 * @param str pour obtenir la chaîne de caratère à envoyer
+	 */
 	public void envoyerDonnees(String str)
 	{
 		try 
@@ -54,6 +62,10 @@ public class Communication_wifi {
 		}
 	}
 	
+	
+	/**
+	 * Fonction permettant de lire les donnees envoyées par le serveur
+	 */
 	public void lireDonneesServeur()
 	{
 		try 
@@ -74,11 +86,19 @@ public class Communication_wifi {
 		}
 	}
 	
+	/**
+	 * Fonction permettant d'obtenir la chaîne de caractère lue dans la trame Wi-Fi
+	 * @return la chaine de caractere lue
+	 */
 	public String obtenirDonneesLues()
 	{
 		return this.chaine;
 	}
 	
+	
+	/**
+	 * Fonction permettant de fermer la connexion, fermer le socket
+	 */
 	public void fermerConnexion()
 	{
 		try 

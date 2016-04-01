@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 import fr.iutvalence.S3.TurtleBot.Application;
-import fr.iutvalence.S3.TurtleBot.Communication_wifi;
 import fr.iutvalence.S3.TurtleBot.InformationConnexion;
 import fr.iutvalence.S3.TurtleBot.InterfaceEntree;
 import fr.iutvalence.S3.TurtleBot.Mouvement;
@@ -23,8 +22,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 
+/**
+ * Classe permettant le contrôle du robot
+ */
 public class PageControle extends JFrame implements ActionListener, InterfaceEntree, Runnable
 {
 
@@ -51,11 +52,14 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	private JButton boutonVitesseRotation;
 	private JButton boutonVitesseDeplacement;
 	private JButton localisation;
+	
+	//Déclaration des barres de progression
 	private JProgressBar progressBarVitDep;
 	private JProgressBar progressBarVitRot;
 	
 	
 	private volatile boolean leChoixEstFait;
+	
 	private String choixUtilisateur;
 	private JTextField pourcentageDeplacement;
 	private JTextField pourcentageRotation;
@@ -71,7 +75,9 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		initialize();
 	}
 
-	//Initalisation des composants de la fenêtre
+	/**
+	 * Initalisation des composants de la fenêtre
+	 */
 	private void initialize()
 	{		
 
@@ -91,6 +97,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.getContentPane().add(panelDroit);
 		panelDroit.setLayout(null);
 		
+		//Création des boutons
 		this.localisation = new JButton("");		
 		this.localisation.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/localisation2.png")));
 		this.localisation.setBounds(142, 318, 50, 50);
@@ -151,7 +158,6 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelGauche.add(this.recDroite);
 		this.recDroite.addActionListener(this);
 		
-		//Création des boutons
 		this.deconnexion = new JButton("");
 		deconnexion.setBounds(269, 349, 50, 50);
 		panelDroit.add(deconnexion);
@@ -182,7 +188,17 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelDroit.add(this.buttonPlusRot);
 		this.buttonPlusRot.addActionListener(this);
 		
-		//Création des JProgressBars
+		this.boutonVitesseDeplacement = new JButton("✓");
+		this.boutonVitesseDeplacement.setBounds(184, 140, 51, 20);
+		panelDroit.add(this.boutonVitesseDeplacement);
+		this.boutonVitesseDeplacement.addActionListener(this);
+		
+		this.boutonVitesseRotation = new JButton("✓");
+		boutonVitesseRotation.setBounds(184, 318, 51, 20);
+		panelDroit.add(this.boutonVitesseRotation);
+		this.boutonVitesseRotation.addActionListener(this);
+		
+		//Création des barres de progression
 		this.progressBarVitDep = new JProgressBar();
 		this.progressBarVitDep.setBounds(70, 99, 165, 14);
 		this.progressBarVitDep.setMaximum(100);
@@ -247,16 +263,6 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		lblChangerVitesseRotation.setBounds(70, 302, 165, 14);
 		panelDroit.add(lblChangerVitesseRotation);
 		
-		this.boutonVitesseDeplacement = new JButton("✓");
-		this.boutonVitesseDeplacement.setBounds(184, 140, 51, 20);
-		panelDroit.add(this.boutonVitesseDeplacement);
-		this.boutonVitesseDeplacement.addActionListener(this);
-		
-		this.boutonVitesseRotation = new JButton("✓");
-		boutonVitesseRotation.setBounds(184, 318, 51, 20);
-		panelDroit.add(this.boutonVitesseRotation);
-		this.boutonVitesseRotation.addActionListener(this);
-		
 		//Rendre visible les fenêtres et les JPanels
 		panelGauche.setVisible(true);
 		panelDroit.setVisible(true);
@@ -268,6 +274,10 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.setVisible(true);
 	}
 	
+	
+	/* 
+	 * Permet de savoir quelle action réaliser par rapport au bouton que l'on a cliqué
+	 */
 	public void actionPerformed(ActionEvent e)
 	{
 		
@@ -396,6 +406,12 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		return info;
 	}
 
+	
+	/* 
+	 * Tant que l'utilisateur n'a pas cliqué sur un bouton, l'interface attend puis fait passer le booléan à true 
+	 * pour permettre d'obtenir du choix de l'utilisateur
+	 * @return le choix de l'utilisateur
+	 */
 	@Override
 	public String demandeAction()
 	{
@@ -413,6 +429,10 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		return this.choixUtilisateur;
 	}
 
+	/**
+	 * Permet de donner l'application créer à la classe qui appelle cette fonction
+	 * @param application2
+	 */
 	public void setApplication(Application application2) {
 		this.application = application2;
 	}

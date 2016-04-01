@@ -15,6 +15,10 @@ public class Application {
 		this.donneesLues = new String();
 	}
 	
+	
+	/**
+	 * Fonction permettant de créer la communication entre le serveur et le client
+	 */
 	public void creationCommunication()
 	{
 		try
@@ -35,7 +39,10 @@ public class Application {
 		}
 	}
 	
-	//Methode run dans un jeu
+	
+	/**
+	 * Fonction qui donne la main à l'utilisateur, c'est cette fonction qui tourne tout au long de l'exécution du programme
+	 */
 	public void fonctionner()
 	{
 		while (true)
@@ -55,44 +62,61 @@ public class Application {
 		}
 	}
 	
+	/**
+	 * Fonction appelant la fonction de la classe CommunicationWifi
+	 * @return la chaîne lue par le client et envoyée par le serveur
+	 */
 	public String obtenirDonneesLues()
 	{
 		return this.comWifi.obtenirDonneesLues();
 	}
 	
+	
+	/**
+	 * Fonction appelant la foncion seConnecter de la classe CommunicationWifi
+	 * @return un booléen, vrai si la connexion est établie, faux sinon
+	 */
 	public boolean etablirConnexion()
 	{
 		return this.comWifi.seConnecter();
 	}
 	
+	
+	/**
+	 * Fonction appelant la fonction envoyerDonnees de la classe CommunicatioWifi
+	 * @param str
+	 */
 	public void envoyerDonnees(String str)
 	{
 		this.comWifi.envoyerDonnees(str);
 	}
 	
+	
+	/**
+	 * Fonction appelant la fonction lireDonneesServeur de la classe CommunicationWifi
+	 */
 	public void lireDonneesServeur()
 	{
 		this.comWifi.lireDonneesServeur();
 	}
 	
-	public void montrerCarte(Position p)
-	{
-		//TODO
-	}
-	
+
+	/**
+	 * Fonction appelant la fonction fermerConnexin de la classe CommunicationWifi
+	 */
 	public void terminerConnexion()
 	{
 		this.comWifi.fermerConnexion();
 	}
 	
+	
+	/**
+	 * @param dep qui permet de donner le sens de déplacement
+	 * @param rot qui permet de donner le sens de rotation
+	 * @return une chaîne de caractère contenant le déplacement et la rotation que le robot va effectuer
+	 */
 	public String deplacement(Sens_deplacement dep, Sens_rotation rot)
 	{
 		return this.mouvement.obtenirLeDeplacementQuiCorrespondA(dep, rot);
-	}
-	
-	public String obtenirDonneesLuesParLeClient()
-	{
-		return this.donneesLues;
-	}
-	
+	}	
 }

@@ -19,6 +19,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
+/**
+ * Interface de départ qui demande à l'utilisateur d'entrer l'adresse IP et le port auquels se connecter
+ */
 public class PageConnexion extends JDialog implements ActionListener
 {
 	/**
@@ -27,11 +30,8 @@ public class PageConnexion extends JDialog implements ActionListener
 	private static final long serialVersionUID = 1L;
 
 	private JTextField champIp;
-	
 	private JTextField champPort;
-	
 	private JButton btnConnexion;
-
 	private boolean ok;
 
 	
@@ -63,7 +63,7 @@ public class PageConnexion extends JDialog implements ActionListener
 					JOptionPane.showMessageDialog(this, "Le port doit être de type entier");
 					return;
 				}
-				ok = true; 
+				this.ok = true; 
 				setVisible (false);
 			}
 			
@@ -72,10 +72,10 @@ public class PageConnexion extends JDialog implements ActionListener
 	
 	public InformationConnexion lanceDialogue()
 	{ 
-		ok = false ;
+		this.ok = false ;
 		setVisible (true) ;
 		
-		if (ok)
+		if (this.ok)
 			return new InformationConnexion(this.champIp.getText(), Integer.parseInt(this.champPort.getText())) ;
 		else 
 			return null ;
@@ -114,10 +114,10 @@ public class PageConnexion extends JDialog implements ActionListener
 		lblAdresseIp.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		this.champIp = new JTextField();
-		champIp.setBounds(0, 41, 270, 20);
-		panel.add(champIp);
-		champIp.setHorizontalAlignment(SwingConstants.LEFT);
-		champIp.setColumns(10);
+		this.champIp.setBounds(0, 41, 270, 20);
+		panel.add(this.champIp);
+		this.champIp.setHorizontalAlignment(SwingConstants.LEFT);
+		this.champIp.setColumns(10);
 		
 		JLabel lblPort = new JLabel("Port");
 		lblPort.setBounds(0, 72, 270, 14);
@@ -125,14 +125,14 @@ public class PageConnexion extends JDialog implements ActionListener
 		lblPort.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		this.champPort = new JTextField();
-		champPort.setBounds(0, 87, 270, 20);
-		panel.add(champPort);
-		champPort.setColumns(10);
+		this.champPort.setBounds(0, 87, 270, 20);
+		panel.add(this.champPort);
+		this.champPort.setColumns(10);
 		
-		btnConnexion = new JButton("Connexion");
-		btnConnexion.setBounds(80, 135, 102, 23);
-		panel.add(btnConnexion);
-		btnConnexion.addActionListener(this);
+		this.btnConnexion = new JButton("Connexion");
+		this.btnConnexion.setBounds(80, 135, 102, 23);
+		panel.add(this.btnConnexion);
+		this.btnConnexion.addActionListener(this);
 		panel.setVisible(true);
 
 	}

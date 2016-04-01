@@ -1,5 +1,9 @@
 package fr.iutvalence.S3.TurtleBot;
 
+
+/**
+ * Classe permettant de mettre en place la protocole choisi pour la rotation du robot
+ */
 public enum Sens_rotation
 {
 	

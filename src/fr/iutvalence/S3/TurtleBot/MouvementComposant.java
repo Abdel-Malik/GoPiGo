@@ -21,11 +21,20 @@ public class MouvementComposant
 		this.pas = pas;
 	}
 	
+	
+	/**
+	 * Fonction permettant le fonctionnement des barres de progression de changement de vitesses
+	 * @return un entier (le pourcentage)
+	 */
 	public int progression()
 	{
 		return (int)((this.vitesseActuelle - this.vitesseMin)/(this.vitesseMax - this.vitesseMin) * 100);
 	} 
 	
+	
+	/**
+	 * @return une chaine de caracteres qui indique que combien on veut augmenter la vitesse
+	 */
 	public String augmenterVitesse()
 	{
 		String chaine = "";
@@ -43,6 +52,9 @@ public class MouvementComposant
 		return chaine;
 	}
 	
+	/**
+	 * @return une chaine de caracteres qui indique que combien on veut augmenter la vitesse
+	 */
 	public String diminuerVitesse()
 	{
 		String chaine = "";
@@ -60,11 +72,20 @@ public class MouvementComposant
 		return chaine;
 	}
 	
+	
+	/**
+	 * @return la vitesse actuelle
+	 */
 	public double obtenirVitesseActuelle()
 	{
 		return this.vitesseActuelle;
 	}
 	
+	
+	/**
+	 * @param pourcentageVitesse
+	 * @return la vitesse en pourcentage
+	 */
 	public String convertirPourcentageVitesse(JTextField pourcentageVitesse)
 	{
 		String texteBouton = pourcentageVitesse.getText();

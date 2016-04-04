@@ -17,7 +17,7 @@ public class Application {
 	
 	
 	/**
-	 * Fonction permettant de cr√©er la communication entre le serveur et le client
+	 * Fonction permettant de crÈer la communication entre le serveur et le client
 	 */
 	public void creationCommunication()
 	{
@@ -41,7 +41,7 @@ public class Application {
 	
 	
 	/**
-	 * Fonction qui donne la main √† l'utilisateur, c'est cette fonction qui tourne tout au long de l'ex√©cution du programme
+	 * Fonction qui donne la main ‡ l'utilisateur, c'est cette fonction qui tourne tout au long de l'exÈcution du programme
 	 */
 	public void fonctionner()
 	{
@@ -63,8 +63,8 @@ public class Application {
 	}
 	
 	/**
-	 * Fonction appelant la fonction de la classe CommunicationWifi
-	 * @return la cha√Æne lue par le client et envoy√©e par le serveur
+	 * Fonction appelant la fonction de la classe Communication_Wifi
+	 * @return la chaine lue par le client et envoyÈe par le serveur
 	 */
 	public String obtenirDonneesLues()
 	{
@@ -73,8 +73,8 @@ public class Application {
 	
 	
 	/**
-	 * Fonction appelant la foncion seConnecter de la classe CommunicationWifi
-	 * @return un bool√©en, vrai si la connexion est √©tablie, faux sinon
+	 * Fonction appelant la foncion seConnecter de la classe Communication_Wifi
+	 * @return un bool√©en, vrai si la connexion est Ètablie, faux sinon
 	 */
 	public boolean etablirConnexion()
 	{
@@ -83,7 +83,7 @@ public class Application {
 	
 	
 	/**
-	 * Fonction appelant la fonction envoyerDonnees de la classe CommunicatioWifi
+	 * Fonction appelant la fonction envoyerDonnees de la classe Communication_Wifi
 	 * @param str
 	 */
 	public void envoyerDonnees(String str)
@@ -93,7 +93,7 @@ public class Application {
 	
 	
 	/**
-	 * Fonction appelant la fonction lireDonneesServeur de la classe CommunicationWifi
+	 * Fonction appelant la fonction lireDonneesServeur de la classe Communication_Wifi
 	 */
 	public void lireDonneesServeur()
 	{
@@ -102,7 +102,7 @@ public class Application {
 	
 
 	/**
-	 * Fonction appelant la fonction fermerConnexin de la classe CommunicationWifi
+	 * Fonction appelant la fonction fermerConnexin de la classe Communication_Wifi
 	 */
 	public void terminerConnexion()
 	{
@@ -111,9 +111,9 @@ public class Application {
 	
 	
 	/**
-	 * @param dep qui permet de donner le sens de d√©placement
+	 * @param dep qui permet de donner le sens de dÈplacement
 	 * @param rot qui permet de donner le sens de rotation
-	 * @return une cha√Æne de caract√®re contenant le d√©placement et la rotation que le robot va effectuer
+	 * @return une chaine de caractËre contenant le dÈplacement et la rotation que le robot va effectuer
 	 */
 	public String deplacement(Sens_deplacement dep, Sens_rotation rot)
 	{

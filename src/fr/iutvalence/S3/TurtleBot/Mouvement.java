@@ -7,7 +7,7 @@ public class Mouvement
 	
 	
 	/**
-	 * Permet d'initialier les mouvements demandÃ©s
+	 * Permet d'initialier les mouvements demandés
 	 */
 	public Mouvement() 
 	{
@@ -19,7 +19,7 @@ public class Mouvement
 	/**
 	 * @param sensDeplacement
 	 * @param sensRotation
-	 * @return une chaine de caractÃ¨res pour indiquer le mouvement Ã  rÃ©aliser 
+	 * @return une chaine de caractères pour indiquer le mouvement à réaliser 
 	 */
 	public String obtenirLeDeplacementQuiCorrespondA(Sens_deplacement sensDeplacement, Sens_rotation sensRotation)
 	{

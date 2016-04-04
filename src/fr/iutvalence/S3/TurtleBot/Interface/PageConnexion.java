@@ -20,7 +20,7 @@ import java.awt.event.ActionListener;
 
 
 /**
- * Interface de dÃ©part qui demande Ã  l'utilisateur d'entrer l'adresse IP et le port auquels se connecter
+ * Interface de départ qui demande à l'utilisateur d'entrer l'adresse IP et le port auquels se connecter
  */
 public class PageConnexion extends JDialog implements ActionListener
 {
@@ -48,10 +48,10 @@ public class PageConnexion extends JDialog implements ActionListener
 		{
 			if(this.champIp.getText().equals(""))
 			{
-				JOptionPane.showMessageDialog(this, "L'adresse IP n'est pas indiquÃ©e");
+				JOptionPane.showMessageDialog(this, "L'adresse IP n'est pas indiqué");
 			}
 			else if(this.champPort.getText().equals(""))
-				JOptionPane.showMessageDialog(this, "Le port n'est pas indiquÃ©");
+				JOptionPane.showMessageDialog(this, "Le port n'est pas indiqué");
 			else 
 			{
 				try
@@ -60,7 +60,7 @@ public class PageConnexion extends JDialog implements ActionListener
 				}
 				catch(NumberFormatException et)
 				{
-					JOptionPane.showMessageDialog(this, "Le port doit Ãªtre de type entier");
+					JOptionPane.showMessageDialog(this, "Le port doit être de type entier");
 					return;
 				}
 				this.ok = true; 

@@ -20,8 +20,8 @@ public class Communication_wifi {
 	
 	
 	/**
-	 * Fonction appelÃ©e dans la classe application dans la fonction etablirConnexion
-	 * @return un boolÃ©en vrai quand les attributs ont pu Ãªtre initilisÃ©s, faux sinon
+	 * Fonction appelée dans la classe application dans la fonction etablirConnexion
+	 * @return un booléen vrai quand les attributs ont pu être initialisés, faux sinon
 	 */
 	public boolean seConnecter()
 	{
@@ -48,7 +48,7 @@ public class Communication_wifi {
 	
 	/**
 	 * Fonction qui permet l'envoi de commandes au serveur
-	 * @param str pour obtenir la chaÃ®ne de caratÃ¨re Ã  envoyer
+	 * @param str pour obtenir la chaine de caratère à envoyer
 	 */
 	public void envoyerDonnees(String str)
 	{
@@ -64,7 +64,7 @@ public class Communication_wifi {
 	
 	
 	/**
-	 * Fonction permettant de lire les donnees envoyÃ©es par le serveur
+	 * Fonction permettant de lire les donnees envoyées par le serveur
 	 */
 	public void lireDonneesServeur()
 	{
@@ -87,7 +87,7 @@ public class Communication_wifi {
 	}
 	
 	/**
-	 * Fonction permettant d'obtenir la chaÃ®ne de caractÃ¨re lue dans la trame Wi-Fi
+	 * Fonction permettant d'obtenir la chaine de caractère lue dans la trame Wi-Fi
 	 * @return la chaine de caractere lue
 	 */
 	public String obtenirDonneesLues()

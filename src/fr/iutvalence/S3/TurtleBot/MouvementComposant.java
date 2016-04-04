@@ -33,7 +33,7 @@ public class MouvementComposant
 	
 	
 	/**
-	 * @return une chaine de caracteres qui indique que combien on veut augmenter la vitesse
+	 * @return une chaine de caractères qui indique de combien on veut augmenter la vitesse
 	 */
 	public String augmenterVitesse()
 	{
@@ -53,7 +53,7 @@ public class MouvementComposant
 	}
 	
 	/**
-	 * @return une chaine de caracteres qui indique que combien on veut augmenter la vitesse
+	 * @return une chaine de caracteres qui indique de combien on veut diminuer la vitesse
 	 */
 	public String diminuerVitesse()
 	{

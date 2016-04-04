@@ -8,8 +8,8 @@ public class InformationConnexion
 	
 	
 	/**
-	 * @param adresse pour obtenir l'adresse IP entrÃ©e dans l'interface
-	 * @param port pour obtenir le port entrÃ© dans l'interface
+	 * @param adresse pour obtenir l'adresse IP entrée dans l'interface
+	 * @param port pour obtenir le port entré dans l'interface
 	 */
 	public InformationConnexion(String adresse, int port)
 	{

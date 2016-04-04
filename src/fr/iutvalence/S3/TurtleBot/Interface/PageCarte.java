@@ -10,8 +10,8 @@ import java.awt.Color;
 
 
 /**
- * Classe crÃ©er pour l'affichage de la carte
- * Non appelÃ©e pour l'instant
+ * Classe créer pour l'affichage de la carte
+ * Non appelée pour l'instant
  */
 public class PageCarte 
 {

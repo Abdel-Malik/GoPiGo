@@ -5,9 +5,9 @@ package fr.iutvalence.S3.TurtleBot;
  */
 public enum Sens_deplacement 
 {	
-	AVANT ("A"),
+	AVANT ("w"),
 	
-	ARRIERE ("R"),
+	ARRIERE ("s"),
 
 	RIEN ("");
 	

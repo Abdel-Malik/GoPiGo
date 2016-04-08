@@ -35,34 +35,34 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	private static final long serialVersionUID = 1L;
 	
 	//Déclaration des boutons
-	private JButton avGauche;
+	//private JButton avGauche;
 	private JButton avancer;
-	private JButton avDroite;
+	//private JButton avDroite;
 	private JButton gauche;
 	private JButton stop;
 	private JButton droite;
-	private JButton recGauche;
+	//private JButton recGauche;
 	private JButton reculer;
-	private JButton recDroite;
+	//private JButton recDroite;
 	private JButton buttonMinusDep;
 	private JButton buttonPlusDep;
-	private JButton buttonMinusRot;
-	private JButton buttonPlusRot;
+	//private JButton buttonMinusRot;
+	//private JButton buttonPlusRot;
 	private JButton deconnexion;
-	private JButton boutonVitesseRotation;
-	private JButton boutonVitesseDeplacement;
+	//private JButton boutonVitesseRotation;
+	//private JButton boutonVitesseDeplacement;
 	private JButton localisation;
 	
 	//Déclaration des barres de progression
-	private JProgressBar progressBarVitDep;
-	private JProgressBar progressBarVitRot;
+	//private JProgressBar progressBarVitDep;
+	//private JProgressBar progressBarVitRot;
 	
 	
 	private volatile boolean leChoixEstFait;
 	
 	private String choixUtilisateur;
-	private JTextField pourcentageDeplacement;
-	private JTextField pourcentageRotation;
+	//private JTextField pourcentageDeplacement;
+	//private JTextField pourcentageRotation;
 	private PageConnexion pageConnexion;
 	
 	private JLabel affichePosition;
@@ -86,7 +86,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.setLocationRelativeTo(null);
 		this.getContentPane().setLayout(null);
 		
-		//CrÃ©ation des JPanels
+		//Création des JPanels
 		JPanel panelGauche = new JPanel();
 		panelGauche.setBounds(0, 61, 341, 410);
 		this.getContentPane().add(panelGauche);
@@ -104,11 +104,11 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelGauche.add(this.localisation);
 		this.localisation.addActionListener(this);
 		
-		this.avGauche = new JButton("");
+		/*this.avGauche = new JButton("");
 		this.avGauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/hautGauche.png")));
 		this.avGauche.setBounds(82, 70, 50, 50);
 		panelGauche.add(this.avGauche);
-		this.avGauche.addActionListener(this);
+		this.avGauche.addActionListener(this);*/
 		
 		this.avancer = new JButton("");
 		this.avancer.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/haut.png")));
@@ -116,11 +116,11 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelGauche.add(this.avancer);
 		this.avancer.addActionListener(this);
 		
-		this.avDroite = new JButton("");
+		/*this.avDroite = new JButton("");
 		this.avDroite.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/hautDroit.png")));
 		this.avDroite.setBounds(202, 70, 50, 50);
 		panelGauche.add(this.avDroite);
-		this.avDroite.addActionListener(this);
+		this.avDroite.addActionListener(this);*/
 		
 		this.gauche = new JButton("");
 		this.gauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/gauche.png")));
@@ -140,11 +140,11 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelGauche.add(this.droite);
 		this.droite.addActionListener(this);
 		
-		this.recGauche = new JButton("");
+		/*this.recGauche = new JButton("");
 		this.recGauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/basGauche.png")));
 		this.recGauche.setBounds(82, 192, 50, 50);
 		panelGauche.add(this.recGauche);
-		this.recGauche.addActionListener(this);
+		this.recGauche.addActionListener(this);*/
 		
 		this.reculer = new JButton("");
 		this.reculer.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/bas.png")));
@@ -152,11 +152,11 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelGauche.add(this.reculer);
 		this.reculer.addActionListener(this);
 		
-		this.recDroite = new JButton("");
+		/*this.recDroite = new JButton("");
 		this.recDroite.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/basDroite.png")));
 		this.recDroite.setBounds(202, 192, 50, 50);
 		panelGauche.add(this.recDroite);
-		this.recDroite.addActionListener(this);
+		this.recDroite.addActionListener(this);*/
 		
 		this.deconnexion = new JButton("");
 		deconnexion.setBounds(269, 349, 50, 50);
@@ -176,7 +176,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelDroit.add(buttonPlusDep);
 		buttonPlusDep.addActionListener(this);
 		
-		this.buttonMinusRot = new JButton("");
+		/*this.buttonMinusRot = new JButton("");
 		this.buttonMinusRot.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png")));
 		this.buttonMinusRot.setBounds(10, 258, 50, 50);
 		panelDroit.add(this.buttonMinusRot);
@@ -186,9 +186,9 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.buttonPlusRot.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png")));
 		this.buttonPlusRot.setBounds(245, 258, 50, 50);
 		panelDroit.add(this.buttonPlusRot);
-		this.buttonPlusRot.addActionListener(this);
+		this.buttonPlusRot.addActionListener(this);*/
 		
-		this.boutonVitesseDeplacement = new JButton("âœ“");
+		/*this.boutonVitesseDeplacement = new JButton("âœ“");
 		this.boutonVitesseDeplacement.setBounds(184, 140, 51, 20);
 		panelDroit.add(this.boutonVitesseDeplacement);
 		this.boutonVitesseDeplacement.addActionListener(this);
@@ -196,10 +196,10 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.boutonVitesseRotation = new JButton("âœ“");
 		boutonVitesseRotation.setBounds(184, 318, 51, 20);
 		panelDroit.add(this.boutonVitesseRotation);
-		this.boutonVitesseRotation.addActionListener(this);
+		this.boutonVitesseRotation.addActionListener(this);*/
 		
 		//Création des barres de progression
-		this.progressBarVitDep = new JProgressBar();
+		/*this.progressBarVitDep = new JProgressBar();
 		this.progressBarVitDep.setBounds(70, 99, 165, 14);
 		this.progressBarVitDep.setMaximum(100);
 		this.progressBarVitDep.setMinimum(0);
@@ -221,7 +221,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 		this.pourcentageRotation = new JTextField();
 		this.pourcentageRotation.setBounds(70, 318, 104, 20);
-		panelDroit.add(this.pourcentageRotation);
+		panelDroit.add(this.pourcentageRotation);*/
 		
 		
 		//Création des labels
@@ -281,21 +281,21 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	public void actionPerformed(ActionEvent e)
 	{
 		
-		if(e.getSource() == this.avGauche)
+		/*if(e.getSource() == this.avGauche)
 		{
 			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.AVANT, Sens_rotation.GAUCHE);
 			this.leChoixEstFait = true;
-		}
-		else if(e.getSource() == this.avancer)
+		}*/
+		/*else */if(e.getSource() == this.avancer)
 		{
 			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.AVANT, Sens_rotation.RIEN);
 			this.leChoixEstFait = true;
 		}
-		else if(e.getSource()== this.avDroite)
+		/*else if(e.getSource()== this.avDroite)
 		{
 			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.AVANT, Sens_rotation.DROITE);
 			this.leChoixEstFait = true;
-		}
+		}*/
 		else if(e.getSource() == this.gauche)
 		{
 			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.RIEN, Sens_rotation.GAUCHE);
@@ -311,35 +311,35 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.RIEN, Sens_rotation.DROITE);
 			this.leChoixEstFait = true;
 		}
-		else if(e.getSource() == this.recGauche)
+		/*else if(e.getSource() == this.recGauche)
 		{
 			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.ARRIERE, Sens_rotation.GAUCHE);
 			this.leChoixEstFait = true;
-		}
+		}*/
 		else if(e.getSource() == this.reculer)
 		{
 			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.ARRIERE, Sens_rotation.RIEN);
 			this.leChoixEstFait = true;
 		}
-		else if(e.getSource() == this.recDroite)
+		/*else if(e.getSource() == this.recDroite)
 		{
 			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.ARRIERE, Sens_rotation.DROITE);
 			this.leChoixEstFait = true;
-		}
+		}*/
 		else if(e.getSource() == this.buttonMinusDep)
 		{
 			this.choixUtilisateur = mouvement.obtenirDeplacement().diminuerVitesse();
-			this.progressBarVitDep.setValue(this.mouvement.obtenirDeplacement().progression());
+			//this.progressBarVitDep.setValue(this.mouvement.obtenirDeplacement().progression());
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.buttonPlusDep)
 		{
 			
 			this.choixUtilisateur = mouvement.obtenirDeplacement().augmenterVitesse();
-			this.progressBarVitDep.setValue(this.mouvement.obtenirDeplacement().progression());
+			//this.progressBarVitDep.setValue(this.mouvement.obtenirDeplacement().progression());
 			this.leChoixEstFait = true;
 		}
-		else if(e.getSource() == this.buttonMinusRot)
+		/*else if(e.getSource() == this.buttonMinusRot)
 		{
 			this.choixUtilisateur = mouvement.obtenirRotation().diminuerVitesse();
 			this.progressBarVitRot.setValue(this.mouvement.obtenirRotation().progression());
@@ -350,14 +350,14 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			this.choixUtilisateur = mouvement.obtenirRotation().augmenterVitesse();
 			this.progressBarVitRot.setValue(this.mouvement.obtenirRotation().progression());
 			this.leChoixEstFait = true;
-		}
+		}*/
 		else if(e.getSource() == this.deconnexion)
 		{
 			this.choixUtilisateur = "STOP";
 			this.leChoixEstFait = true;
 			System.exit(0);
 		}
-		else if(e.getSource() == this.boutonVitesseDeplacement)
+		/*else if(e.getSource() == this.boutonVitesseDeplacement)
 		{
 			String pourcent = mouvement.obtenirDeplacement().convertirPourcentageVitesse(this.pourcentageDeplacement);
 			if(pourcent != "")
@@ -394,7 +394,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			}
 			String obtenirDonneesLues = application.obtenirDonneesLues();
 			this.affichePosition.setText(obtenirDonneesLues);
-		}
+		}*/
 	}
 
 	@Override

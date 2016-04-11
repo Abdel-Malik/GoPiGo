@@ -144,11 +144,6 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelDroit.add(buttonPlusDep);
 		buttonPlusDep.addActionListener(this);
 		
-		this.boutonVitesseDeplacement = new JButton("âœ“");
-		this.boutonVitesseDeplacement.setBounds(184, 140, 51, 20);
-		panelDroit.add(this.boutonVitesseDeplacement);
-		this.boutonVitesseDeplacement.addActionListener(this);
-		
 		//Création des barres de progression
 		this.progressBarVitDep = new JProgressBar();
 		this.progressBarVitDep.setBounds(70, 99, 165, 14);
@@ -236,33 +231,22 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		}
 		else if(e.getSource() == this.buttonMinusDep)
 		{
-			this.choixUtilisateur = mouvement.obtenirDeplacement().diminuerVitesse();
+			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.MOINS);
 			this.progressBarVitDep.setValue(this.mouvement.obtenirDeplacement().progression());
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.buttonPlusDep)
 		{
 			
-			this.choixUtilisateur = mouvement.obtenirDeplacement().augmenterVitesse();
+			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.PLUS);
 			this.progressBarVitDep.setValue(this.mouvement.obtenirDeplacement().progression());
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.deconnexion)
 		{
-			this.choixUtilisateur = "STOP";
+			this.choixUtilisateur = "BK";
 			this.leChoixEstFait = true;
 			System.exit(0);
-		}
-		else if(e.getSource() == this.boutonVitesseDeplacement)
-		{
-			String pourcent = mouvement.obtenirDeplacement().convertirPourcentageVitesse(this.pourcentageDeplacement);
-			if(pourcent != "")
-			{
-				this.choixUtilisateur = "VALL";
-				this.choixUtilisateur += pourcent;
-				this.progressBarVitDep.setValue(this.mouvement.obtenirDeplacement().progression());
-			}
-			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.localisation)
 		{

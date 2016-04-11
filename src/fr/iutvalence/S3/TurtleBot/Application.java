@@ -48,17 +48,9 @@ public class Application {
 		while (true)
 		{
 			String choix = this.interfaceEntree.demandeAction();
-			if(choix.equals("RECV"))
-			{
 				choix += '\0';
 				this.envoyerDonnees(choix);
 				lireDonneesServeur();
-			}
-			else 
-			{
-				choix += "\0";
-				this.envoyerDonnees(choix);
-			}
 		}
 	}
 	

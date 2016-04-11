@@ -5,11 +5,19 @@ package fr.iutvalence.S3.TurtleBot;
  */
 public enum Sens_deplacement 
 {	
-	AVANT ("w"),
+	AVANT ("f"),
 	
-	ARRIERE ("s"),
+	ARRIERE ("b"),
+	
+	GAUCHE ("l"),
+	
+	DROITE ("r"),
+	
+	PLUS ("t"),
+	
+	MOINS ("g"),
 
-	RIEN ("");
+	STOP ("s");
 	
 	private String deplacement="";
 	

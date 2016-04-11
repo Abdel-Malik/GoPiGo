@@ -115,8 +115,8 @@ public class Application {
 	 * @param rot qui permet de donner le sens de rotation
 	 * @return une chaine de caractère contenant le déplacement et la rotation que le robot va effectuer
 	 */
-	public String deplacement(Sens_deplacement dep, Sens_rotation rot)
+	public String deplacement(Sens_deplacement dep)
 	{
-		return this.mouvement.obtenirLeDeplacementQuiCorrespondA(dep, rot);
+		return this.mouvement.obtenirLeDeplacementQuiCorrespondA(dep);
 	}	
 }

@@ -140,12 +140,6 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelGauche.add(this.rotationDroite);
 		this.rotationDroite.addActionListener(this);
 		
-		this.avancer = new JButton("");
-		this.avancer.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/haut.png")));
-		this.avancer.setBounds(142, 70, 50, 50);
-		panelGauche.add(this.avancer);
-		this.avancer.addActionListener(this);
-		
 		this.deconnexion = new JButton("");
 		deconnexion.setBounds(269, 349, 50, 50);
 		panelDroit.add(deconnexion);

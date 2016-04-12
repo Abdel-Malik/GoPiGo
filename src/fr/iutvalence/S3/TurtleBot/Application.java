@@ -48,8 +48,13 @@ public class Application {
 		while (true)
 		{
 			String choix = this.interfaceEntree.demandeAction();
-				choix += '\0';
 				this.envoyerDonnees(choix);
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				lireDonneesServeur();
 		}
 	}

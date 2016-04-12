@@ -13,9 +13,9 @@ public enum Sens_deplacement
 	
 	DROITE ("r"),
 	
-	PLUS ("t"),
+	PLUS ("i"),
 	
-	MOINS ("g"),
+	MOINS ("d"),
 
 	STOP ("s");
 	

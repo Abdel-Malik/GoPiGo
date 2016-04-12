@@ -39,6 +39,8 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	private JButton stop;
 	private JButton droite;
 	private JButton reculer;
+	private JButton rotationGauche;
+	private JButton rotationDroite;
 	private JButton buttonMinusDep;
 	private JButton buttonPlusDep;
 	private JButton deconnexion;
@@ -125,6 +127,24 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.reculer.setBounds(142, 192, 50, 50);
 		panelGauche.add(this.reculer);
 		this.reculer.addActionListener(this);
+		
+		this.rotationGauche = new JButton("");
+		this.rotationGauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/rotationGauche.png")));
+		this.rotationGauche.setBounds(82, 192, 50, 50);
+		panelGauche.add(this.rotationGauche);
+		this.rotationGauche.addActionListener(this);
+		
+		this.rotationDroite = new JButton("");
+		this.rotationDroite.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/rotationDroite.png")));
+		this.rotationDroite.setBounds(202, 192, 50, 50);
+		panelGauche.add(this.rotationDroite);
+		this.rotationDroite.addActionListener(this);
+		
+		this.avancer = new JButton("");
+		this.avancer.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/haut.png")));
+		this.avancer.setBounds(142, 70, 50, 50);
+		panelGauche.add(this.avancer);
+		this.avancer.addActionListener(this);
 		
 		this.deconnexion = new JButton("");
 		deconnexion.setBounds(269, 349, 50, 50);
@@ -227,6 +247,16 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		else if(e.getSource() == this.reculer)
 		{
 			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.ARRIERE);
+			this.leChoixEstFait = true;
+		}
+		else if(e.getSource() == this.rotationGauche)
+		{
+			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.ROTATIONG);
+			this.leChoixEstFait = true;
+		}
+		else if(e.getSource() == this.rotationDroite)
+		{
+			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.ROTATIOND);
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.buttonMinusDep)

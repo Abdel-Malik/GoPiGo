@@ -13,6 +13,10 @@ public enum Sens_deplacement
 	
 	DROITE ("r"),
 	
+	ROTATIONG ("a"),
+	
+	ROTATIOND ("e"),
+	
 	PLUS ("i"),
 	
 	MOINS ("d"),

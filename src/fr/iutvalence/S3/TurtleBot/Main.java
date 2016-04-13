@@ -17,7 +17,7 @@ public class Main
 		Application application = new Application(pageControle);
 		pageControle.setApplication(application);
 		application.creationCommunication();
-		application.envoyerDonnees("La connexion avec un client est etablie\0");
+		application.envoyerDonnees("la connexion avec un client est etablie\0");
 		application.fonctionner();
 	}
 }

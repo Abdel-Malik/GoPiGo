@@ -71,7 +71,7 @@ public class Communication_wifi {
 		try 
 		{
 			this.chaine = "";
-			byte[] data = new byte[50];
+			byte[] data = new byte[80];
 			
 			int count = this.provenanceDuServeur.read(data);
 			System.out.println("nbbytes lus : "+count);

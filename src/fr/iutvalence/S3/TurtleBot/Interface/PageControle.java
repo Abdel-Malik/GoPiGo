@@ -259,6 +259,12 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		{
 			this.choixUtilisateur = "BREAK";
 			this.leChoixEstFait = true;
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			System.exit(0);
 		}
 		else if(e.getSource() == this.ultrason)
@@ -269,7 +275,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			this.leChoixEstFait = true;
 			
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(500);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

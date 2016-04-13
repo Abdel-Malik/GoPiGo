@@ -44,8 +44,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	private JButton buttonMinusDep;
 	private JButton buttonPlusDep;
 	private JButton deconnexion;
-	private JButton localisation;
-	private JButton boutonVitesseDeplacement;
+	private JButton ultrason;
 	
 	//Déclaration des barres de progression
 	private JProgressBar progressBarVitDep;
@@ -54,10 +53,9 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	private volatile boolean leChoixEstFait;
 	
 	private String choixUtilisateur;
-	private JTextField pourcentageDeplacement;
 	private PageConnexion pageConnexion;
 	
-	private JLabel affichePosition;
+	private JLabel afficheDistance;
 	
 	//Création de l'application
 	public PageControle() 
@@ -91,11 +89,11 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelDroit.setLayout(null);
 		
 		//Création des boutons
-		this.localisation = new JButton("");		
-		this.localisation.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/localisation2.png")));
-		this.localisation.setBounds(142, 318, 50, 50);
-		panelGauche.add(this.localisation);
-		this.localisation.addActionListener(this);
+		this.ultrason = new JButton("");		
+		this.ultrason.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/localisation2.png")));
+		this.ultrason.setBounds(142, 318, 50, 50);
+		panelGauche.add(this.ultrason);
+		this.ultrason.addActionListener(this);
 		
 		
 		this.avancer = new JButton("");
@@ -165,17 +163,12 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.progressBarVitDep.setMinimum(0);
 		this.progressBarVitDep.setValue(this.mouvement.obtenirDeplacement().progression());
 		panelDroit.add(this.progressBarVitDep);
-		
-		// Création des JTextField
-		this.pourcentageDeplacement = new JTextField();
-		this.pourcentageDeplacement.setBounds(70, 140, 104, 20);
-		panelDroit.add(this.pourcentageDeplacement);
-		this.pourcentageDeplacement.setColumns(10);
+	
 		
 		//Création des labels
-		this.affichePosition = new JLabel("");
-		this.affichePosition.setBounds(106, 379, 122, 14);
-		panelGauche.add(this.affichePosition);
+		this.afficheDistance = new JLabel("");
+		this.afficheDistance.setBounds(106, 379, 122, 14);
+		panelGauche.add(this.afficheDistance);
 		
 		JLabel lblDplacementDu = new JLabel("- Contr\u00F4le du Robot -");
 		lblDplacementDu.setHorizontalAlignment(SwingConstants.CENTER);
@@ -195,10 +188,6 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		lblVitesseDplacement.setBounds(68, 37, 167, 39);
 		panelDroit.add(lblVitesseDplacement);
 		
-		JLabel lblChangerVitesseDeplacement = new JLabel("Entrez un pourcentage");
-		lblChangerVitesseDeplacement.setHorizontalAlignment(SwingConstants.CENTER);
-		lblChangerVitesseDeplacement.setBounds(70, 124, 165, 14);
-		panelDroit.add(lblChangerVitesseDeplacement);
 		
 		//Rendre visible les fenêtres et les JPanels
 		panelGauche.setVisible(true);
@@ -268,15 +257,15 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		}
 		else if(e.getSource() == this.deconnexion)
 		{
-			this.choixUtilisateur = "BK";
+			this.choixUtilisateur = "BREAK";
 			this.leChoixEstFait = true;
 			System.exit(0);
 		}
-		else if(e.getSource() == this.localisation)
+		else if(e.getSource() == this.ultrason)
 		{
-			this.affichePosition.setText("En attente de la position...");
-			this.affichePosition.setHorizontalAlignment(JLabel.CENTER);
-			this.choixUtilisateur = "RECV";
+			this.afficheDistance.setText("En attente de la position...");
+			this.afficheDistance.setHorizontalAlignment(JLabel.CENTER);
+			this.choixUtilisateur = "u";
 			this.leChoixEstFait = true;
 			
 			try {
@@ -286,7 +275,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 				e1.printStackTrace();
 			}
 			String obtenirDonneesLues = application.obtenirDonneesLues();
-			this.affichePosition.setText(obtenirDonneesLues);
+			this.afficheDistance.setText(obtenirDonneesLues);
 		}
 	}
 

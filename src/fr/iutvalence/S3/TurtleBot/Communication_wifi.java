@@ -54,6 +54,7 @@ public class Communication_wifi {
 	{
 		try 
 		{
+				System.out.println(str);
 				this.versLeServeur.writeBytes(str);
 		} 
 		catch (IOException e) 

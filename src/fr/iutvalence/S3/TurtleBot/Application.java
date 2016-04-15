@@ -48,7 +48,7 @@ public class Application {
 		while (true)
 		{
 			String choix = this.interfaceEntree.demandeAction();
-			choix += '\0';
+			choix += '\n';
 			this.envoyerDonnees(choix);
 			try {
 				Thread.sleep(10);

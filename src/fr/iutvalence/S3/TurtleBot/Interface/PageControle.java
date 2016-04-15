@@ -257,7 +257,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		}
 		else if(e.getSource() == this.deconnexion)
 		{
-			this.choixUtilisateur = "BREAK";
+			this.choixUtilisateur = "B";
 			this.leChoixEstFait = true;
 			try {
 				Thread.sleep(1000);

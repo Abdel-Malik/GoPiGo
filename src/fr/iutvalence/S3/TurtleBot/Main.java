@@ -18,6 +18,7 @@ public class Main
 		pageControle.setApplication(application);
 		application.creationCommunication();
 		application.envoyerDonnees("la connexion avec un client est etablie\n");
+		application.lireDonneesServeur();
 		application.fonctionner();
 	}
 }

@@ -45,7 +45,11 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	private JButton buttonPlusDep;
 	private JButton deconnexion;
 	private JButton ultrason;
+	private JButton ValidationPosition;
 	
+	//Zones de texte pour transmettre une position
+	private JTextField abscisse; 
+	private JTextField ordonnee; 
 	//Déclaration des barres de progression
 	private JProgressBar progressBarVitDep;
 	
@@ -91,50 +95,50 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		//Création des boutons
 		this.ultrason = new JButton("");		
 		this.ultrason.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/localisation2.png")));
-		this.ultrason.setBounds(142, 318, 50, 50);
+		this.ultrason.setBounds(142, 298, 50, 50);
 		panelGauche.add(this.ultrason);
 		this.ultrason.addActionListener(this);
 		
 		
 		this.avancer = new JButton("");
 		this.avancer.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/haut.png")));
-		this.avancer.setBounds(142, 70, 50, 50);
+		this.avancer.setBounds(142, 50, 50, 50);
 		panelGauche.add(this.avancer);
 		this.avancer.addActionListener(this);
 		
 		this.gauche = new JButton("");
 		this.gauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/gauche.png")));
-		this.gauche.setBounds(82, 131, 50, 50);
+		this.gauche.setBounds(82, 111, 50, 50);
 		panelGauche.add(this.gauche);
 		this.gauche.addActionListener(this);
 		
 		this.stop = new JButton("");
 		this.stop.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/stop.png")));
-		this.stop.setBounds(142, 131, 50, 50);
+		this.stop.setBounds(142, 111, 50, 50);
 		panelGauche.add(this.stop);
 		this.stop.addActionListener(this);
 		
 		this.droite = new JButton("");
 		this.droite.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/droite.png")));
-		this.droite.setBounds(202, 131, 50, 50);
+		this.droite.setBounds(202, 111, 50, 50);
 		panelGauche.add(this.droite);
 		this.droite.addActionListener(this);
 		
 		this.reculer = new JButton("");
 		this.reculer.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/bas.png")));
-		this.reculer.setBounds(142, 192, 50, 50);
+		this.reculer.setBounds(142, 172, 50, 50);
 		panelGauche.add(this.reculer);
 		this.reculer.addActionListener(this);
 		
 		this.rotationGauche = new JButton("");
 		this.rotationGauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/rotationGauche.png")));
-		this.rotationGauche.setBounds(82, 192, 50, 50);
+		this.rotationGauche.setBounds(82, 172, 50, 50);
 		panelGauche.add(this.rotationGauche);
 		this.rotationGauche.addActionListener(this);
 		
 		this.rotationDroite = new JButton("");
 		this.rotationDroite.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/rotationDroite.png")));
-		this.rotationDroite.setBounds(202, 192, 50, 50);
+		this.rotationDroite.setBounds(202, 172, 50, 50);
 		panelGauche.add(this.rotationDroite);
 		this.rotationDroite.addActionListener(this);
 		
@@ -146,19 +150,35 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 		this.buttonMinusDep = new JButton("");
 		this.buttonMinusDep.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png")));
-		this.buttonMinusDep.setBounds(10, 80, 50, 50);
+		this.buttonMinusDep.setBounds(10, 60, 50, 50);
 		panelDroit.add(buttonMinusDep);
 		this.buttonMinusDep.addActionListener(this);
 		
 		this.buttonPlusDep = new JButton("");
 		buttonPlusDep.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png")));
-		buttonPlusDep.setBounds(245, 80, 50, 50);
+		buttonPlusDep.setBounds(245, 60, 50, 50);
 		panelDroit.add(buttonPlusDep);
 		buttonPlusDep.addActionListener(this);
 		
+		this.ValidationPosition = new JButton("Valider");
+		ValidationPosition.setBounds(130, 340, 80, 35);
+		panelDroit.add(ValidationPosition);
+		ValidationPosition.addActionListener(this);
+		
+		//Création des champs de texte
+		this.abscisse = new JTextField();
+		this.abscisse.setBounds(126, 294, 30, 25);
+		panelDroit.add(this.abscisse);
+		
+		this.ordonnee = new JTextField();
+		this.ordonnee.setBounds(182, 294, 30, 25);
+		panelDroit.add(this.ordonnee);
+		
+		
+		
 		//Création des barres de progression
 		this.progressBarVitDep = new JProgressBar();
-		this.progressBarVitDep.setBounds(70, 99, 165, 14);
+		this.progressBarVitDep.setBounds(70, 79, 165, 14);
 		this.progressBarVitDep.setMaximum(100);
 		this.progressBarVitDep.setMinimum(0);
 		this.progressBarVitDep.setValue(this.mouvement.obtenirDeplacement().progression());
@@ -167,27 +187,50 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 		//Création des labels
 		this.afficheDistance = new JLabel("");
-		this.afficheDistance.setBounds(106, 379, 122, 14);
+		this.afficheDistance.setBounds(106, 35, 122, 14);
 		panelGauche.add(this.afficheDistance);
 		
-		JLabel lblDplacementDu = new JLabel("- Contr\u00F4le du Robot -");
-		lblDplacementDu.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDplacementDu.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblDplacementDu.setBounds(0, 11, 694, 39);
-		this.getContentPane().add(lblDplacementDu);
+		JLabel lblSujetDeplacee = new JLabel("- Contr\u00F4le du Robot -");
+		lblSujetDeplacee.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSujetDeplacee.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblSujetDeplacee.setBounds(0, 11, 674, 28);
+		this.getContentPane().add(lblSujetDeplacee);
 		
 		JLabel lblDplacement = new JLabel("D\u00E9placement");
 		lblDplacement.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblDplacement.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDplacement.setBounds(0, 31, 341, 28);
+		lblDplacement.setBounds(8, 11, 320, 28);
 		panelGauche.add(lblDplacement);		
 		
 		JLabel lblVitesseDplacement = new JLabel("Vitesse de D\u00E9placement");
 		lblVitesseDplacement.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVitesseDplacement.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblVitesseDplacement.setBounds(68, 37, 167, 39);
+		lblVitesseDplacement.setBounds(68, 11, 167, 28);
 		panelDroit.add(lblVitesseDplacement);
 		
+		JLabel lblCapteur = new JLabel("Capteur");
+		lblCapteur.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCapteur.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblCapteur.setBounds(115, 248, 100, 28);
+		panelGauche.add(lblCapteur);
+		
+		JLabel lblPosition = new JLabel("Position");
+		lblPosition.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPosition.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPosition.setBounds(115, 248, 100, 28);
+		panelDroit.add(lblPosition);
+		
+		JLabel lblAbscisse = new JLabel("x :");
+		lblAbscisse.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAbscisse.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblAbscisse.setBounds(64, 290, 100, 28);
+		panelDroit.add(lblAbscisse);
+		
+		JLabel lblOrdonnee = new JLabel("y :");
+		lblOrdonnee.setHorizontalAlignment(SwingConstants.CENTER);
+		lblOrdonnee.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblOrdonnee.setBounds(122, 290, 100, 28);
+		panelDroit.add(lblOrdonnee);
 		
 		//Rendre visible les fenêtres et les JPanels
 		panelGauche.setVisible(true);
@@ -255,6 +298,11 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			this.progressBarVitDep.setValue(this.mouvement.obtenirDeplacement().progression());
 			this.leChoixEstFait = true;
 		}
+		else if(e.getSource() == this.ValidationPosition)
+		{
+			this.choixUtilisateur = this.obtenirCoordonnee();
+			this.leChoixEstFait = true;
+		}
 		else if(e.getSource() == this.deconnexion)
 		{
 			this.choixUtilisateur = "B";
@@ -283,6 +331,10 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			String obtenirDonneesLues = application.obtenirDonneesLues();
 			this.afficheDistance.setText(obtenirDonneesLues);
 		}
+	}
+
+	private String obtenirCoordonnee() {
+		return ("P:"+this.abscisse.getText()+":"+this.ordonnee.getText());
 	}
 
 	@Override

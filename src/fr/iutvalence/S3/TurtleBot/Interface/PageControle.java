@@ -334,7 +334,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	}
 
 	private String obtenirCoordonnee() {
-		return ("P:"+this.abscisse.getText()+":"+this.ordonnee.getText());
+		return ("P:"+this.abscisse.getText()+":"+this.ordonnee.getText()+":");
 	}
 
 	@Override

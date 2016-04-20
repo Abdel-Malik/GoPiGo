@@ -28,12 +28,20 @@ import javax.swing.JTextField;
 public class PageControle extends JFrame implements ActionListener, InterfaceEntree, Runnable
 {
 
+	/*** -- Déclaration fonctionnement de la page -- ***/
 	private Mouvement mouvement;
 	private Application application;
+	private PageConnexion pageConnexion;
+	
+	//en lien avec l'utilisateur
+	private volatile boolean leChoixEstFait;
+	private String choixUtilisateur;
 	
 	private static final long serialVersionUID = 1L;
 	
-	//Déclaration des boutons
+	/*** -- Déclaration des boutons --  ***/
+	
+	//déplacement
 	private JButton avancer;
 	private JButton gauche;
 	private JButton stop;
@@ -41,25 +49,35 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	private JButton reculer;
 	private JButton rotationGauche;
 	private JButton rotationDroite;
+	
+	//vitesse
 	private JButton buttonMinusDep;
 	private JButton buttonPlusDep;
-	private JButton deconnexion;
+	
+	//servomoteur
+	private JButton rotationServoGauche;
+	private JButton positionInitial;
+	private JButton rotationServoDroite;
+	
+	//ultrason
 	private JButton ultrason;
+	
+	//position
 	private JButton ValidationPosition;
 	
-	//Zones de texte pour transmettre une position
+	//autre
+	private JButton deconnexion;
+	
+	/*** -- Déclaration des JTextFields --  ***/
+	
+	//Données position
 	private JTextField abscisse; 
-	private JTextField ordonnee; 
-	//Déclaration des barres de progression
-	private JProgressBar progressBarVitDep;
+	private JTextField ordonnee; 	
 	
-	
-	private volatile boolean leChoixEstFait;
-	
-	private String choixUtilisateur;
-	private PageConnexion pageConnexion;
-	
+	/*** -- Autre -- ***/
+
 	private JLabel afficheDistance;
+	
 	
 	//Création de l'application
 	public PageControle() 
@@ -92,14 +110,9 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.getContentPane().add(panelDroit);
 		panelDroit.setLayout(null);
 		
-		//Création des boutons
-		this.ultrason = new JButton("");		
-		this.ultrason.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/localisation2.png")));
-		this.ultrason.setBounds(142, 298, 50, 50);
-		panelGauche.add(this.ultrason);
-		this.ultrason.addActionListener(this);
-		
-		
+		/*** -- Initialisation des boutons --  ***/
+
+		//déplacement		
 		this.avancer = new JButton("");
 		this.avancer.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/haut.png")));
 		this.avancer.setBounds(142, 50, 50, 50);
@@ -112,17 +125,17 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelGauche.add(this.gauche);
 		this.gauche.addActionListener(this);
 		
-		this.stop = new JButton("");
-		this.stop.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/stop.png")));
-		this.stop.setBounds(142, 111, 50, 50);
-		panelGauche.add(this.stop);
-		this.stop.addActionListener(this);
-		
 		this.droite = new JButton("");
 		this.droite.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/droite.png")));
 		this.droite.setBounds(202, 111, 50, 50);
 		panelGauche.add(this.droite);
 		this.droite.addActionListener(this);
+		
+		this.stop = new JButton("");
+		this.stop.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/stop.png")));
+		this.stop.setBounds(142, 111, 50, 50);
+		panelGauche.add(this.stop);
+		this.stop.addActionListener(this);
 		
 		this.reculer = new JButton("");
 		this.reculer.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/bas.png")));
@@ -142,49 +155,55 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelGauche.add(this.rotationDroite);
 		this.rotationDroite.addActionListener(this);
 		
+		//Vitesse
+		this.buttonMinusDep = new JButton("");
+		this.buttonMinusDep.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png")));
+		this.buttonMinusDep.setBounds(110, 298, 50, 50);
+		panelGauche.add(buttonMinusDep);
+		this.buttonMinusDep.addActionListener(this);
+		
+		this.buttonPlusDep = new JButton("");
+		buttonPlusDep.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png")));
+		buttonPlusDep.setBounds(174, 298, 50, 50);
+		panelGauche.add(buttonPlusDep);
+		buttonPlusDep.addActionListener(this);
+		
+		//servomoteur
+		//TODO boutons
+		
+		//ultrason
+		this.ultrason = new JButton("");		
+		this.ultrason.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/localisation2.png")));
+		this.ultrason.setBounds(115, 50, 50, 50);
+		panelDroit.add(this.ultrason);
+		this.ultrason.addActionListener(this);
+		
+		//position
+		this.ValidationPosition = new JButton("Valider");
+		ValidationPosition.setBounds(100, 340, 80, 35);
+		panelDroit.add(ValidationPosition);
+		ValidationPosition.addActionListener(this);
+		
+		//autre
 		this.deconnexion = new JButton("");
 		deconnexion.setBounds(269, 349, 50, 50);
 		panelDroit.add(deconnexion);
 		this.deconnexion.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/deconnexion.png")));
 		this.deconnexion.addActionListener(this);
 		
-		this.buttonMinusDep = new JButton("");
-		this.buttonMinusDep.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png")));
-		this.buttonMinusDep.setBounds(10, 60, 50, 50);
-		panelDroit.add(buttonMinusDep);
-		this.buttonMinusDep.addActionListener(this);
+
+		/*** -- Initialisation de JTextFields --  ***/
 		
-		this.buttonPlusDep = new JButton("");
-		buttonPlusDep.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png")));
-		buttonPlusDep.setBounds(245, 60, 50, 50);
-		panelDroit.add(buttonPlusDep);
-		buttonPlusDep.addActionListener(this);
-		
-		this.ValidationPosition = new JButton("Valider");
-		ValidationPosition.setBounds(130, 340, 80, 35);
-		panelDroit.add(ValidationPosition);
-		ValidationPosition.addActionListener(this);
-		
-		//Création des champs de texte
+		//Données position
 		this.abscisse = new JTextField();
-		this.abscisse.setBounds(126, 294, 30, 25);
+		this.abscisse.setBounds(98, 294, 30, 25);
 		panelDroit.add(this.abscisse);
 		
 		this.ordonnee = new JTextField();
-		this.ordonnee.setBounds(182, 294, 30, 25);
+		this.ordonnee.setBounds(160, 294, 30, 25);
 		panelDroit.add(this.ordonnee);
-		
-		
-		
-		//Création des barres de progression
-		this.progressBarVitDep = new JProgressBar();
-		this.progressBarVitDep.setBounds(70, 79, 165, 14);
-		this.progressBarVitDep.setMaximum(100);
-		this.progressBarVitDep.setMinimum(0);
-		this.progressBarVitDep.setValue(this.mouvement.obtenirDeplacement().progression());
-		panelDroit.add(this.progressBarVitDep);
 	
-		
+		/*** -- Création des labels --  ***/
 		//Création des labels
 		this.afficheDistance = new JLabel("");
 		this.afficheDistance.setBounds(106, 35, 122, 14);
@@ -205,31 +224,31 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		JLabel lblVitesseDplacement = new JLabel("Vitesse de D\u00E9placement");
 		lblVitesseDplacement.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVitesseDplacement.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblVitesseDplacement.setBounds(68, 11, 167, 28);
-		panelDroit.add(lblVitesseDplacement);
+		lblVitesseDplacement.setBounds(83, 248, 167, 28);
+		panelGauche.add(lblVitesseDplacement);
 		
 		JLabel lblCapteur = new JLabel("Capteur");
 		lblCapteur.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCapteur.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblCapteur.setBounds(115, 248, 100, 28);
-		panelGauche.add(lblCapteur);
+		lblCapteur.setBounds(89, 11, 100, 28);
+		panelDroit.add(lblCapteur);
 		
 		JLabel lblPosition = new JLabel("Position");
 		lblPosition.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPosition.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblPosition.setBounds(115, 248, 100, 28);
+		lblPosition.setBounds(90, 248, 100, 28);
 		panelDroit.add(lblPosition);
 		
 		JLabel lblAbscisse = new JLabel("x :");
 		lblAbscisse.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAbscisse.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblAbscisse.setBounds(64, 290, 100, 28);
+		lblAbscisse.setBounds(35, 290, 100, 28);
 		panelDroit.add(lblAbscisse);
 		
 		JLabel lblOrdonnee = new JLabel("y :");
 		lblOrdonnee.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOrdonnee.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblOrdonnee.setBounds(122, 290, 100, 28);
+		lblOrdonnee.setBounds(98, 290, 100, 28);
 		panelDroit.add(lblOrdonnee);
 		
 		//Rendre visible les fenêtres et les JPanels
@@ -288,14 +307,12 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		else if(e.getSource() == this.buttonMinusDep)
 		{
 			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.MOINS);
-			this.progressBarVitDep.setValue(this.mouvement.obtenirDeplacement().progression());
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.buttonPlusDep)
 		{
 			
 			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.PLUS);
-			this.progressBarVitDep.setValue(this.mouvement.obtenirDeplacement().progression());
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.ValidationPosition)

@@ -9,7 +9,6 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 
 import fr.iutvalence.S3.TurtleBot.Application;
 import fr.iutvalence.S3.TurtleBot.InformationConnexion;
@@ -222,7 +221,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		/*** -- Création des labels --  ***/
 		
 		this.afficheDistance = new JLabel("");
-		this.afficheDistance.setBounds(101, 11, 100, 14);
+		this.afficheDistance.setBounds(86, 75, 100, 14);
 		panelDroit.add(this.afficheDistance);
 		
 		/*Général*/
@@ -358,7 +357,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 				e1.printStackTrace();
 			}
 			String obtenirDonneesLues = application.obtenirDonneesLues();
-			this.afficheDistance.setText(obtenirDonneesLues);
+			this.afficheDistance.setText((obtenirDonneesLues+" cm"));
 		}
 		
 		//servomoteur

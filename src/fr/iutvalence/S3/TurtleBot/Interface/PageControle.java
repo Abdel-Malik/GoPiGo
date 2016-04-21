@@ -169,7 +169,23 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		buttonPlusDep.addActionListener(this);
 		
 		//servomoteur
-		//TODO boutons
+		this.rotationServoGauche = new JButton("");
+		this.rotationServoGauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/fleche_gauche.png")));
+		rotationServoGauche.setBounds(50, 170, 50, 50);
+		panelDroit.add(rotationServoGauche);
+		rotationServoGauche.addActionListener(this);
+		
+		this.positionInitial = new JButton("");
+		this.positionInitial.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/axe.png")));
+		positionInitial.setBounds(115, 170, 50, 50);
+		panelDroit.add(positionInitial);
+		positionInitial.addActionListener(this);
+		
+		this.rotationServoDroite = new JButton("");
+		this.rotationServoDroite.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/fleche_droite.png")));
+		rotationServoDroite.setBounds(180, 170, 50, 50);
+		panelDroit.add(rotationServoDroite);
+		rotationServoDroite.addActionListener(this);
 		
 		//ultrason
 		this.ultrason = new JButton("");		
@@ -204,17 +220,19 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelDroit.add(this.ordonnee);
 	
 		/*** -- Création des labels --  ***/
-		//Création des labels
+		
 		this.afficheDistance = new JLabel("");
 		this.afficheDistance.setBounds(106, 35, 122, 14);
 		panelGauche.add(this.afficheDistance);
 		
+		/*Général*/
 		JLabel lblSujetDeplacee = new JLabel("- Contr\u00F4le du Robot -");
 		lblSujetDeplacee.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSujetDeplacee.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblSujetDeplacee.setBounds(0, 11, 674, 28);
 		this.getContentPane().add(lblSujetDeplacee);
 		
+		/*Panel Gauche*/
 		JLabel lblDplacement = new JLabel("D\u00E9placement");
 		lblDplacement.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblDplacement.setHorizontalAlignment(SwingConstants.CENTER);
@@ -227,11 +245,18 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		lblVitesseDplacement.setBounds(83, 248, 167, 28);
 		panelGauche.add(lblVitesseDplacement);
 		
+		/*Panel Droit*/
 		JLabel lblCapteur = new JLabel("Capteur");
 		lblCapteur.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCapteur.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblCapteur.setBounds(89, 11, 100, 28);
 		panelDroit.add(lblCapteur);
+		
+		JLabel lblServo = new JLabel("Servomoteur");
+		lblServo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblServo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblServo.setBounds(90, 125, 100, 28);
+		panelDroit.add(lblServo);
 		
 		JLabel lblPosition = new JLabel("Position");
 		lblPosition.setHorizontalAlignment(SwingConstants.CENTER);
@@ -268,7 +293,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	 */
 	public void actionPerformed(ActionEvent e)
 	{
-		
+		//déplacement
 		if(e.getSource() == this.avancer)
 		{
 			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.AVANT);
@@ -304,6 +329,8 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.ROTATIOND);
 			this.leChoixEstFait = true;
 		}
+		
+		//vitesse de déplacement
 		else if(e.getSource() == this.buttonMinusDep)
 		{
 			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.MOINS);
@@ -315,6 +342,43 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.PLUS);
 			this.leChoixEstFait = true;
 		}
+		
+		//ultrason
+		else if(e.getSource() == this.ultrason)
+		{
+			this.afficheDistance.setText("En attente de la position...");
+			this.afficheDistance.setHorizontalAlignment(JLabel.CENTER);
+			this.choixUtilisateur = "u";
+			this.leChoixEstFait = true;
+			
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			String obtenirDonneesLues = application.obtenirDonneesLues();
+			this.afficheDistance.setText(obtenirDonneesLues);
+		}
+		
+		//servomoteur
+		else if(e.getSource() == this.rotationServoGauche)
+		{
+			this.choixUtilisateur = "-";
+			this.leChoixEstFait = true;
+		}
+		else if(e.getSource() == this.positionInitial)
+		{
+			this.choixUtilisateur = "*";
+			this.leChoixEstFait = true;
+		}
+		else if(e.getSource() == this.rotationServoDroite)
+		{
+			this.choixUtilisateur = "+";
+			this.leChoixEstFait = true;
+		}
+		
+		//position
 		else if(e.getSource() == this.ValidationPosition)
 		{
 			this.choixUtilisateur = this.obtenirCoordonnee();
@@ -332,22 +396,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			}
 			System.exit(0);
 		}
-		else if(e.getSource() == this.ultrason)
-		{
-			this.afficheDistance.setText("En attente de la position...");
-			this.afficheDistance.setHorizontalAlignment(JLabel.CENTER);
-			this.choixUtilisateur = "u";
-			this.leChoixEstFait = true;
-			
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			String obtenirDonneesLues = application.obtenirDonneesLues();
-			this.afficheDistance.setText(obtenirDonneesLues);
-		}
+		
 	}
 
 	private String obtenirCoordonnee() {

@@ -222,8 +222,8 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		/*** -- Création des labels --  ***/
 		
 		this.afficheDistance = new JLabel("");
-		this.afficheDistance.setBounds(106, 35, 122, 14);
-		panelGauche.add(this.afficheDistance);
+		this.afficheDistance.setBounds(101, 11, 100, 14);
+		panelDroit.add(this.afficheDistance);
 		
 		/*Général*/
 		JLabel lblSujetDeplacee = new JLabel("- Contr\u00F4le du Robot -");

@@ -26,7 +26,9 @@ import javax.swing.JTextField;
  */
 public class PageControle extends JFrame implements ActionListener, InterfaceEntree, Runnable
 {
-
+	/*** -- Déclaration constantes de la page -- ***/
+	public final static int TAILLE_BOUTON = 40;
+	
 	/*** -- Déclaration fonctionnement de la page -- ***/
 	private Mouvement mouvement;
 	private Application application;
@@ -62,7 +64,8 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	private JButton ultrason;
 	
 	//position
-	private JButton ValidationPosition;
+	private JButton validationPosition;
+	private JButton localisationBouton;
 	
 	//autre
 	private JButton deconnexion;
@@ -76,6 +79,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	/*** -- Autre -- ***/
 
 	private JLabel afficheDistance;
+	private JLabel localisation;
 	
 	
 	//Création de l'application
@@ -114,94 +118,101 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		//déplacement		
 		this.avancer = new JButton("");
 		this.avancer.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/haut.png")));
-		this.avancer.setBounds(142, 50, 50, 50);
+		this.avancer.setBounds(142, 50, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.avancer);
 		this.avancer.addActionListener(this);
 		
 		this.gauche = new JButton("");
 		this.gauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/gauche.png")));
-		this.gauche.setBounds(82, 111, 50, 50);
+		this.gauche.setBounds(82, 111, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.gauche);
 		this.gauche.addActionListener(this);
 		
 		this.droite = new JButton("");
 		this.droite.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/droite.png")));
-		this.droite.setBounds(202, 111, 50, 50);
+		this.droite.setBounds(202, 111, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.droite);
 		this.droite.addActionListener(this);
 		
 		this.stop = new JButton("");
 		this.stop.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/stop.png")));
-		this.stop.setBounds(142, 111, 50, 50);
+		this.stop.setBounds(142, 111, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.stop);
 		this.stop.addActionListener(this);
 		
 		this.reculer = new JButton("");
 		this.reculer.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/bas.png")));
-		this.reculer.setBounds(142, 172, 50, 50);
+		this.reculer.setBounds(142, 172, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.reculer);
 		this.reculer.addActionListener(this);
 		
 		this.rotationGauche = new JButton("");
 		this.rotationGauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/rotationGauche.png")));
-		this.rotationGauche.setBounds(82, 172, 50, 50);
+		this.rotationGauche.setBounds(82, 172, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.rotationGauche);
 		this.rotationGauche.addActionListener(this);
 		
 		this.rotationDroite = new JButton("");
 		this.rotationDroite.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/rotationDroite.png")));
-		this.rotationDroite.setBounds(202, 172, 50, 50);
+		this.rotationDroite.setBounds(202, 172, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.rotationDroite);
 		this.rotationDroite.addActionListener(this);
 		
 		//Vitesse
 		this.buttonMinusDep = new JButton("");
 		this.buttonMinusDep.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png")));
-		this.buttonMinusDep.setBounds(110, 298, 50, 50);
-		panelGauche.add(buttonMinusDep);
+		this.buttonMinusDep.setBounds(110, 298, TAILLE_BOUTON, TAILLE_BOUTON);
+		panelGauche.add(this.buttonMinusDep);
 		this.buttonMinusDep.addActionListener(this);
 		
 		this.buttonPlusDep = new JButton("");
-		buttonPlusDep.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png")));
-		buttonPlusDep.setBounds(174, 298, 50, 50);
-		panelGauche.add(buttonPlusDep);
-		buttonPlusDep.addActionListener(this);
+		this.buttonPlusDep.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png")));
+		this.buttonPlusDep.setBounds(174, 298, TAILLE_BOUTON, TAILLE_BOUTON);
+		panelGauche.add(this.buttonPlusDep);
+		this.buttonPlusDep.addActionListener(this);
 		
 		//servomoteur
 		this.rotationServoGauche = new JButton("");
 		this.rotationServoGauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/fleche_gauche.png")));
-		rotationServoGauche.setBounds(50, 170, 50, 50);
-		panelDroit.add(rotationServoGauche);
-		rotationServoGauche.addActionListener(this);
+		this.rotationServoGauche.setBounds(50, 170, TAILLE_BOUTON, TAILLE_BOUTON);
+		panelDroit.add(this.rotationServoGauche);
+		this.rotationServoGauche.addActionListener(this);
 		
 		this.positionInitial = new JButton("");
 		this.positionInitial.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/axe.png")));
-		positionInitial.setBounds(115, 170, 50, 50);
-		panelDroit.add(positionInitial);
-		positionInitial.addActionListener(this);
+		this.positionInitial.setBounds(115, 170, TAILLE_BOUTON, TAILLE_BOUTON);
+		panelDroit.add(this.positionInitial);
+		this.positionInitial.addActionListener(this);
 		
 		this.rotationServoDroite = new JButton("");
 		this.rotationServoDroite.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/fleche_droite.png")));
-		rotationServoDroite.setBounds(180, 170, 50, 50);
-		panelDroit.add(rotationServoDroite);
-		rotationServoDroite.addActionListener(this);
+		this.rotationServoDroite.setBounds(180, 170, TAILLE_BOUTON, TAILLE_BOUTON);
+		panelDroit.add(this.rotationServoDroite);
+		this.rotationServoDroite.addActionListener(this);
 		
 		//ultrason
 		this.ultrason = new JButton("");		
 		this.ultrason.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/localisation2.png")));
-		this.ultrason.setBounds(115, 50, 50, 50);
+		this.ultrason.setBounds(115, 50, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelDroit.add(this.ultrason);
 		this.ultrason.addActionListener(this);
 		
 		//position
-		this.ValidationPosition = new JButton("Valider");
-		ValidationPosition.setBounds(100, 340, 80, 35);
-		panelDroit.add(ValidationPosition);
-		ValidationPosition.addActionListener(this);
+		this.validationPosition = new JButton("Valider");
+		this.validationPosition.setFont(new Font("book antiqua", Font.PLAIN, 12));
+		this.validationPosition.setBounds(170, 294, 80, 25);
+		panelDroit.add(this.validationPosition);
+		this.validationPosition.addActionListener(this);
+		
+		this.localisationBouton = new JButton("Localisation");
+		this.localisationBouton.setFont(new Font("book antiqua", Font.PLAIN, 11));
+		this.localisationBouton.setBounds(162, 334, 96, 25);
+		panelDroit.add(this.localisationBouton);
+		this.localisationBouton.addActionListener(this);
 		
 		//autre
 		this.deconnexion = new JButton("");
-		deconnexion.setBounds(269, 349, 50, 50);
+		deconnexion.setBounds(269, 349, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelDroit.add(deconnexion);
 		this.deconnexion.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/deconnexion.png")));
 		this.deconnexion.addActionListener(this);
@@ -211,18 +222,24 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 		//Données position
 		this.abscisse = new JTextField();
-		this.abscisse.setBounds(98, 294, 30, 25);
+		this.abscisse.setBounds(63, 294, 30, 25);
 		panelDroit.add(this.abscisse);
 		
 		this.ordonnee = new JTextField();
-		this.ordonnee.setBounds(160, 294, 30, 25);
+		this.ordonnee.setBounds(125, 294, 30, 25);
 		panelDroit.add(this.ordonnee);
 	
 		/*** -- Création des labels --  ***/
 		
-		this.afficheDistance = new JLabel("");
-		this.afficheDistance.setBounds(86, 75, 100, 14);
+		this.afficheDistance = new JLabel("_ cm");
+		this.afficheDistance.setFont(new Font("book antiqua", Font.PLAIN, 15));
+		this.afficheDistance.setBounds(166, 86, 100, 14);
 		panelDroit.add(this.afficheDistance);
+		
+		this.localisation = new JLabel("( _ , _ )");
+		this.localisation.setFont(new Font("book antiqua", Font.PLAIN, 16));
+		this.localisation.setBounds(82, 336, 100, 25);
+		panelDroit.add(this.localisation);
 		
 		/*Général*/
 		JLabel lblSujetDeplacee = new JLabel("- Contr\u00F4le du Robot -");
@@ -265,14 +282,14 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 		JLabel lblAbscisse = new JLabel("x :");
 		lblAbscisse.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAbscisse.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblAbscisse.setBounds(35, 290, 100, 28);
+		lblAbscisse.setFont(new Font("book antiqua", Font.PLAIN, 15));
+		lblAbscisse.setBounds(0, 292, 100, 28);
 		panelDroit.add(lblAbscisse);
 		
 		JLabel lblOrdonnee = new JLabel("y :");
 		lblOrdonnee.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOrdonnee.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblOrdonnee.setBounds(98, 290, 100, 28);
+		lblOrdonnee.setFont(new Font("book antiqua", Font.PLAIN, 15));
+		lblOrdonnee.setBounds(63, 292, 100, 28);
 		panelDroit.add(lblOrdonnee);
 		
 		//Rendre visible les fenêtres et les JPanels
@@ -378,10 +395,24 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		}
 		
 		//position
-		else if(e.getSource() == this.ValidationPosition)
+		else if(e.getSource() == this.validationPosition)
 		{
-			this.choixUtilisateur = this.obtenirCoordonnee();
+			this.choixUtilisateur = this.envoyerCoordonnees();
 			this.leChoixEstFait = true;
+		}
+		else if(e.getSource() == this.localisationBouton)
+		{
+			this.choixUtilisateur = "c";
+			this.leChoixEstFait = true;
+			
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			String obtenirDonneesLues = application.obtenirDonneesLues();
+			this.localisation.setText(("("+obtenirDonneesLues+")"));
 		}
 		else if(e.getSource() == this.deconnexion)
 		{
@@ -398,7 +429,12 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 	}
 
-	private String obtenirCoordonnee() {
+	/*private String recupererCoordonnees() {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
+
+	private String envoyerCoordonnees() {
 		return ("P:"+this.abscisse.getText()+":"+this.ordonnee.getText()+":");
 	}
 

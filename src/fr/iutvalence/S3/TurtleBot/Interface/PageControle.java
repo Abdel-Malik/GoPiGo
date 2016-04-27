@@ -200,19 +200,19 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		//position
 		this.validationPosition = new JButton("Valider");
 		this.validationPosition.setFont(new Font("book antiqua", Font.PLAIN, 12));
-		this.validationPosition.setBounds(170, 294, 80, 25);
+		this.validationPosition.setBounds(170, 287, 80, 25);
 		panelDroit.add(this.validationPosition);
 		this.validationPosition.addActionListener(this);
 		
 		this.localisationBouton = new JButton("Localisation");
 		this.localisationBouton.setFont(new Font("book antiqua", Font.PLAIN, 11));
-		this.localisationBouton.setBounds(162, 334, 96, 25);
+		this.localisationBouton.setBounds(162, 327, 96, 25);
 		panelDroit.add(this.localisationBouton);
 		this.localisationBouton.addActionListener(this);
 		
 		//autre
 		this.deconnexion = new JButton("");
-		deconnexion.setBounds(269, 349, TAILLE_BOUTON, TAILLE_BOUTON);
+		deconnexion.setBounds(288, 370, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelDroit.add(deconnexion);
 		this.deconnexion.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/deconnexion.png")));
 		this.deconnexion.addActionListener(this);
@@ -222,18 +222,18 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 		//Données position
 		this.abscisse = new JTextField();
-		this.abscisse.setBounds(63, 294, 30, 25);
+		this.abscisse.setBounds(63, 287, 30, 25);
 		panelDroit.add(this.abscisse);
 		
 		this.ordonnee = new JTextField();
-		this.ordonnee.setBounds(125, 294, 30, 25);
+		this.ordonnee.setBounds(125, 287, 30, 25);
 		panelDroit.add(this.ordonnee);
 	
 		/*** -- Création des labels --  ***/
 		
 		this.afficheDistance = new JLabel("_ cm");
 		this.afficheDistance.setFont(new Font("book antiqua", Font.PLAIN, 15));
-		this.afficheDistance.setBounds(166, 86, 100, 14);
+		this.afficheDistance.setBounds(166, 78, 100, 14);
 		panelDroit.add(this.afficheDistance);
 		
 		this.localisation = new JLabel("( _ , _ )");
@@ -277,19 +277,19 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		JLabel lblPosition = new JLabel("Position");
 		lblPosition.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPosition.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblPosition.setBounds(90, 248, 100, 28);
+		lblPosition.setBounds(90, 242, 100, 28);
 		panelDroit.add(lblPosition);
 		
 		JLabel lblAbscisse = new JLabel("x :");
 		lblAbscisse.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAbscisse.setFont(new Font("book antiqua", Font.PLAIN, 15));
-		lblAbscisse.setBounds(0, 292, 100, 28);
+		lblAbscisse.setBounds(0, 285, 100, 28);
 		panelDroit.add(lblAbscisse);
 		
 		JLabel lblOrdonnee = new JLabel("y :");
 		lblOrdonnee.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOrdonnee.setFont(new Font("book antiqua", Font.PLAIN, 15));
-		lblOrdonnee.setBounds(63, 292, 100, 28);
+		lblOrdonnee.setBounds(63, 285, 100, 28);
 		panelDroit.add(lblOrdonnee);
 		
 		//Rendre visible les fenêtres et les JPanels

@@ -76,9 +76,9 @@ public class Communication_wifi {
 			
 			int count = this.provenanceDuServeur.read(data);
 			System.out.println("nbbytes lus : "+count);
-			System.out.println("Donees lues :" + data.toString());
+			System.out.println("Donees lues : " + data.toString());
 			
-			for(int i=0; i < data.length; i++)
+			for(int i=0; i < count; i++)
 			       this.chaine += (char) data[i];
 			System.out.println("chaine lue: " + chaine);
 		}

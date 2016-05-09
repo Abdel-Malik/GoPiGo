@@ -97,11 +97,11 @@ public class PageConnexion extends JDialog implements ActionListener
 		titre.setBounds(0, 9, 494, 39);
 		this.getContentPane().add(titre);
 		
-		JLabel imageTurtleBot = new JLabel();
-		imageTurtleBot.setLocation(364, 102);
-		this.getContentPane().add(imageTurtleBot);
-		imageTurtleBot.setSize(130,106);
-		imageTurtleBot.setIcon(new ImageIcon(PageConnexion.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/gopigo.png")));
+		JLabel imageGopigo = new JLabel();
+		imageGopigo.setLocation(364, 102);
+		this.getContentPane().add(imageGopigo);
+		imageGopigo.setSize(130,106);
+		imageGopigo.setIcon(new ImageIcon(PageConnexion.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/gopigo.png")));
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(72, 61, 270, 190);

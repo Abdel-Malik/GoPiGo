@@ -237,8 +237,8 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelDroit.add(this.afficheDistance);
 		
 		this.localisation = new JLabel("( _ , _ )");
-		this.localisation.setFont(new Font("book antiqua", Font.PLAIN, 16));
-		this.localisation.setBounds(82, 336, 100, 25);
+		this.localisation.setFont(new Font("book antiqua", Font.PLAIN, 14));
+		this.localisation.setBounds(80, 326, 100, 25);
 		panelDroit.add(this.localisation);
 		
 		/*Général*/
@@ -412,7 +412,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 				e1.printStackTrace();
 			}
 			String obtenirDonneesLues = application.obtenirDonneesLues();
-			this.localisation.setText(("("+obtenirDonneesLues+")"));
+			this.localisation.setText(("("+obtenirDonneesLues+"°)"));
 		}
 		else if(e.getSource() == this.deconnexion)
 		{

@@ -238,7 +238,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 		this.localisation = new JLabel("( _ , _ )");
 		this.localisation.setFont(new Font("book antiqua", Font.PLAIN, 14));
-		this.localisation.setBounds(80, 326, 100, 25);
+		this.localisation.setBounds(76, 326, 100, 25);
 		panelDroit.add(this.localisation);
 		
 		/*Général*/

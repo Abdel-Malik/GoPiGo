@@ -238,7 +238,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 		this.localisation = new JLabel("( _ , _ )");
 		this.localisation.setFont(new Font("book antiqua", Font.PLAIN, 14));
-		this.localisation.setBounds(76, 326, 100, 25);
+		this.localisation.setBounds(72, 326, 100, 25);
 		panelDroit.add(this.localisation);
 		
 		/*Général*/
@@ -406,7 +406,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			this.leChoixEstFait = true;
 			
 			try {
-				Thread.sleep(500);
+				Thread.sleep(1200);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -428,6 +428,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		}
 		
 	}
+
 
 	/*private String recupererCoordonnees() {
 		// TODO Auto-generated method stub

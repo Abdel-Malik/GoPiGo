@@ -16,10 +16,6 @@ public enum Sens_deplacement
 	ROTATIONG ("a"),
 	
 	ROTATIOND ("e"),
-	
-	PLUS ("i"),
-	
-	MOINS ("d"),
 
 	STOP ("s");
 	

@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import fr.iutvalence.S3.TurtleBot.Application;
 import fr.iutvalence.S3.TurtleBot.InformationConnexion;
 import fr.iutvalence.S3.TurtleBot.InterfaceEntree;
-import fr.iutvalence.S3.TurtleBot.Mouvement;
+import fr.iutvalence.S3.TurtleBot.Ordre_robot;
 import fr.iutvalence.S3.TurtleBot.Sens_deplacement;
 
 import java.awt.event.ActionListener;
@@ -30,7 +30,6 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	public final static int TAILLE_BOUTON = 40;
 	
 	/*** -- Déclaration fonctionnement de la page -- ***/
-	private Mouvement mouvement;
 	private Application application;
 	private PageConnexion pageConnexion;
 	
@@ -66,6 +65,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	//position
 	private JButton validationPosition;
 	private JButton localisationBouton;
+	private JButton restartLocButton;
 	
 	//autre
 	private JButton deconnexion;
@@ -81,12 +81,10 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	private JLabel afficheDistance;
 	private JLabel localisation;
 	
-	
 	//Création de l'application
 	public PageControle() 
 	{
 		super("Contrôle du robot");
-		this.mouvement = new Mouvement();
 
 		initialize();
 	}
@@ -210,6 +208,12 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelDroit.add(this.localisationBouton);
 		this.localisationBouton.addActionListener(this);
 		
+		this.restartLocButton = new JButton("Reset");
+		this.restartLocButton.setFont(new Font("book antiqua", Font.PLAIN, 10));
+		this.restartLocButton.setBounds(200, 357, 58, 20);
+		panelDroit.add(this.restartLocButton);
+		this.restartLocButton.addActionListener(this);
+		
 		//autre
 		this.deconnexion = new JButton("");
 		deconnexion.setBounds(288, 370, TAILLE_BOUTON, TAILLE_BOUTON);
@@ -312,50 +316,50 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		//déplacement
 		if(e.getSource() == this.avancer)
 		{
-			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.AVANT);
+			this.choixUtilisateur = Sens_deplacement.AVANT.toString();
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.gauche)
 		{
-			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.GAUCHE);
+			this.choixUtilisateur = Sens_deplacement.GAUCHE.toString();
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.stop)
 		{
-			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.STOP);
+			this.choixUtilisateur = Sens_deplacement.STOP.toString();
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.droite)
 		{
-			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.DROITE);
+			this.choixUtilisateur = Sens_deplacement.DROITE.toString();
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.reculer)
 		{
-			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.ARRIERE);
+			this.choixUtilisateur = Sens_deplacement.ARRIERE.toString();
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.rotationGauche)
 		{
-			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.ROTATIONG);
+			this.choixUtilisateur = Sens_deplacement.ROTATIONG.toString();
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.rotationDroite)
 		{
-			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.ROTATIOND);
+			this.choixUtilisateur = Sens_deplacement.ROTATIOND.toString();
 			this.leChoixEstFait = true;
 		}
 		
 		//vitesse de déplacement
 		else if(e.getSource() == this.buttonMinusDep)
 		{
-			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.MOINS);
+			this.choixUtilisateur = Ordre_robot.VITESSE_MOINS.toString();
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.buttonPlusDep)
 		{
 			
-			this.choixUtilisateur = mouvement.obtenirLeDeplacementQuiCorrespondA(Sens_deplacement.PLUS);
+			this.choixUtilisateur = Ordre_robot.VITESSE_MOINS.toString();
 			this.leChoixEstFait = true;
 		}
 		
@@ -364,11 +368,11 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		{
 			this.afficheDistance.setText("En attente de la position...");
 			this.afficheDistance.setHorizontalAlignment(JLabel.CENTER);
-			this.choixUtilisateur = "u";
+			this.choixUtilisateur = Ordre_robot.ULTRASON.toString();
 			this.leChoixEstFait = true;
 			
 			try {
-				Thread.sleep(500);
+				Thread.sleep(800);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -380,17 +384,17 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		//servomoteur
 		else if(e.getSource() == this.rotationServoGauche)
 		{
-			this.choixUtilisateur = "-";
+			this.choixUtilisateur = Ordre_robot.TOURNER_SERVO_G.toString();
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.positionInitial)
 		{
-			this.choixUtilisateur = "*";
+			this.choixUtilisateur = Ordre_robot.POS_SERVO_AXE.toString();
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.rotationServoDroite)
 		{
-			this.choixUtilisateur = "+";
+			this.choixUtilisateur = Ordre_robot.TOURNER_SERVO_G.toString();
 			this.leChoixEstFait = true;
 		}
 		
@@ -402,11 +406,11 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		}
 		else if(e.getSource() == this.localisationBouton)
 		{
-			this.choixUtilisateur = "c";
+			this.choixUtilisateur = Ordre_robot.LOCALISATION.toString();
 			this.leChoixEstFait = true;
 			
 			try {
-				Thread.sleep(1200);
+				Thread.sleep(1800);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -414,9 +418,16 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			String obtenirDonneesLues = application.obtenirDonneesLues();
 			this.localisation.setText(("("+obtenirDonneesLues+"°)"));
 		}
+		
+		else if(e.getSource() == this.restartLocButton)
+		{
+			this.choixUtilisateur = Ordre_robot.RESTART.toString();
+			this.leChoixEstFait = true;
+		}
+		
 		else if(e.getSource() == this.deconnexion)
 		{
-			this.choixUtilisateur = "BREAK";
+			this.choixUtilisateur = Ordre_robot.BREAK.toString();
 			this.leChoixEstFait = true;
 			try {
 				Thread.sleep(1000);
@@ -436,7 +447,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	}*/
 
 	private String envoyerCoordonnees() {
-		return ("P:"+this.abscisse.getText()+":"+this.ordonnee.getText()+":");
+		return (Ordre_robot.POSITIONNEMENT.toString()+this.abscisse.getText()+":"+this.ordonnee.getText()+":");
 	}
 
 	@Override

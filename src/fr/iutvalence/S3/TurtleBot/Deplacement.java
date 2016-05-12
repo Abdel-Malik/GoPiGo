@@ -10,6 +10,6 @@ public class Deplacement
 	
 	public final static double PAS = 5;
 
-	public static final double VITESSE_DEPART = 120;
+	public static final double VITESSE_DEPART = 155;
 	
 }

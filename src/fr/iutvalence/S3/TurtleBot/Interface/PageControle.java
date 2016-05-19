@@ -447,7 +447,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	}*/
 
 	private String envoyerCoordonnees() {
-		return (Ordre_robot.POSITIONNEMENT.toString()+this.abscisse.getText()+":"+this.ordonnee.getText()+":");
+		return (Ordre_robot.POSITIONNEMENT.toString()+":"+this.abscisse.getText()+":"+this.ordonnee.getText()+":");
 	}
 
 	@Override

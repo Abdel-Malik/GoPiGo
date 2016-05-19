@@ -423,6 +423,14 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		{
 			this.choixUtilisateur = Ordre_robot.RESTART.toString();
 			this.leChoixEstFait = true;
+			try {
+				Thread.sleep(1800);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			String obtenirDonneesLues = application.obtenirDonneesLues();
+			this.localisation.setText(("("+obtenirDonneesLues+"°)"));
 		}
 		
 		else if(e.getSource() == this.deconnexion)

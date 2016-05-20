@@ -359,7 +359,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		else if(e.getSource() == this.buttonPlusDep)
 		{
 			
-			this.choixUtilisateur = Ordre_robot.VITESSE_MOINS.toString();
+			this.choixUtilisateur = Ordre_robot.VITESSE_PLUS.toString();
 			this.leChoixEstFait = true;
 		}
 		
@@ -409,28 +409,14 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			this.choixUtilisateur = Ordre_robot.LOCALISATION.toString();
 			this.leChoixEstFait = true;
 			
-			try {
-				Thread.sleep(1800);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			String obtenirDonneesLues = application.obtenirDonneesLues();
-			this.localisation.setText(("("+obtenirDonneesLues+"°)"));
+			lireDonneesPourLocalisation();
 		}
 		
 		else if(e.getSource() == this.restartLocButton)
 		{
 			this.choixUtilisateur = Ordre_robot.RESTART.toString();
 			this.leChoixEstFait = true;
-			try {
-				Thread.sleep(1800);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			String obtenirDonneesLues = application.obtenirDonneesLues();
-			this.localisation.setText(("("+obtenirDonneesLues+"°)"));
+			lireDonneesPourLocalisation();
 		}
 		
 		else if(e.getSource() == this.deconnexion)
@@ -448,11 +434,16 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 	}
 
-
-	/*private String recupererCoordonnees() {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
+	private void lireDonneesPourLocalisation() {
+		try {
+			Thread.sleep(1200);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String obtenirDonneesLues = application.obtenirDonneesLues();
+		this.localisation.setText(("("+obtenirDonneesLues+"°)"));
+	}
 
 	private String envoyerCoordonnees() {
 		return (Ordre_robot.POSITIONNEMENT.toString()+":"+this.abscisse.getText()+":"+this.ordonnee.getText()+":");

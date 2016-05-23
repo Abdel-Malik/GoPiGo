@@ -255,7 +255,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 		this.tensionBatterie = new JLabel("_V");
 		this.tensionBatterie.setFont(new Font("book antiqua", Font.PLAIN, 14));
-		this.tensionBatterie.setBounds(145, 356, 50, 25);
+		this.tensionBatterie.setBounds(125, 356, 500, 25);
 		panelGauche.add(this.tensionBatterie);
 		
 		/*Général*/

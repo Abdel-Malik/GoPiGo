@@ -69,6 +69,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	
 	//autre
 	private JButton deconnexion;
+	private JButton recuperationTension;
 	
 	/*** -- Déclaration des JTextFields --  ***/
 	
@@ -80,6 +81,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 
 	private JLabel afficheDistance;
 	private JLabel localisation;
+	private JLabel tensionBatterie;
 	
 	//Création de l'application
 	public PageControle() 
@@ -116,56 +118,56 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		//déplacement		
 		this.avancer = new JButton("");
 		this.avancer.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/haut.png")));
-		this.avancer.setBounds(142, 50, TAILLE_BOUTON, TAILLE_BOUTON);
+		this.avancer.setBounds(142, 38, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.avancer);
 		this.avancer.addActionListener(this);
 		
 		this.gauche = new JButton("");
 		this.gauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/gauche.png")));
-		this.gauche.setBounds(82, 111, TAILLE_BOUTON, TAILLE_BOUTON);
+		this.gauche.setBounds(82, 99, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.gauche);
 		this.gauche.addActionListener(this);
 		
 		this.droite = new JButton("");
 		this.droite.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/droite.png")));
-		this.droite.setBounds(202, 111, TAILLE_BOUTON, TAILLE_BOUTON);
+		this.droite.setBounds(202, 99, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.droite);
 		this.droite.addActionListener(this);
 		
 		this.stop = new JButton("");
 		this.stop.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/stop.png")));
-		this.stop.setBounds(142, 111, TAILLE_BOUTON, TAILLE_BOUTON);
+		this.stop.setBounds(142, 99, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.stop);
 		this.stop.addActionListener(this);
 		
 		this.reculer = new JButton("");
 		this.reculer.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/bas.png")));
-		this.reculer.setBounds(142, 172, TAILLE_BOUTON, TAILLE_BOUTON);
+		this.reculer.setBounds(142, 160, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.reculer);
 		this.reculer.addActionListener(this);
 		
 		this.rotationGauche = new JButton("");
 		this.rotationGauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/rotationGauche.png")));
-		this.rotationGauche.setBounds(82, 172, TAILLE_BOUTON, TAILLE_BOUTON);
+		this.rotationGauche.setBounds(82, 160, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.rotationGauche);
 		this.rotationGauche.addActionListener(this);
 		
 		this.rotationDroite = new JButton("");
 		this.rotationDroite.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/rotationDroite.png")));
-		this.rotationDroite.setBounds(202, 172, TAILLE_BOUTON, TAILLE_BOUTON);
+		this.rotationDroite.setBounds(202, 160, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.rotationDroite);
 		this.rotationDroite.addActionListener(this);
 		
 		//Vitesse
 		this.buttonMinusDep = new JButton("");
 		this.buttonMinusDep.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png")));
-		this.buttonMinusDep.setBounds(110, 298, TAILLE_BOUTON, TAILLE_BOUTON);
+		this.buttonMinusDep.setBounds(110, 266, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.buttonMinusDep);
 		this.buttonMinusDep.addActionListener(this);
 		
 		this.buttonPlusDep = new JButton("");
 		this.buttonPlusDep.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png")));
-		this.buttonPlusDep.setBounds(174, 298, TAILLE_BOUTON, TAILLE_BOUTON);
+		this.buttonPlusDep.setBounds(174, 266, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.buttonPlusDep);
 		this.buttonPlusDep.addActionListener(this);
 		
@@ -221,6 +223,12 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.deconnexion.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/deconnexion.png")));
 		this.deconnexion.addActionListener(this);
 		
+		this.recuperationTension = new JButton("");
+		recuperationTension.setBounds(174, 340, TAILLE_BOUTON, TAILLE_BOUTON);
+		panelGauche.add(recuperationTension);
+		this.recuperationTension.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/tension.png")));
+		this.recuperationTension.addActionListener(this);
+		
 
 		/*** -- Initialisation de JTextFields --  ***/
 		
@@ -245,6 +253,11 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.localisation.setBounds(72, 326, 100, 25);
 		panelDroit.add(this.localisation);
 		
+		this.tensionBatterie = new JLabel("_V");
+		this.tensionBatterie.setFont(new Font("book antiqua", Font.PLAIN, 14));
+		this.tensionBatterie.setBounds(145, 356, 50, 25);
+		panelGauche.add(this.tensionBatterie);
+		
 		/*Général*/
 		JLabel lblSujetDeplacee = new JLabel("- Contr\u00F4le du Robot -");
 		lblSujetDeplacee.setHorizontalAlignment(SwingConstants.CENTER);
@@ -256,13 +269,13 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		JLabel lblDplacement = new JLabel("D\u00E9placement");
 		lblDplacement.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblDplacement.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDplacement.setBounds(8, 11, 320, 28);
+		lblDplacement.setBounds(11, 11, 300, 28);
 		panelGauche.add(lblDplacement);		
 		
 		JLabel lblVitesseDplacement = new JLabel("Vitesse de D\u00E9placement");
 		lblVitesseDplacement.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVitesseDplacement.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblVitesseDplacement.setBounds(83, 248, 167, 28);
+		lblVitesseDplacement.setBounds(83, 228, 167, 28);
 		panelGauche.add(lblVitesseDplacement);
 		
 		/*Panel Droit*/
@@ -418,6 +431,21 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			this.leChoixEstFait = true;
 			lireDonneesPourLocalisation();
 		}
+		
+		else if(e.getSource() == this.recuperationTension)
+		{
+			this.choixUtilisateur = Ordre_robot.TENSION.toString();
+			this.leChoixEstFait = true;
+			try {
+				Thread.sleep(1200);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			String obtenirDonneesLues = application.obtenirDonneesLues();
+			this.tensionBatterie.setText((obtenirDonneesLues+"V"));
+		}
+		
 		
 		else if(e.getSource() == this.deconnexion)
 		{

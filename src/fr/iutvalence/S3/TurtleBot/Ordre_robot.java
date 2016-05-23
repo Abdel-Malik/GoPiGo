@@ -22,6 +22,8 @@ public enum Ordre_robot {
 	
 	RESTART ("R"),
 	
+	TENSION ("U"),
+	
 	BREAK ("BREAK");
 	
 	private String ordre="";

@@ -422,28 +422,22 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			this.choixUtilisateur = Ordre_robot.LOCALISATION.toString();
 			this.leChoixEstFait = true;
 			
-			lireDonneesPourLocalisation();
+			this.localisation.setText(donneesDePose());
 		}
 		
 		else if(e.getSource() == this.restartLocButton)
 		{
 			this.choixUtilisateur = Ordre_robot.RESTART.toString();
 			this.leChoixEstFait = true;
-			lireDonneesPourLocalisation();
+			this.localisation.setText(donneesDePose());
 		}
 		
 		else if(e.getSource() == this.recuperationTension)
 		{
 			this.choixUtilisateur = Ordre_robot.TENSION.toString();
 			this.leChoixEstFait = true;
-			try {
-				Thread.sleep(1200);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			String obtenirDonneesLues = application.obtenirDonneesLues();
-			this.tensionBatterie.setText((obtenirDonneesLues+"V"));
+			
+			this.tensionBatterie.setText((lireDonnees()+"V"));
 		}
 		
 		
@@ -462,21 +456,38 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 	}
 
-	private void lireDonneesPourLocalisation() {
+	/**
+	 * Attend un certain temps avant de récupérer des données transmis par le wi-fi
+	 * @return la chaine de caractères reçue
+	 */
+	private String lireDonnees() {
 		try {
 			Thread.sleep(1200);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		String obtenirDonneesLues = application.obtenirDonneesLues();
-		this.localisation.setText(("("+obtenirDonneesLues+"°)"));
+		return application.obtenirDonneesLues();
 	}
 
+	/**
+	 * Structure une chaine pour un affichage de pose
+	 * @return la chaine complétée
+	 */
+	private String donneesDePose(){
+		return ("("+lireDonnees()+"°)");
+	}
+	
+	
+	/**
+	 * Structure l'envoi d'une position à atteindre
+	 * @return la chaine de caractères structurée
+	 */
 	private String envoyerCoordonnees() {
 		return (Ordre_robot.POSITIONNEMENT.toString()+":"+this.abscisse.getText()+":"+this.ordonnee.getText()+":");
 	}
 
+	
 	@Override
 	public InformationConnexion demandeInformationsConnexion()
 	{
@@ -515,5 +526,11 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	 */
 	public void setApplication(Application application2) {
 		this.application = application2;
+	}
+
+	@Override
+	public void nouvelleInfo() {
+		// TODO Auto-generated method stub
+		
 	}
 }

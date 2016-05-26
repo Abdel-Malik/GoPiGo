@@ -6,13 +6,10 @@ public class Application {
 	private InterfaceEntree interfaceEntree;
 	private Mouvement mouvement;
 	
-	private String donneesLues;
-	
 	public Application(InterfaceEntree interfaceEntree)
 	{
 		this.mouvement = new Mouvement();
 		this.interfaceEntree = interfaceEntree;
-		this.donneesLues = new String();
 	}
 	
 	
@@ -59,6 +56,20 @@ public class Application {
 			this.lireDonneesServeur();
 		}
 	}
+	
+	public void fonctionnementAutonome() {
+		while (true)
+		{
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			this.lireDonneesServeur();
+			this.interfaceEntree.nouvelleInfo();
+		}
+	}	
 	
 	/**
 	 * Fonction appelant la fonction de la classe Communication_Wifi
@@ -116,5 +127,6 @@ public class Application {
 	public String deplacement(Sens_deplacement dep)
 	{
 		return this.mouvement.obtenirLeDeplacementQuiCorrespondA(dep);
-	}	
+	}
+
 }

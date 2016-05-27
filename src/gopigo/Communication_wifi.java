@@ -1,4 +1,4 @@
-package fr.iutvalence.S3.Gopigo;
+package gopigo;
 import java.io.*;
 import java.net.*;
 

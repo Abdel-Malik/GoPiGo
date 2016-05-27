@@ -1,4 +1,4 @@
-package fr.iutvalence.S3.Gopigo.Interface;
+package interfaceControle;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -11,9 +11,9 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import fr.iutvalence.S3.Gopigo.Application;
-import fr.iutvalence.S3.Gopigo.InformationConnexion;
-import fr.iutvalence.S3.Gopigo.InterfaceEntree;
+import gopigo.Application;
+import gopigo.InformationConnexion;
+import gopigo.InterfaceEntree;
 
 public class PageVisualisation extends JFrame implements ActionListener, InterfaceEntree, Runnable {
 	

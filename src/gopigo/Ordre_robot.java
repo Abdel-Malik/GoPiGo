@@ -1,4 +1,4 @@
-package fr.iutvalence.S3.Gopigo;
+package gopigo;
 
 public enum Ordre_robot {
 	

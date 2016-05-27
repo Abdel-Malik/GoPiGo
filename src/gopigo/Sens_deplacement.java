@@ -1,4 +1,4 @@
-package fr.iutvalence.S3.Gopigo;
+package gopigo;
 
 /**
  * Classe permettant de mettre en place la protocole choisi pour l'avancement du robot

@@ -1,11 +1,11 @@
-package fr.iutvalence.S3.Gopigo;
+package gopigo;
+import interfaceControle.PageChoix;
+import interfaceControle.PageControle;
+import interfaceControle.PageVisualisation;
+
 import java.io.IOException;
 
 import javax.swing.SwingUtilities;
-
-import fr.iutvalence.S3.Gopigo.Interface.PageChoix;
-import fr.iutvalence.S3.Gopigo.Interface.PageControle;
-import fr.iutvalence.S3.Gopigo.Interface.PageVisualisation;
 
 
 public class Main 

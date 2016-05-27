@@ -1,4 +1,4 @@
-package fr.iutvalence.S3.Gopigo.Interface;
+package interfaceControle;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,11 +10,11 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import fr.iutvalence.S3.Gopigo.Application;
-import fr.iutvalence.S3.Gopigo.InformationConnexion;
-import fr.iutvalence.S3.Gopigo.InterfaceEntree;
-import fr.iutvalence.S3.Gopigo.Ordre_robot;
-import fr.iutvalence.S3.Gopigo.Sens_deplacement;
+import gopigo.Application;
+import gopigo.InformationConnexion;
+import gopigo.InterfaceEntree;
+import gopigo.Ordre_robot;
+import gopigo.Sens_deplacement;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -28,7 +28,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 {
 	/*** -- Déclaration constantes de la page -- ***/
 	public final static int TAILLE_BOUTON = 40;
-	private final static String ICON_PATH = "/fr/iutvalence/S3/Gopigo/Icones/";
+	private final static String ICON_PATH = "/icones/";
 	/*** -- Déclaration fonctionnement de la page -- ***/
 	private Application application;
 	private PageConnexion pageConnexion;

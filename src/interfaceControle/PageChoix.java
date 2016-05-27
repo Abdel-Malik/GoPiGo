@@ -1,4 +1,4 @@
-package fr.iutvalence.S3.Gopigo.Interface;
+package interfaceControle;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;

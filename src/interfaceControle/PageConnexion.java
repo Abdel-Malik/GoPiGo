@@ -1,4 +1,4 @@
-package fr.iutvalence.S3.Gopigo.Interface;
+package interfaceControle;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,7 +13,7 @@ import java.awt.Font;
 
 import javax.swing.JTextField;
 
-import fr.iutvalence.S3.Gopigo.InformationConnexion;
+import gopigo.InformationConnexion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +28,7 @@ public class PageConnexion extends JDialog implements ActionListener
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final static String ICON_PATH = "/fr/iutvalence/S3/Gopigo/Icones/";
+	private final static String ICON_PATH = "/icones/";
 	
 	private JTextField champIp;
 	private JTextField champPort;

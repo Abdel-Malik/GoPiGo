@@ -1,4 +1,4 @@
-package fr.iutvalence.S3.TurtleBot.Interface;
+package fr.iutvalence.S3.Gopigo.Interface;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,11 +10,11 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import fr.iutvalence.S3.TurtleBot.Application;
-import fr.iutvalence.S3.TurtleBot.InformationConnexion;
-import fr.iutvalence.S3.TurtleBot.InterfaceEntree;
-import fr.iutvalence.S3.TurtleBot.Ordre_robot;
-import fr.iutvalence.S3.TurtleBot.Sens_deplacement;
+import fr.iutvalence.S3.Gopigo.Application;
+import fr.iutvalence.S3.Gopigo.InformationConnexion;
+import fr.iutvalence.S3.Gopigo.InterfaceEntree;
+import fr.iutvalence.S3.Gopigo.Ordre_robot;
+import fr.iutvalence.S3.Gopigo.Sens_deplacement;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -28,7 +28,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 {
 	/*** -- Déclaration constantes de la page -- ***/
 	public final static int TAILLE_BOUTON = 40;
-	
+	private final static String ICON_PATH = "/fr/iutvalence/S3/Gopigo/Icones/";
 	/*** -- Déclaration fonctionnement de la page -- ***/
 	private Application application;
 	private PageConnexion pageConnexion;
@@ -117,82 +117,82 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 
 		//déplacement		
 		this.avancer = new JButton("");
-		this.avancer.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/haut.png")));
+		this.avancer.setIcon(new ImageIcon(PageControle.class.getResource(ICON_PATH+"haut.png")));
 		this.avancer.setBounds(142, 38, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.avancer);
 		this.avancer.addActionListener(this);
 		
 		this.gauche = new JButton("");
-		this.gauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/gauche.png")));
+		this.gauche.setIcon(new ImageIcon(PageControle.class.getResource(ICON_PATH+"gauche.png")));
 		this.gauche.setBounds(82, 99, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.gauche);
 		this.gauche.addActionListener(this);
 		
 		this.droite = new JButton("");
-		this.droite.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/droite.png")));
+		this.droite.setIcon(new ImageIcon(PageControle.class.getResource(ICON_PATH+"droite.png")));
 		this.droite.setBounds(202, 99, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.droite);
 		this.droite.addActionListener(this);
 		
 		this.stop = new JButton("");
-		this.stop.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/stop.png")));
+		this.stop.setIcon(new ImageIcon(PageControle.class.getResource(ICON_PATH+"stop.png")));
 		this.stop.setBounds(142, 99, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.stop);
 		this.stop.addActionListener(this);
 		
 		this.reculer = new JButton("");
-		this.reculer.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/bas.png")));
+		this.reculer.setIcon(new ImageIcon(PageControle.class.getResource(ICON_PATH+"bas.png")));
 		this.reculer.setBounds(142, 160, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.reculer);
 		this.reculer.addActionListener(this);
 		
 		this.rotationGauche = new JButton("");
-		this.rotationGauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/rotationGauche.png")));
+		this.rotationGauche.setIcon(new ImageIcon(PageControle.class.getResource(ICON_PATH+"rotationGauche.png")));
 		this.rotationGauche.setBounds(82, 160, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.rotationGauche);
 		this.rotationGauche.addActionListener(this);
 		
 		this.rotationDroite = new JButton("");
-		this.rotationDroite.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/rotationDroite.png")));
+		this.rotationDroite.setIcon(new ImageIcon(PageControle.class.getResource(ICON_PATH+"rotationDroite.png")));
 		this.rotationDroite.setBounds(202, 160, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.rotationDroite);
 		this.rotationDroite.addActionListener(this);
 		
 		//Vitesse
 		this.buttonMinusDep = new JButton("");
-		this.buttonMinusDep.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/moins4.png")));
+		this.buttonMinusDep.setIcon(new ImageIcon(PageControle.class.getResource(ICON_PATH+"moins4.png")));
 		this.buttonMinusDep.setBounds(110, 266, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.buttonMinusDep);
 		this.buttonMinusDep.addActionListener(this);
 		
 		this.buttonPlusDep = new JButton("");
-		this.buttonPlusDep.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/plus2.png")));
+		this.buttonPlusDep.setIcon(new ImageIcon(PageControle.class.getResource(ICON_PATH+"plus2.png")));
 		this.buttonPlusDep.setBounds(174, 266, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(this.buttonPlusDep);
 		this.buttonPlusDep.addActionListener(this);
 		
 		//servomoteur
 		this.rotationServoGauche = new JButton("");
-		this.rotationServoGauche.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/fleche_gauche.png")));
+		this.rotationServoGauche.setIcon(new ImageIcon(PageControle.class.getResource(ICON_PATH+"fleche_gauche.png")));
 		this.rotationServoGauche.setBounds(50, 170, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelDroit.add(this.rotationServoGauche);
 		this.rotationServoGauche.addActionListener(this);
 		
 		this.positionInitial = new JButton("");
-		this.positionInitial.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/axe.png")));
+		this.positionInitial.setIcon(new ImageIcon(PageControle.class.getResource(ICON_PATH+"axe.png")));
 		this.positionInitial.setBounds(115, 170, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelDroit.add(this.positionInitial);
 		this.positionInitial.addActionListener(this);
 		
 		this.rotationServoDroite = new JButton("");
-		this.rotationServoDroite.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/fleche_droite.png")));
+		this.rotationServoDroite.setIcon(new ImageIcon(PageControle.class.getResource(ICON_PATH+"fleche_droite.png")));
 		this.rotationServoDroite.setBounds(180, 170, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelDroit.add(this.rotationServoDroite);
 		this.rotationServoDroite.addActionListener(this);
 		
 		//ultrason
 		this.ultrason = new JButton("");		
-		this.ultrason.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/localisation2.png")));
+		this.ultrason.setIcon(new ImageIcon(PageControle.class.getResource(ICON_PATH+"localisation2.png")));
 		this.ultrason.setBounds(115, 50, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelDroit.add(this.ultrason);
 		this.ultrason.addActionListener(this);
@@ -220,13 +220,13 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		this.deconnexion = new JButton("");
 		deconnexion.setBounds(288, 370, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelDroit.add(deconnexion);
-		this.deconnexion.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/deconnexion.png")));
+		this.deconnexion.setIcon(new ImageIcon(PageControle.class.getResource(ICON_PATH+"deconnexion.png")));
 		this.deconnexion.addActionListener(this);
 		
 		this.recuperationTension = new JButton("");
 		recuperationTension.setBounds(174, 340, TAILLE_BOUTON, TAILLE_BOUTON);
 		panelGauche.add(recuperationTension);
-		this.recuperationTension.setIcon(new ImageIcon(PageControle.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/tension.png")));
+		this.recuperationTension.setIcon(new ImageIcon(PageControle.class.getResource(ICON_PATH+"tension.png")));
 		this.recuperationTension.addActionListener(this);
 		
 

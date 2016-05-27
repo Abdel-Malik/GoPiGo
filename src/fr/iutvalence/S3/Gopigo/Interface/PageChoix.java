@@ -1,4 +1,4 @@
-package fr.iutvalence.S3.TurtleBot.Interface;
+package fr.iutvalence.S3.Gopigo.Interface;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;

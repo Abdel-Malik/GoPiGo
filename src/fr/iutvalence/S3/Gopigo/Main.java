@@ -1,11 +1,11 @@
-package fr.iutvalence.S3.TurtleBot;
+package fr.iutvalence.S3.Gopigo;
 import java.io.IOException;
 
 import javax.swing.SwingUtilities;
 
-import fr.iutvalence.S3.TurtleBot.Interface.PageChoix;
-import fr.iutvalence.S3.TurtleBot.Interface.PageControle;
-import fr.iutvalence.S3.TurtleBot.Interface.PageVisualisation;
+import fr.iutvalence.S3.Gopigo.Interface.PageChoix;
+import fr.iutvalence.S3.Gopigo.Interface.PageControle;
+import fr.iutvalence.S3.Gopigo.Interface.PageVisualisation;
 
 
 public class Main 

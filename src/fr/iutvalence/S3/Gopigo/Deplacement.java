@@ -1,4 +1,4 @@
-package fr.iutvalence.S3.TurtleBot;
+package fr.iutvalence.S3.Gopigo;
 
 public class Deplacement
 {

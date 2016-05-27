@@ -1,4 +1,4 @@
-package fr.iutvalence.S3.TurtleBot;
+package fr.iutvalence.S3.Gopigo;
 
 /**
  * Classe permettant de mettre en place la protocole choisi pour l'avancement du robot

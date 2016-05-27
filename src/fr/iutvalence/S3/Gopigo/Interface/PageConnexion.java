@@ -1,4 +1,4 @@
-package fr.iutvalence.S3.TurtleBot.Interface;
+package fr.iutvalence.S3.Gopigo.Interface;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,7 +13,7 @@ import java.awt.Font;
 
 import javax.swing.JTextField;
 
-import fr.iutvalence.S3.TurtleBot.InformationConnexion;
+import fr.iutvalence.S3.Gopigo.InformationConnexion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +28,8 @@ public class PageConnexion extends JDialog implements ActionListener
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private final static String ICON_PATH = "/fr/iutvalence/S3/Gopigo/Icones/";
+	
 	private JTextField champIp;
 	private JTextField champPort;
 	private JButton btnConnexion;
@@ -101,7 +102,7 @@ public class PageConnexion extends JDialog implements ActionListener
 		imageGopigo.setLocation(364, 102);
 		this.getContentPane().add(imageGopigo);
 		imageGopigo.setSize(130,106);
-		imageGopigo.setIcon(new ImageIcon(PageConnexion.class.getResource("/fr/iutvalence/S3/TurtleBot/Icones/gopigo.png")));
+		imageGopigo.setIcon(new ImageIcon(PageConnexion.class.getResource(ICON_PATH+"gopigo.png")));
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(72, 61, 270, 190);

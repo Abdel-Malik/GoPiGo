@@ -70,13 +70,19 @@ public class PageVisualisation extends JFrame implements ActionListener, Interfa
 	}
 
 
-	public void nouvelleInfo(){
-		String info = this.application.obtenirDonneesLues();
+	public void nouvelleInfo(String recu){
+		String info = recu;
 		if(info.length() == 0){
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			application.terminerConnexion();
 			System.exit(0);
 		}
-		info = info.substring(0,info.length()-1);
+		//info = info.substring(0,info.length()-1);
 		this.donnees.setText(this.donnees.getText()+"\n("+info+")");
 		this.actualiserPositionBarreDefilement();
 	}

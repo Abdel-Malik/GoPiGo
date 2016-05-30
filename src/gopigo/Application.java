@@ -1,5 +1,9 @@
 package gopigo;
 
+import java.io.IOException;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+
 public class Application {
 	
 	private Communication_wifi comWifi;
@@ -57,18 +61,36 @@ public class Application {
 		}
 	}
 	
-	public void fonctionnementAutonome() {
-		while (true)
+	public void fonctionnementAutonome() throws IOException {
+		PipedOutputStream sortieSimu = new PipedOutputStream();
+        PipedInputStream  entreeSimu  = new PipedInputStream(sortieSimu);
+        
+        PipedOutputStream sortieAgent = new PipedOutputStream();
+        PipedInputStream  entreeAgent  = new PipedInputStream(sortieAgent);
+		
+
+        Dialogue partieSimulateur = new Dialogue(this.interfaceEntree, this.comWifi, entreeAgent, sortieSimu);
+        Dialogue partieAgent = new Dialogue(this.interfaceEntree, this.comWifi, entreeSimu, sortieAgent);
+
+        partieSimulateur.start();
+        partieAgent.start();
+
+        while (partieSimulateur.isAlive() && partieAgent.isAlive())
 		{
 			try {
-				Thread.sleep(10);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			this.lireDonneesServeur();
-			this.interfaceEntree.nouvelleInfo();
 		}
+        try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        System.exit(1);
 	}	
 	
 	/**

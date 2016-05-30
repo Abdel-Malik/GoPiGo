@@ -529,7 +529,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	}
 
 	@Override
-	public void nouvelleInfo() {
+	public void nouvelleInfo(String information) {
 		// TODO Auto-generated method stub
 		
 	}

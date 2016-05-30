@@ -111,4 +111,12 @@ public class Communication_wifi {
 			e.printStackTrace();
 		}
 	}
+
+
+	public boolean isAvailable() throws IOException {
+		boolean b = false;
+		if(this.provenanceDuServeur.available() > 0)
+				b = true;
+		return b;
+	}
 }

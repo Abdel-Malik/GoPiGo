@@ -6,5 +6,5 @@ public interface InterfaceEntree
 	
 	public String demandeAction();
 
-	void nouvelleInfo();
+	void nouvelleInfo(String information);
 }

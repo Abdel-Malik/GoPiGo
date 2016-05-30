@@ -35,6 +35,7 @@ public class Main
 				application.lireDonneesServeur();
 				application.fonctionner();
 			break;
+			
 			case "simulation":
 				PageVisualisation visualisation = new PageVisualisation();
 				SwingUtilities.invokeLater(visualisation);
@@ -42,7 +43,6 @@ public class Main
 				visualisation.setApplication(application);
 				application.creationCommunication();
 				application.envoyerDonnees("la connexion avec un client est etablie\n");
-				application.lireDonneesServeur();
 				application.fonctionnementAutonome();
 			break;
 		}

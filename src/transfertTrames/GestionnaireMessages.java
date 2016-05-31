@@ -157,46 +157,36 @@ public class GestionnaireMessages {
 		String message = "";
 		
 		if((this.code_fonction == ConstructionCode.INITIALISATION.getValue())){
-			message = this.contenu.substring(this.contenu.indexOf(SEPARATEUR_ELEMENT), this.contenu.indexOf(SEPARATEUR_ENS_DONNEES));
+			message = SEPARATEUR_ELEMENT+this.contenu.substring(0, this.contenu.indexOf(SEPARATEUR_ENS_DONNEES))+SEPARATEUR_ENS_DONNEES;
 			if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-				//TODO ajouter le code pour le switch du robot
-				message = ""+message;
+				message = Ordre_robot.ID.toString()+message;
 			else if(this.code_sous_fonction == (ConstructionCode.POSITION.getValue() | ConstructionCode.ENVOI_MASH.getValue())){
-				//TODO ajouter le code pour le switch du robot
-				message = ""+message;
+				message = Ordre_robot.POSITION.toString()+message;
 			}
 		}
 		
 		if((this.code_fonction == ConstructionCode.INFORMATION.getValue())){
 			if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-				//TODO ajouter le code pour le switch du robot
 				message = Ordre_robot.DEMANDE_ID.toString();
 			else if(this.code_sous_fonction == (ConstructionCode.POSITION.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-				//TODO ajouter le code pour le switch du robot
 				message = Ordre_robot.DEMANDE_POSITION.toString();
 			else if(this.code_sous_fonction == (ConstructionCode.COMPORTEMENT.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-				//TODO ajouter le code pour le switch du robot
 				message = Ordre_robot.DEMANDE_COMPORTEMENT.toString();
 			else if(this.code_sous_fonction == (ConstructionCode.VITESSE.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-				//TODO ajouter le code pour le switch du robot
 				message = Ordre_robot.DEMANDE_VITESSE.toString();
-			else if(this.code_sous_fonction == (0x09 | ConstructionCode.ENVOI_MASH.getValue())) /*Ligne test -- à retirer une fois terminé*/
-				//TODO ajouter le code pour le switch du robot
+			else if(this.code_sous_fonction == (0x09 | ConstructionCode.ENVOI_MASH.getValue())) /* TODO Ligne test -- à retirer une fois terminé*/
 				message = Ordre_robot.DEMANDE_TENSION.toString();
 			
 		}
 
 		if((this.code_fonction == ConstructionCode.ORDRE.getValue())){
-			message = this.contenu.substring(this.contenu.indexOf(SEPARATEUR_ELEMENT), this.contenu.indexOf(SEPARATEUR_ENS_DONNEES));
+			message = SEPARATEUR_ELEMENT+this.contenu.substring(0, this.contenu.indexOf(SEPARATEUR_ENS_DONNEES))+SEPARATEUR_ENS_DONNEES;
 			if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-				//TODO ajouter le code pour le switch du robot
-				message = ""+message;
+				message = Ordre_robot.ID.toString()+message;
 			else if(this.code_sous_fonction == (ConstructionCode.POSITION.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-				//TODO ajouter le code pour le switch du robot
-				message = ""+message;
+				message = Ordre_robot.POSITION.toString()+message;
 			else if(this.code_sous_fonction == (ConstructionCode.COMPORTEMENT.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-				//TODO ajouter le code pour le switch du robot
-				message = ""+message;
+				message = Ordre_robot.COMPORTEMENT.toString()+message;
 		}
 		
 		if((this.code_fonction == ConstructionCode.ENVIRONNEMENT.getValue())){
@@ -247,8 +237,8 @@ public class GestionnaireMessages {
 		String traduit = this.contenu;
 		if(this.estStructuree())
 			traduit = this.messagePourAgent();
-		else
-			traduit = this.messagePourSimulation();
+		//else
+			//traduit = this.messagePourSimulation();
 		return traduit;
 	}
 

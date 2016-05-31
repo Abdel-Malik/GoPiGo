@@ -5,17 +5,17 @@ package gopigo;
  */
 public enum Sens_deplacement 
 {	
-	AVANT ("f"),
+	AVANT ("a"),
 	
 	ARRIERE ("b"),
 	
-	GAUCHE ("l"),
+	GAUCHE ("g"),
 	
-	DROITE ("r"),
+	DROITE ("d"),
 	
-	ROTATIONG ("a"),
+	ROTATION_GAUCHE ("q"),
 	
-	ROTATIOND ("e"),
+	ROTATION_DROITE ("w"),
 
 	STOP ("s");
 	

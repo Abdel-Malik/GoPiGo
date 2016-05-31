@@ -1,5 +1,7 @@
 package transfertTrames;
 
+import gopigo.Ordre_robot;
+
 
 public class GestionnaireMessages {
 
@@ -29,16 +31,21 @@ public class GestionnaireMessages {
 	 */
 	public boolean setGestionnaireMessages(String message){
 		boolean succes = false;
-		
-		if((message.charAt(0)<<2+message.charAt(1)) != StructureTrame.ENTETE.getValue()){
+		int entete;
+		if(message.length()<2)
+			entete = 0;
+		else
+			entete = (( (int)(message.charAt(0)) ) <<8) | ((int)(message.charAt(1))&0xFF);
+		if(entete != (StructureTrame.ENTETE.getValue())){
 			this.taille_donnees = (short) message.length();
 			this.code_fonction = NON_STRUCTUREE;
 			this.code_sous_fonction = NON_STRUCTUREE;
 			this.contenu = message;
 			succes = true;
+			return succes;
 		}
 		this.checksum = recuperationChecksum(message);
-		if(testChecksum(message) != 0){
+		if(testChecksum(message)){
 			this.taille_donnees = recuperationTailleDonnees(message);
 			this.code_fonction = recuperationCodeFonction(message);
 			this.code_sous_fonction = recuperationCodeSousFonction(message);
@@ -51,45 +58,70 @@ public class GestionnaireMessages {
 
 /*** Récupération et vérification des données reçu ***/
 	
+	/**
+	 * Fonction répupérant l'information sur le nombre d'octets contenu dans la partie "Données" de la trame. 
+	 * @param message la trame reçu
+	 * @return le nombre d'octet du champ "Données" de la trame
+	 */
 	private short recuperationTailleDonnees(String message) {
 		int debut = StructureTrame.TAILLE_ENTETE.getValue();
 		int nbOctetsARecuperer = StructureTrame.TAILLE_TAILLE_DONNEES.getValue();
 		if(message.length() < debut+nbOctetsARecuperer)
 			return -1;
 		String extrait = parcoursString(message, debut, nbOctetsARecuperer);
-		return (short)(Integer.parseInt(extrait));
+		short somme = (short)((extrait.charAt(0)<<8)|(extrait.charAt(1)&0xFF));
+		return somme;
 	}
 
-
+	/**
+	 * Fonction récupérant la valeur du checksum. 
+	 * @param message la trame reçu
+	 * @return la valeur du checkSum de la trame lors de l'envoi
+	 */
 	private short recuperationChecksum(String message) {
 		int debut = message.length()-(StructureTrame.TAILLE_ENQUEUX.getValue()+StructureTrame.TAILLE_CHECKSUM.getValue());
 		int nbOctetsARecuperer = StructureTrame.TAILLE_CHECKSUM.getValue();
 		if(message.length() < debut+nbOctetsARecuperer)
 			return -1;
 		String extrait =  parcoursString(message, debut, nbOctetsARecuperer);
-		return (short)(Integer.parseInt(extrait));
+		short somme = (short)((extrait.charAt(0)<<8)|(extrait.charAt(1)&0xFF));
+		return somme;
 	}
 
+	/**
+	 * @param message la trame reçu
+	 * @return le code fonction contenu dans la trame
+	 */
 	private short recuperationCodeFonction(String message) {
 		int debut = StructureTrame.TAILLE_ENTETE.getValue()+StructureTrame.TAILLE_TAILLE_DONNEES.getValue();
 		int nbOctetsARecuperer = StructureTrame.TAILLE_CODE_FONCTION.getValue();
 		if(message.length() < debut+nbOctetsARecuperer)
 			return -1;
 		String extrait = parcoursString(message, debut, nbOctetsARecuperer);
-		return (short)(Integer.parseInt(extrait));
+		short somme = (short)extrait.charAt(0);
+		return somme;
 	}
 	
+	/**
+	 * @param message la trame reçu
+	 * @return le code sous fonction contenu dans la trame
+	 */
 	private short recuperationCodeSousFonction(String message) {
 		int debut = StructureTrame.TAILLE_ENTETE.getValue()+StructureTrame.TAILLE_TAILLE_DONNEES.getValue()+StructureTrame.TAILLE_CODE_FONCTION.getValue();
 		int nbOctetsARecuperer = StructureTrame.TAILLE_CODE_SOUS_FONCTION.getValue();
 		if(message.length() < debut+nbOctetsARecuperer)
 			return -1;
 		String extrait = parcoursString(message, debut, nbOctetsARecuperer);
-		return (short)(Integer.parseInt(extrait));
+		short somme = (short)extrait.charAt(0);
+		return somme;
 	}
 
 
 
+	/**
+	 * @param message la trame reçu
+	 * @return le contenu du champ "Données" de la trame
+	 */
 	private String recuperationContenu(String message) {
 		int debut = StructureTrame.TAILLE_ENTETE.getValue()+StructureTrame.TAILLE_TAILLE_DONNEES.getValue()+StructureTrame.TAILLE_CODE_FONCTION.getValue()+StructureTrame.TAILLE_CODE_SOUS_FONCTION.getValue();
 		int nbOctetsARecuperer = this.taille_donnees;
@@ -106,12 +138,21 @@ public class GestionnaireMessages {
 		return m;
 	}
 	
-	private int testChecksum(String message) {
+	/**
+	 * Calcul la valeur du checkSUm pour la trame reçu et la compare avec l'information présente dans celle-ci
+	 * @param message la trame reçu
+	 * @return un booléen true si la trame semble complête, false sinon
+	 */
+	private boolean testChecksum(String message) {
 		// TODO Auto-generated method stub
-		return 0;
+		return true;
 	}
 	
 
+	/**
+	 * Transforme la trame reçu en un message compréhensible par l'agent
+	 * @return un message traduit
+	 */
 	private String messagePourAgent(){
 		String message = "";
 		
@@ -129,19 +170,19 @@ public class GestionnaireMessages {
 		if((this.code_fonction == ConstructionCode.INFORMATION.getValue())){
 			if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
 				//TODO ajouter le code pour le switch du robot
-				message = "";
+				message = Ordre_robot.DEMANDE_ID.toString();
 			else if(this.code_sous_fonction == (ConstructionCode.POSITION.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
 				//TODO ajouter le code pour le switch du robot
-				message = "";
+				message = Ordre_robot.DEMANDE_POSITION.toString();
 			else if(this.code_sous_fonction == (ConstructionCode.COMPORTEMENT.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
 				//TODO ajouter le code pour le switch du robot
-				message = "";
-			else if(this.code_sous_fonction == (ConstructionCode.COULEUR_FEU.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-				//TODO ajouter le code pour le switch du robot
-				message = "";
+				message = Ordre_robot.DEMANDE_COMPORTEMENT.toString();
 			else if(this.code_sous_fonction == (ConstructionCode.VITESSE.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
 				//TODO ajouter le code pour le switch du robot
-				message = "";
+				message = Ordre_robot.DEMANDE_VITESSE.toString();
+			else if(this.code_sous_fonction == (0x09 | ConstructionCode.ENVOI_MASH.getValue())) /*Ligne test -- à retirer une fois terminé*/
+				//TODO ajouter le code pour le switch du robot
+				message = Ordre_robot.DEMANDE_TENSION.toString();
 			
 		}
 
@@ -171,9 +212,6 @@ public class GestionnaireMessages {
 			else if(this.code_sous_fonction == (ConstructionCode.COMPORTEMENT.getValue() | ConstructionCode.ENVOI_AGENT.getValue()))
 				//TODO ajouter le code pour le switch du robot
 				message = "";
-			else if(this.code_sous_fonction == (ConstructionCode.COULEUR_FEU.getValue() | ConstructionCode.ENVOI_AGENT.getValue()))
-				//TODO ajouter le code pour le switch du robot
-				message = "";
 			else if(this.code_sous_fonction == (ConstructionCode.VITESSE.getValue() | ConstructionCode.ENVOI_AGENT.getValue()))
 				//TODO ajouter le code pour le switch du robot
 				message = "";
@@ -186,30 +224,51 @@ public class GestionnaireMessages {
 			
 		}
 		
-		return (message+"\n");
-		
+		return (message+"\n");	
 	}
 	
-	private String messageSousFonction() {
-		String message = "";
-		if(this.code_fonction == (short)(ConstructionCode.INITIALISATION.getValue())){
-			
+	
+	/**
+	 * Transforme la trame reçu en un message compréhensible par le simulateur
+	 * @return un message traduit
+	 */
+	private String messagePourSimulation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	public String creationMessagePourAgent(){
+		return this.messagePourAgent();
+	}
+	
+	public String obtenirMessageTraduit(){
+		String traduit = this.contenu;
+		if(this.estStructuree())
+			traduit = this.messagePourAgent();
+		else
+			traduit = this.messagePourSimulation();
+		return traduit;
+	}
+
+
+	public boolean estStructuree(){
+		boolean struct = true;
+		if( (this.code_fonction == NON_STRUCTUREE) && (this.code_sous_fonction == NON_STRUCTUREE) ){
+			struct = false;
 		}
-		return null;
-	}
-
-
-	private String creationMessagePourAgent(){
-		String message = "";
-		
-		return message;
+		return struct;
 	}
 	
-	
-	private String creationMessagePourMash(String messageAgent){
-		
-		
-		return null;
+	@Override
+	public String toString(){
+		String Classe = "";
+		Classe += "taille données"+this.taille_donnees+"\n";
+		Classe += "code fonction"+this.code_fonction+"\n";
+		Classe += "code sous fonction"+this.code_sous_fonction+"\n";
+		Classe += "checkSum"+this.checksum+"\n";
+		Classe += "contenu"+this.contenu;
+		return Classe;
 	}
-
 }

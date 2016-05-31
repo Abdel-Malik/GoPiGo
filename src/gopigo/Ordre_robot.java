@@ -2,27 +2,38 @@ package gopigo;
 
 public enum Ordre_robot {
 	
-	VITESSE_PLUS ("i"),
+	ID ("i"),
+	DEMANDE_ID ("I"),
 	
-	VITESSE_MOINS ("d"),
+	POSITION ("p"),
+	
+	DEMANDE_POSITION ("P"),
+	
+	COMPORTEMENT ("c"),
+	
+	DEMANDE_COMPORTEMENT ("C"),
+	
+	DEMANDE_VOISINAGE ("V"),
+	
+	VITESSE_PLUS ("+"),
+	
+	VITESSE_MOINS ("-"),
+	
+	DEMANDE_VITESSE ("D"),
 	
 
-	TOURNER_SERVO_G ("-"),
+	TOURNER_SERVO_G ("o"),
 	
-	TOURNER_SERVO_D ("+"),
+	TOURNER_SERVO_D ("e"),
 	
 	POS_SERVO_AXE ("*"),
 	
+	DISTANCE_OBSTACLE("u"),
 	
-	ULTRASON ("u"),
 	
-	POSITIONNEMENT ("P"),
+	REINITIALISATION_POSITION ("r"),
 	
-	LOCALISATION ("c"),
-	
-	RESTART ("R"),
-	
-	TENSION ("U"),
+	DEMANDE_TENSION ("U"),
 	
 	BREAK ("BREAK");
 	

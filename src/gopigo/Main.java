@@ -41,8 +41,7 @@ public class Main
 				SwingUtilities.invokeLater(visualisation);
 				application = new Application(visualisation);
 				visualisation.setApplication(application);
-				application.creationCommunication();
-				application.envoyerDonnees("la connexion avec un client est etablie\n");
+				application.creationCommunicationSimu();
 				application.fonctionnementAutonome();
 			break;
 		}

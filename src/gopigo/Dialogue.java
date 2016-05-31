@@ -45,6 +45,7 @@ public class Dialogue extends Thread {
 	/***
 	 * En présence de données sur la socket, celles-ci sont affiché, traité et renvoyé par la pipe. 
 	 */
+	@SuppressWarnings("deprecation")
 	private void transfertAutreThread(){
 		String reception = "";
 		
@@ -54,23 +55,30 @@ public class Dialogue extends Thread {
 				reception = this.comWifi.obtenirDonneesLues();
 			}
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+			this.destroy();
 			e1.printStackTrace();
 		}
 		if(reception.length() != 0){
-			this.interfaceVisualisation.nouvelleInfo(reception+"\n");
-			traitement.setGestionnaireMessages(reception);
+			if(!traitement.setGestionnaireMessages(reception))
+				this.interfaceVisualisation.nouvelleInfo("probleme initialisation"+this.getName());
+			
+			if(traitement.estStructuree()){
+				this.interfaceVisualisation.nouvelleInfo("trame reçu"+this.getName());
+			}
+			reception = traitement.obtenirMessageTraduit();
+			this.interfaceVisualisation.nouvelleInfo(reception+this.getName());
 		
 			for(int i = 0; i < reception.length(); i++){
 				try {
 					ecritureInfos.write(reception.charAt(i));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
+				} catch (IOException e){
+					this.comWifi.fermerConnexion();
+					this.destroy();
 					e.printStackTrace();
 				}
 			}
 			try {
-				ecritureInfos.write(null);
+				ecritureInfos.write(0x00);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -89,9 +97,9 @@ public class Dialogue extends Thread {
 			if(this.lectureInfos.available() > 0){
 				nbBytesLues = lectureInfos.read(receptionTube);
 				
-				while(receptionTube[receptionTube.length-1] != 0){
+				while(receptionTube[nbBytesLues-1] != 0x00 && nbBytesLues < 80){
 						try {
-							receptionTube[receptionTube.length] = (byte)lectureInfos.read();
+							receptionTube[nbBytesLues] = (byte)lectureInfos.read();
 							nbBytesLues++;
 						} catch (IOException e) {
 								// TODO Auto-generated catch block
@@ -108,6 +116,8 @@ public class Dialogue extends Thread {
 		if(nbBytesLues > 0){
 			for(int i=0; i < nbBytesLues; i++)
 				envoi += (char)receptionTube[i];
+			System.out.println(envoi+this.getName()+"\n\n");
+			envoi += "\n";
 			this.comWifi.envoyerDonnees(envoi);
 		}
 	}

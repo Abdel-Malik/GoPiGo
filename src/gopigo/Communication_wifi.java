@@ -60,6 +60,7 @@ public class Communication_wifi {
 		catch (IOException e) 
 		{
 			e.printStackTrace();
+			this.fermerConnexion();
 		}
 	}
 	

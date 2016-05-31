@@ -6,15 +6,29 @@ import java.io.PipedOutputStream;
 
 public class Application {
 	
-	private Communication_wifi comWifi;
+	private Communication_wifi comWifiRobot;
+	private Communication_wifi comWifiSimulateur;
 	private InterfaceEntree interfaceEntree;
 	private Mouvement mouvement;
+	
 	
 	public Application(InterfaceEntree interfaceEntree)
 	{
 		this.mouvement = new Mouvement();
 		this.interfaceEntree = interfaceEntree;
 	}
+	
+	/***
+	 * Constructeur pour une utilisation lié à deux serveurs différents
+	 * @param interfaceEntree connexion au robot
+	 * @param interfaceSimulateur connexion au simulateur
+	 */
+/*	public Application(InterfaceEntree interfaceEntree, InterfaceEntree interfaceSimulateur)
+	{
+		this.mouvement = new Mouvement();
+		this.coteRobot = interfaceEntree;
+		this.coteSimulateur = interfaceSimulateur;
+	}*/
 	
 	
 	/**
@@ -31,8 +45,8 @@ public class Application {
 				if (info == null)
 					System.exit(0);
 				
-				this.comWifi = new Communication_wifi(info.obtenirAdresse(), info.obtenirPort());
-			}while(!this.etablirConnexion());
+				this.comWifiRobot = new Communication_wifi(info.obtenirAdresse(), info.obtenirPort());
+			}while(!this.etablirConnexion(this.comWifiRobot));
 		} 
 		catch (Exception e)
 		{
@@ -40,6 +54,46 @@ public class Application {
 		}
 	}
 	
+	
+	/***
+	 * Fonction qui ouvre deux connexions wifi en étant client de part et d'autre
+	 */
+	public void creationCommunicationSimu()
+	{
+		try
+		{
+			do
+			{
+				InformationConnexion infoS = this.interfaceEntree.demandeInformationsConnexion();
+				
+				if (infoS == null)
+					System.exit(0);
+				
+				this.comWifiSimulateur = new Communication_wifi(infoS.obtenirAdresse(), infoS.obtenirPort());
+			}while(!this.etablirConnexion(this.comWifiSimulateur));
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		try
+		{
+			do
+			{
+				InformationConnexion info = this.interfaceEntree.demandeInformationsConnexion();
+				
+				if (info == null)
+					System.exit(0);
+				
+				this.comWifiRobot = new Communication_wifi(info.obtenirAdresse(), info.obtenirPort());
+			}while(!this.etablirConnexion(this.comWifiRobot));
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * Fonction qui donne la main à l'utilisateur, c'est cette fonction qui tourne tout au long de l'exécution du programme
@@ -61,6 +115,10 @@ public class Application {
 		}
 	}
 	
+	/***
+	 * Fonction qui fonctionne seule, elle transfert et traduis des messages d'un côté à l'autre en les affichant
+	 * @throws IOException
+	 */
 	public void fonctionnementAutonome() throws IOException {
 		PipedOutputStream sortieSimu = new PipedOutputStream();
         PipedInputStream  entreeSimu  = new PipedInputStream(sortieSimu);
@@ -69,8 +127,8 @@ public class Application {
         PipedInputStream  entreeAgent  = new PipedInputStream(sortieAgent);
 		
 
-        Dialogue partieSimulateur = new Dialogue(this.interfaceEntree, this.comWifi, entreeAgent, sortieSimu);
-        Dialogue partieAgent = new Dialogue(this.interfaceEntree, this.comWifi, entreeSimu, sortieAgent);
+        Dialogue partieSimulateur = new Dialogue(this.interfaceEntree, this.comWifiSimulateur, entreeAgent, sortieSimu);
+        Dialogue partieAgent = new Dialogue(this.interfaceEntree, this.comWifiRobot, entreeSimu, sortieAgent);
 
         partieSimulateur.start();
         partieAgent.start();
@@ -99,7 +157,7 @@ public class Application {
 	 */
 	public String obtenirDonneesLues()
 	{
-		return this.comWifi.obtenirDonneesLues();
+		return this.comWifiRobot.obtenirDonneesLues();
 	}
 	
 	
@@ -107,9 +165,9 @@ public class Application {
 	 * Fonction appelant la foncion seConnecter de la classe Communication_Wifi
 	 * @return un boolÃ©en, vrai si la connexion est établie, faux sinon
 	 */
-	public boolean etablirConnexion()
+	public boolean etablirConnexion(Communication_wifi laSocket)
 	{
-		return this.comWifi.seConnecter();
+		return laSocket.seConnecter();
 	}
 	
 	
@@ -119,7 +177,7 @@ public class Application {
 	 */
 	public void envoyerDonnees(String str)
 	{
-		this.comWifi.envoyerDonnees(str);
+		this.comWifiRobot.envoyerDonnees(str);
 	}
 	
 	
@@ -128,7 +186,7 @@ public class Application {
 	 */
 	public void lireDonneesServeur()
 	{
-		this.comWifi.lireDonneesServeur();
+		this.comWifiRobot.lireDonneesServeur();
 	}
 	
 
@@ -137,7 +195,7 @@ public class Application {
 	 */
 	public void terminerConnexion()
 	{
-		this.comWifi.fermerConnexion();
+		this.comWifiRobot.fermerConnexion();
 	}
 	
 	

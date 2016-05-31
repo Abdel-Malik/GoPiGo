@@ -354,12 +354,12 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		}
 		else if(e.getSource() == this.rotationGauche)
 		{
-			this.choixUtilisateur = Sens_deplacement.ROTATIONG.toString();
+			this.choixUtilisateur = Sens_deplacement.ROTATION_GAUCHE.toString();
 			this.leChoixEstFait = true;
 		}
 		else if(e.getSource() == this.rotationDroite)
 		{
-			this.choixUtilisateur = Sens_deplacement.ROTATIOND.toString();
+			this.choixUtilisateur = Sens_deplacement.ROTATION_DROITE.toString();
 			this.leChoixEstFait = true;
 		}
 		
@@ -381,7 +381,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		{
 			this.afficheDistance.setText("En attente de la position...");
 			this.afficheDistance.setHorizontalAlignment(JLabel.CENTER);
-			this.choixUtilisateur = Ordre_robot.ULTRASON.toString();
+			this.choixUtilisateur = Ordre_robot.DISTANCE_OBSTACLE.toString();
 			this.leChoixEstFait = true;
 			
 			try {
@@ -419,7 +419,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		}
 		else if(e.getSource() == this.localisationBouton)
 		{
-			this.choixUtilisateur = Ordre_robot.LOCALISATION.toString();
+			this.choixUtilisateur = Ordre_robot.DEMANDE_POSITION.toString();
 			this.leChoixEstFait = true;
 			
 			this.localisation.setText(donneesDePose());
@@ -427,14 +427,14 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 		else if(e.getSource() == this.restartLocButton)
 		{
-			this.choixUtilisateur = Ordre_robot.RESTART.toString();
+			this.choixUtilisateur = Ordre_robot.REINITIALISATION_POSITION.toString();
 			this.leChoixEstFait = true;
 			this.localisation.setText(donneesDePose());
 		}
 		
 		else if(e.getSource() == this.recuperationTension)
 		{
-			this.choixUtilisateur = Ordre_robot.TENSION.toString();
+			this.choixUtilisateur = Ordre_robot.DEMANDE_TENSION.toString();
 			this.leChoixEstFait = true;
 			
 			this.tensionBatterie.setText((lireDonnees()+"V"));
@@ -484,7 +484,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	 * @return la chaine de caractères structurée
 	 */
 	private String envoyerCoordonnees() {
-		return (Ordre_robot.POSITIONNEMENT.toString()+":"+this.abscisse.getText()+":"+this.ordonnee.getText()+":");
+		return (Ordre_robot.POSITION.toString()+":"+this.abscisse.getText()+":"+this.ordonnee.getText()+":");
 	}
 
 	

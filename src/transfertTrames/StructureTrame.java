@@ -11,13 +11,13 @@ public enum StructureTrame {
 	TAILLE_ENQUEUX(2),
 	ENQUEUE(0x02FE);
 	
-	private int valeur;
+	private short valeur;
 	
 	StructureTrame(int elm){
-		this.valeur = elm;
+		this.valeur = (short) elm;
 	}
 	
-	public int getValue(){
+	public short getValue(){
 		return this.valeur;
 	}
 }

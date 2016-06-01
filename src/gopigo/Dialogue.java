@@ -63,11 +63,12 @@ public class Dialogue extends Thread {
 				this.interfaceVisualisation.nouvelleInfo("probleme initialisation"+this.getName());
 			
 			if(traitement.estStructuree()){
-				this.interfaceVisualisation.nouvelleInfo("trame reçu"+this.getName());
+				this.interfaceVisualisation.nouvelleInfo("réception : "+this.getName()+" "+this.traitement);
 			}
 			reception = traitement.obtenirMessageTraduit();
-			this.interfaceVisualisation.nouvelleInfo(reception+this.getName());
-		
+			if(traitement.estStructuree()){
+				this.interfaceVisualisation.nouvelleInfo("traduction : "+this.getName()+" "+this.traitement);
+			}
 			for(int i = 0; i < reception.length(); i++){
 				try {
 					ecritureInfos.write(reception.charAt(i));
@@ -116,8 +117,7 @@ public class Dialogue extends Thread {
 		if(nbBytesLues > 0){
 			for(int i=0; i < nbBytesLues; i++)
 				envoi += (char)receptionTube[i];
-			System.out.println(envoi+this.getName()+"\n\n");
-			envoi += "\n";
+			envoi += 0x00;
 			this.comWifi.envoyerDonnees(envoi);
 		}
 	}

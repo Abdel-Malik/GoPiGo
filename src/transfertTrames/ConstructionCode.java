@@ -26,13 +26,13 @@ public enum ConstructionCode {
 	VITESSE(0x06),
 	TYPE_AGENT(0x07);
 	
-	private int valeur;
+	private short valeur;
 	
 	ConstructionCode(int elm){
-		this.valeur = elm;
+		this.valeur = (short) elm;
 	}
 	
-	public int getValue(){
+	public short getValue(){
 		return this.valeur;
 	}
 }

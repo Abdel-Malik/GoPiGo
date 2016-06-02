@@ -1,5 +1,6 @@
 package transfertTrames;
 
+//TODO passer le nom en CodeGeneral
 public enum ConstructionCode {
 
 	/** Codes fonctions **/
@@ -25,6 +26,7 @@ public enum ConstructionCode {
 	COULEUR_FEU(0x05),
 	VITESSE(0x06),
 	TYPE_AGENT(0x07);
+	
 	
 	private short valeur;
 	

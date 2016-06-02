@@ -62,13 +62,8 @@ public class Dialogue extends Thread {
 			if(!traitement.setGestionnaireMessages(reception))
 				this.interfaceVisualisation.nouvelleInfo("probleme initialisation"+this.getName());
 			
-			if(traitement.estStructuree()){
-				this.interfaceVisualisation.nouvelleInfo("réception : "+this.getName()+" "+this.traitement);
-			}
-			reception = traitement.obtenirMessageTraduit();
-			if(traitement.estStructuree()){
-				this.interfaceVisualisation.nouvelleInfo("traduction : "+this.getName()+" "+this.traitement);
-			}
+			reception = affichageEtTraduction();
+			
 			for(int i = 0; i < reception.length(); i++){
 				try {
 					ecritureInfos.write(reception.charAt(i));
@@ -85,6 +80,13 @@ public class Dialogue extends Thread {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private String affichageEtTraduction() {
+		String reception;
+		reception = traitement.obtenirMessageTraduit();
+		this.interfaceVisualisation.nouvelleInfo("traduction : "+this.getName()+" "+this.traitement);
+		return reception;
 	}
 	
 	/***

@@ -148,7 +148,7 @@ public class Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        //System.exit(1);
+        System.exit(1);
 	}	
 	
 	/**

@@ -15,6 +15,7 @@ public class GestionnaireMessages {
 	private short code_fonction;
 	private short code_sous_fonction;
 	public String contenu;
+	public String affichage;
 	private short checksum;
 	
 	
@@ -23,12 +24,13 @@ public class GestionnaireMessages {
 		this.code_fonction = 0;
 		this.code_sous_fonction = 0;
 		this.contenu = "";
+		this.affichage = "";
 		this.checksum = 0;
 	}
 	
 	
 	/**
-	 * fonction récupérant les différentes parties de la trame pour un traitement
+	 * méthode récupérant les différentes parties de la trame pour un traitement
 	 *@param String contient une trame (aux propriétés préétablies) reçu sur un port 
 	 */
 	public boolean setGestionnaireMessages(String message){
@@ -38,11 +40,13 @@ public class GestionnaireMessages {
 			entete = 0;
 		else
 			entete = (( (int)(message.charAt(0)) ) <<8) | ((int)(message.charAt(1))&0xFF);
+		
 		if(entete != (StructureTrame.ENTETE.getValue())){
 			this.taille_donnees = (short) message.length();
 			this.code_fonction = NON_STRUCTUREE;
 			this.code_sous_fonction = NON_STRUCTUREE;
 			this.contenu = message;
+			this.affichage = "";
 			succes = true;
 			return succes;
 		}
@@ -52,13 +56,16 @@ public class GestionnaireMessages {
 			this.code_fonction = recuperationCodeFonction(message);
 			this.code_sous_fonction = recuperationCodeSousFonction(message);
 			this.contenu = recuperationContenu(message);
+			this.affichage = "";
 			succes = true;
 		}
 		return succes;
 	}
 
-
-/*** Récupération et vérification des données reçu ***/
+/***********************************************************/
+/****** Récupération et vérification des données reçu ******/
+/***********************************************************/
+	
 	
 	/**
 	 * Fonction répupérant l'information sur le nombre d'octets contenu dans la partie "Données" de la trame. 
@@ -143,7 +150,7 @@ public class GestionnaireMessages {
 	/**
 	 * Calcul la valeur du checkSUm pour la trame reçu et la compare avec l'information présente dans celle-ci
 	 * @param message la trame reçu
-	 * @return un booléen true si la trame semble complête, false sinon
+	 * @return un booléen true si la trame semble complete, false sinon
 	 */
 	private boolean testChecksum(String message) {
 		// TODO Auto-generated method stub
@@ -157,7 +164,7 @@ public class GestionnaireMessages {
 	 */
 	private String messagePourAgent(){
 		String message = "";
-		
+		preparationAffichage();
 		if((this.code_fonction == ConstructionCode.INITIALISATION.getValue())){
 			message = SEPARATEUR_ELEMENT+(Integer.toString(this.code_fonction))+SEPARATEUR_ELEMENT+this.contenu.substring(0, this.contenu.indexOf(SEPARATEUR_ENS_DONNEES))+SEPARATEUR_ENS_DONNEES;
 			if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
@@ -285,11 +292,11 @@ public class GestionnaireMessages {
 				this.code_sous_fonction = ConstructionCode.RETOUR_AGENT.getValue();
 		}
 		if(commande.equals(Ordre_robot.ID.toString())||commande.equals(Ordre_robot.DEMANDE_ID.toString())){
-			this.code_sous_fonction = (short)(this.code_sous_fonction + ConstructionCode.ID.getValue());
+			this.code_sous_fonction = (short)(this.code_sous_fonction | ConstructionCode.ID.getValue());
 		}else if(commande.equals(Ordre_robot.POSITION.toString())||commande.equals(Ordre_robot.DEMANDE_POSITION.toString())){
-			this.code_sous_fonction = (short)(this.code_sous_fonction + ConstructionCode.POSITION.getValue());
+			this.code_sous_fonction = (short)(this.code_sous_fonction | ConstructionCode.POSITION.getValue());
 		}else if(commande.equals(Ordre_robot.COMPORTEMENT.toString())||commande.equals(Ordre_robot.DEMANDE_COMPORTEMENT.toString())){
-			this.code_sous_fonction = (short)(this.code_sous_fonction + ConstructionCode.COMPORTEMENT.getValue());
+			this.code_sous_fonction = (short)(this.code_sous_fonction | ConstructionCode.COMPORTEMENT.getValue());
 		}
 	}
 
@@ -371,10 +378,41 @@ public class GestionnaireMessages {
 		return struct;
 	}
 	
+	private void preparationAffichage() {
+		String fonction = "";
+		if(this.code_fonction == ConstructionCode.INITIALISATION.getValue())
+			fonction = "Initialisation -";
+		else if(this.code_fonction == ConstructionCode.INFORMATION.getValue())
+			fonction = "Information -";
+		else if(this.code_fonction == ConstructionCode.ORDRE.getValue())
+			fonction = "Ordre -";
+		else if(this.code_fonction == ConstructionCode.ENVIRONNEMENT.getValue())
+			fonction = "Environnement -";
+		String sousFonction = "concerne -";
+		if(this.code_sous_fonction == ConstructionCode.ID.getValue())
+			sousFonction += "ID -";
+		if(this.code_sous_fonction == ConstructionCode.POSITION.getValue())
+			sousFonction += "Position -";
+		else if(this.code_sous_fonction == ConstructionCode.VITESSE.getValue())
+			sousFonction = "Vitesse -";
+		else if(this.code_sous_fonction == ConstructionCode.COMPORTEMENT.getValue())
+			sousFonction = "Comportement -";
+		else if(this.code_fonction == ConstructionCode.VOISINAGE.getValue())
+			sousFonction = "Voisinage -";
+		String donnees = this.contenu;
+		if(donnees.isEmpty())
+			donnees = "demande.";
+		if(!fonction.isEmpty())
+			this.affichage = fonction + sousFonction + donnees;
+	}
+
+
 	@Override
 	public String toString(){
 		String Classe = "";
-		Classe += "taille et contenu : "+this.taille_donnees+" -- "+this.contenu+"\n";
+		if(this.affichage.isEmpty())
+			this.affichage = this.contenu;
+		Classe += "taille et contenu : "+this.taille_donnees+" -- "+this.affichage+"\n";
 		Classe += "codes f/ss_f/check : "+Integer.toHexString(this.code_fonction)+" "+Integer.toHexString(this.code_sous_fonction)+" "+this.checksum;
 		return Classe;
 	}

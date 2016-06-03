@@ -37,10 +37,10 @@ public class PageConnexion extends JDialog implements ActionListener
 
 	
 	
-	public PageConnexion(JFrame frame) 
+	public PageConnexion(JFrame frame, String client) 
 	{
 		super(frame, "Connexion", true);
-		initialize();
+		initialize(client);
 	}
 	
 	public void actionPerformed (ActionEvent e)
@@ -85,14 +85,16 @@ public class PageConnexion extends JDialog implements ActionListener
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize()
+	private void initialize(String client)
 	{
 		this.setResizable(false);
 		this.setBounds(100, 100, 500, 320);
 		this.getContentPane().setLayout(null);
 		this.setLocationRelativeTo(null);
-		
-		JLabel titre = new JLabel("- Connexion au Robot -\r\n");
+		String nomFenetre = "- Connexion au Robot -\r\n";
+		if(!client.equals("ROBOT"))
+			nomFenetre = "- Connexion simulateur -\r\n";
+		JLabel titre = new JLabel(nomFenetre);
 		titre.setHorizontalAlignment(SwingConstants.CENTER);
 		titre.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		titre.setBounds(0, 9, 494, 39);
@@ -102,7 +104,8 @@ public class PageConnexion extends JDialog implements ActionListener
 		imageGopigo.setLocation(364, 102);
 		this.getContentPane().add(imageGopigo);
 		imageGopigo.setSize(130,106);
-		imageGopigo.setIcon(new ImageIcon(PageConnexion.class.getResource(ICON_PATH+"gopigo.png")));
+		if(client.equals("ROBOT"))
+			imageGopigo.setIcon(new ImageIcon(PageConnexion.class.getResource(ICON_PATH+"gopigo.png")));
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(72, 61, 270, 190);

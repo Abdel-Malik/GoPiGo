@@ -103,9 +103,9 @@ public class PageVisualisation extends JFrame implements ActionListener, Interfa
 	}
 
 	@Override
-	public InformationConnexion demandeInformationsConnexion()
+	public InformationConnexion demandeInformationsConnexion(String client)
 	{
-		this.pageConnexion = new PageConnexion(this);
+		this.pageConnexion = new PageConnexion(this, client);
 		InformationConnexion info = pageConnexion.lanceDialogue();
 		
 		return info;
@@ -119,6 +119,12 @@ public class PageVisualisation extends JFrame implements ActionListener, Interfa
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void affichageLoc(String substring) {
 		// TODO Auto-generated method stub
 		
 	}

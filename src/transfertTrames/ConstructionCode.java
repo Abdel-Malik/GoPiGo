@@ -25,7 +25,8 @@ public enum ConstructionCode {
 	VOISINAGE(0x04),
 	COULEUR_FEU(0x05),
 	VITESSE(0x06),
-	TYPE_AGENT(0x07);
+	TYPE_AGENT(0x07),
+	TENSION_BATTERIE(0x08);
 	
 	
 	private short valeur;

@@ -18,17 +18,6 @@ public class Application {
 		this.interfaceEntree = interfaceEntree;
 	}
 	
-	/***
-	 * Constructeur pour une utilisation lié à deux serveurs différents
-	 * @param interfaceEntree connexion au robot
-	 * @param interfaceSimulateur connexion au simulateur
-	 */
-/*	public Application(InterfaceEntree interfaceEntree, InterfaceEntree interfaceSimulateur)
-	{
-		this.mouvement = new Mouvement();
-		this.coteRobot = interfaceEntree;
-		this.coteSimulateur = interfaceSimulateur;
-	}*/
 	
 	
 	/**
@@ -40,7 +29,7 @@ public class Application {
 		{
 			do
 			{
-				InformationConnexion info = this.interfaceEntree.demandeInformationsConnexion();
+				InformationConnexion info = this.interfaceEntree.demandeInformationsConnexion("ROBOT");
 				
 				if (info == null)
 					System.exit(0);
@@ -64,7 +53,7 @@ public class Application {
 		{
 			do
 			{
-				InformationConnexion infoS = this.interfaceEntree.demandeInformationsConnexion();
+				InformationConnexion infoS = this.interfaceEntree.demandeInformationsConnexion("SIMULATEUR");
 				
 				if (infoS == null)
 					System.exit(0);
@@ -81,7 +70,7 @@ public class Application {
 		{
 			do
 			{
-				InformationConnexion info = this.interfaceEntree.demandeInformationsConnexion();
+				InformationConnexion info = this.interfaceEntree.demandeInformationsConnexion("ROBOT");
 				
 				if (info == null)
 					System.exit(0);
@@ -104,14 +93,25 @@ public class Application {
 		{
 			String choix = this.interfaceEntree.demandeAction();
 			choix += '\n';
-			this.envoyerDonnees(choix);
+			if(!choix.equals("\n"))
+				this.envoyerDonnees(choix);
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			this.lireDonneesServeur();
+			try {
+				if(this.comWifiRobot.isAvailable()){
+					this.comWifiRobot.lireDonneesServeur();
+					String localisation = this.comWifiRobot.obtenirDonneesLues();
+					if((localisation.substring(0, 5)).equals("2:52:"))
+						this.interfaceEntree.affichageLoc(localisation.substring(5, localisation.length()));
+				}
+			} catch (IOException e1) {
+
+				e1.printStackTrace();
+			}
 		}
 	}
 	

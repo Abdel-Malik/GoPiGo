@@ -8,7 +8,6 @@ public class GestionnaireMessages {
 
 	public final static char SEPARATEUR_ELEMENT = ':';
 	public final static char SEPARATEUR_ENS_DONNEES = ';';
-	public final static short INFORMATION_PONCTUELLE = 0x05;
 	public final static short NON_STRUCTUREE = 0xFF;
 	
 	private short taille_donnees;
@@ -157,6 +156,9 @@ public class GestionnaireMessages {
 		return true;
 	}
 	
+	/************************************************************/
+	/****** Traduction trames =>String || String => trames ******/
+	/************************************************************/
 
 	/**
 	 * Transforme la trame reçu en un message compréhensible par l'agent
@@ -166,67 +168,60 @@ public class GestionnaireMessages {
 		String message = "";
 		preparationAffichage();
 		if((this.code_fonction == ConstructionCode.INITIALISATION.getValue())){
-			message = SEPARATEUR_ELEMENT+(Integer.toString(this.code_fonction))+SEPARATEUR_ELEMENT+this.contenu.substring(0, this.contenu.indexOf(SEPARATEUR_ENS_DONNEES))+SEPARATEUR_ENS_DONNEES;
-			if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-				message = Ordre_robot.ID.toString() + message;
-			else if(this.code_sous_fonction == (ConstructionCode.POSITION.getValue() | ConstructionCode.ENVOI_MASH.getValue())){
-				message = Ordre_robot.POSITION.toString() + message;
-			}
-		}
+			message = constructionMessageTypeInitialisation();
+			
+		}else if((this.code_fonction == ConstructionCode.INFORMATION.getValue())){
+			message = constructionMessageTypeInformation();
+			
+		}else if((this.code_fonction == ConstructionCode.ORDRE.getValue())){
+			message = constructionMessageTypeOrdre();
 		
-		if((this.code_fonction == ConstructionCode.INFORMATION.getValue())){
-			message = SEPARATEUR_ELEMENT+(Integer.toString(this.code_fonction))+SEPARATEUR_ENS_DONNEES;
-			if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-				message = Ordre_robot.DEMANDE_ID.toString() + message;
-			else if(this.code_sous_fonction == (ConstructionCode.POSITION.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-				message = Ordre_robot.DEMANDE_POSITION.toString() + message;
-			else if(this.code_sous_fonction == (ConstructionCode.COMPORTEMENT.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-				message = Ordre_robot.DEMANDE_COMPORTEMENT.toString() + message;
-			else if(this.code_sous_fonction == (ConstructionCode.VITESSE.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-				message = Ordre_robot.DEMANDE_VITESSE.toString() + message;
-			else if(this.code_sous_fonction == (0x09 | ConstructionCode.ENVOI_MASH.getValue())) /* TODO Ligne test -- à retirer une fois terminé*/
-				message = Ordre_robot.DEMANDE_TENSION.toString() + message;
-			else if(this.code_sous_fonction == (0x0A | ConstructionCode.ENVOI_MASH.getValue())) /* TODO Ligne test -- à retirer une fois terminé*/
-					message = Ordre_robot.REINITIALISATION_POSITION.toString() + message;
+		}else if((this.code_fonction == ConstructionCode.ENVIRONNEMENT.getValue())){
+			message = constructionMessageTypeEnvironnement();
+		}else if(this.code_fonction == ControleGopigo.CODE_FONCTION.getValue()){
 			
 		}
-
-		if((this.code_fonction == ConstructionCode.ORDRE.getValue())){
-			message = SEPARATEUR_ELEMENT+(Integer.toString(this.code_fonction))+SEPARATEUR_ELEMENT+this.contenu.substring(0, this.contenu.indexOf(SEPARATEUR_ENS_DONNEES))+SEPARATEUR_ENS_DONNEES;
-			if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-				message = Ordre_robot.ID.toString()+message;
-			else if(this.code_sous_fonction == (ConstructionCode.POSITION.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-				message = Ordre_robot.POSITION.toString()+message;
-			else if(this.code_sous_fonction == (ConstructionCode.COMPORTEMENT.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-				message = Ordre_robot.COMPORTEMENT.toString()+message;
-		}
-		
-		if((this.code_fonction == ConstructionCode.ENVIRONNEMENT.getValue())){
-			if(this.code_sous_fonction == (ConstructionCode.VOISINAGE.getValue() | ConstructionCode.ENVOI_AGENT.getValue()))
-				//TODO ajouter le code pour le switch du robot
-				message = "";
-			else if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_AGENT.getValue()))
-				//TODO ajouter le code pour le switch du robot
-				message = "";
-			else if(this.code_sous_fonction == (ConstructionCode.POSITION.getValue() | ConstructionCode.ENVOI_AGENT.getValue()))
-				//TODO ajouter le code pour le switch du robot
-				message = "";
-			else if(this.code_sous_fonction == (ConstructionCode.COMPORTEMENT.getValue() | ConstructionCode.ENVOI_AGENT.getValue()))
-				//TODO ajouter le code pour le switch du robot
-				message = "";
-			else if(this.code_sous_fonction == (ConstructionCode.VITESSE.getValue() | ConstructionCode.ENVOI_AGENT.getValue()))
-				//TODO ajouter le code pour le switch du robot
-				message = "";
-			else if(this.code_sous_fonction == (ConstructionCode.TYPE_AGENT.getValue() | ConstructionCode.ENVOI_AGENT.getValue()))
-				//TODO ajouter le code pour le switch du robot
-				message = "";
-			else if(this.code_sous_fonction == (ConstructionCode.VOISINAGE.getValue() | ConstructionCode.ENVOI_AGENT.getValue()))
-				//TODO ajouter le code pour le switch du robot
-				message = "";
-			
-		}
-		
+				
 		return (message+"\n");	
+	}
+	
+
+
+	/**
+	 * Prépare un message avec la trame reçu en un message compréhensible par l'agent pour le code fonction initialisaion
+	 * @return un message traduit
+	 */
+	private String constructionMessageTypeInitialisation() {
+		String message;
+		message = SEPARATEUR_ELEMENT+(Integer.toString(this.code_fonction))+SEPARATEUR_ELEMENT+this.contenu.substring(0, this.contenu.indexOf(SEPARATEUR_ENS_DONNEES))+SEPARATEUR_ENS_DONNEES;
+		if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
+			message = Ordre_robot.ID.toString() + message;
+		else if(this.code_sous_fonction == (ConstructionCode.POSITION.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
+			message = Ordre_robot.POSITION.toString() + message;
+		return message;
+	}
+
+
+	/**
+	 * Prépare un message avec la trame reçu en un message compréhensible par l'agent pour le code fonction information
+	 * @return un message traduit
+	 */
+	private String constructionMessageTypeInformation() {
+		String message;
+		message = SEPARATEUR_ELEMENT+(Integer.toString(this.code_fonction))+SEPARATEUR_ENS_DONNEES;
+		if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
+			message = Ordre_robot.DEMANDE_ID.toString() + message;
+		else if(this.code_sous_fonction == (ConstructionCode.POSITION.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
+			message = Ordre_robot.DEMANDE_POSITION.toString() + message;
+		else if(this.code_sous_fonction == (ConstructionCode.COMPORTEMENT.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
+			message = Ordre_robot.DEMANDE_COMPORTEMENT.toString() + message;
+		else if(this.code_sous_fonction == (ConstructionCode.VITESSE.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
+			message = Ordre_robot.DEMANDE_VITESSE.toString() + message;
+		else if(this.code_sous_fonction == (ConstructionCode.VITESSE.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
+			message = Ordre_robot.DEMANDE_VITESSE.toString() + message;
+		else if(this.code_sous_fonction == (ConstructionCode.TENSION_BATTERIE.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
+			message = Ordre_robot.DEMANDE_TENSION.toString() + message;
+		return message;
 	}
 	
 	
@@ -239,25 +234,76 @@ public class GestionnaireMessages {
 		String message = "";
 		String type = "";
 		String commande = "";
-		int separateur =  this.contenu.indexOf(SEPARATEUR_ELEMENT);
-		type = this.contenu.substring(0, separateur);
 		
-		this.contenu = this.contenu.substring((separateur+1), this.contenu.length());
+		int indexSeparation =  this.contenu.indexOf(SEPARATEUR_ELEMENT);
+		type = this.contenu.substring(0, indexSeparation);
+		
+		this.contenu = this.contenu.substring((indexSeparation+1), this.contenu.length());
 	
-		separateur =  this.contenu.indexOf(SEPARATEUR_ELEMENT);
-		if(separateur == -1){
+		indexSeparation =  this.contenu.indexOf(SEPARATEUR_ELEMENT);
+		if(indexSeparation == -1){
 			commande = this.contenu.substring(0, this.contenu.indexOf(SEPARATEUR_ENS_DONNEES));
 			this.contenu = " ";
 		}else{
-			commande = this.contenu.substring(0, separateur);
-			this.contenu = this.contenu.substring((separateur+1), this.contenu.length());
+			commande = this.contenu.substring(0, indexSeparation);
+			this.contenu = this.contenu.substring((indexSeparation+1), this.contenu.length());
 		}		
 		determinerInformations(type, commande, message);
 		message = creationTrame();
 		return message;
 	}
 
+	/**
+	 * Prépare un message avec la trame reçu en un message compréhensible par l'agent pour le code fonction environnement
+	 * @return un message traduit
+	 */
+	private String constructionMessageTypeEnvironnement() {
+		String message = "";
+		if(this.code_sous_fonction == (ConstructionCode.VOISINAGE.getValue() | ConstructionCode.ENVOI_AGENT.getValue()))
+			//TODO ajouter le code pour le switch du robot
+			message = "";
+		else if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_AGENT.getValue()))
+			//TODO ajouter le code pour le switch du robot
+			message = "";
+		else if(this.code_sous_fonction == (ConstructionCode.POSITION.getValue() | ConstructionCode.ENVOI_AGENT.getValue()))
+			//TODO ajouter le code pour le switch du robot
+			message = "";
+		else if(this.code_sous_fonction == (ConstructionCode.COMPORTEMENT.getValue() | ConstructionCode.ENVOI_AGENT.getValue()))
+			//TODO ajouter le code pour le switch du robot
+			message = "";
+		else if(this.code_sous_fonction == (ConstructionCode.VITESSE.getValue() | ConstructionCode.ENVOI_AGENT.getValue()))
+			//TODO ajouter le code pour le switch du robot
+			message = "";
+		else if(this.code_sous_fonction == (ConstructionCode.TYPE_AGENT.getValue() | ConstructionCode.ENVOI_AGENT.getValue()))
+			//TODO ajouter le code pour le switch du robot
+			message = "";
+		else if(this.code_sous_fonction == (ConstructionCode.VOISINAGE.getValue() | ConstructionCode.ENVOI_AGENT.getValue()))
+			//TODO ajouter le code pour le switch du robot
+			message = "";
+		return message;
+	}
 
+
+	/**
+	 * Prépare un message avec la trame reçu en un message compréhensible par l'agent pour le code fonction ordre
+	 * @return un message traduit
+	 */
+	private String constructionMessageTypeOrdre() {
+		String message;
+		message = SEPARATEUR_ELEMENT+(Integer.toString(this.code_fonction))+SEPARATEUR_ELEMENT+this.contenu.substring(0, this.contenu.indexOf(SEPARATEUR_ENS_DONNEES))+SEPARATEUR_ENS_DONNEES;
+		if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
+			message = Ordre_robot.ID.toString()+message;
+		else if(this.code_sous_fonction == (ConstructionCode.POSITION.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
+			message = Ordre_robot.POSITION.toString()+message;
+		else if(this.code_sous_fonction == (ConstructionCode.COMPORTEMENT.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
+			message = Ordre_robot.COMPORTEMENT.toString()+message;
+		return message;
+	}
+	
+	
+	/************************************************************/
+	/***** Création des codes fonctions et envoi de la trame ****/
+	/************************************************************/
 
 	private void determinerInformations(String type, String commande, String message){
 		determinerCodes(type, commande, message);
@@ -274,29 +320,27 @@ public class GestionnaireMessages {
 
 	
 	/**
-	 * récupère les données code_fonction / code_sous_fonction et les sauvegarde
+	 * récupère les données code_fonction / code_sous_fonction et les sauvegardes
 	 * @param type
 	 * @param commande
 	 * @param message
 	 */
 	private void determinerCodes(String type, String commande, String message) {
 		short type_short = (short)Integer.parseInt(type);
-		if(type_short == INFORMATION_PONCTUELLE){
-			this.code_fonction = ConstructionCode.INFORMATION.getValue();
-			this.code_sous_fonction = ConstructionCode.PONCTUEL_AGENT.getValue();
-		}else{
-			this.code_fonction = type_short;
-			if(message.isEmpty())
-				this.code_sous_fonction = ConstructionCode.CONFIRMATION_AGENT.getValue();
-			else
-				this.code_sous_fonction = ConstructionCode.RETOUR_AGENT.getValue();
-		}
+		this.code_fonction = type_short;
+		if(message.isEmpty())
+			this.code_sous_fonction = ConstructionCode.CONFIRMATION_AGENT.getValue();
+		else
+			this.code_sous_fonction = ConstructionCode.RETOUR_AGENT.getValue();
+	
 		if(commande.equals(Ordre_robot.ID.toString())||commande.equals(Ordre_robot.DEMANDE_ID.toString())){
 			this.code_sous_fonction = (short)(this.code_sous_fonction | ConstructionCode.ID.getValue());
 		}else if(commande.equals(Ordre_robot.POSITION.toString())||commande.equals(Ordre_robot.DEMANDE_POSITION.toString())){
 			this.code_sous_fonction = (short)(this.code_sous_fonction | ConstructionCode.POSITION.getValue());
 		}else if(commande.equals(Ordre_robot.COMPORTEMENT.toString())||commande.equals(Ordre_robot.DEMANDE_COMPORTEMENT.toString())){
 			this.code_sous_fonction = (short)(this.code_sous_fonction | ConstructionCode.COMPORTEMENT.getValue());
+		}else if(Integer.parseInt(commande) == (ConstructionCode.PONCTUEL_AGENT.getValue() |ConstructionCode.POSITION.getValue())){
+			this.code_sous_fonction = (short)(ConstructionCode.PONCTUEL_AGENT.getValue() |ConstructionCode.POSITION.getValue());
 		}
 	}
 
@@ -354,6 +398,13 @@ public class GestionnaireMessages {
 		return trame.toString();
 	}
 	
+	
+	
+	/*************************************************************************/
+	/***** Partie des méthodes étant publique et permettant la traduction ****/
+	/*************************************************************************/
+	
+	
 	/**
 	 * Methode appellée de l'exterieur pour obtenir une chaine convertit dans le langage de l'autre client 
 	 * @return
@@ -378,6 +429,22 @@ public class GestionnaireMessages {
 		return struct;
 	}
 	
+	
+
+
+	@Override
+	public String toString(){
+		String Classe = "";
+		if(this.affichage.isEmpty())
+			this.affichage = this.contenu;
+		Classe += "taille et contenu : "+this.taille_donnees+" -- "+this.affichage+"\n";
+		Classe += "codes f/ss_f/check : "+Integer.toHexString(this.code_fonction)+" "+Integer.toHexString(this.code_sous_fonction)+" "+this.checksum;
+		return Classe;
+	}
+	
+	/**
+	 * Pour le toString
+	 */
 	private void preparationAffichage() {
 		String fonction = "";
 		if(this.code_fonction == ConstructionCode.INITIALISATION.getValue())
@@ -399,21 +466,12 @@ public class GestionnaireMessages {
 			sousFonction = "Comportement -";
 		else if(this.code_fonction == ConstructionCode.VOISINAGE.getValue())
 			sousFonction = "Voisinage -";
+		else if(this.code_fonction == (ConstructionCode.PONCTUEL_AGENT.getValue() | ConstructionCode.POSITION.getValue()))
+			sousFonction = "Ponctuel de position -";
 		String donnees = this.contenu;
 		if(donnees.isEmpty())
 			donnees = "demande.";
 		if(!fonction.isEmpty())
 			this.affichage = fonction + sousFonction + donnees;
-	}
-
-
-	@Override
-	public String toString(){
-		String Classe = "";
-		if(this.affichage.isEmpty())
-			this.affichage = this.contenu;
-		Classe += "taille et contenu : "+this.taille_donnees+" -- "+this.affichage+"\n";
-		Classe += "codes f/ss_f/check : "+Integer.toHexString(this.code_fonction)+" "+Integer.toHexString(this.code_sous_fonction)+" "+this.checksum;
-		return Classe;
 	}
 }

@@ -64,7 +64,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	
 	//position
 	private JButton validationPosition;
-	private JButton localisationBouton;
+	/*private JButton localisationBouton;*/
 	private JButton restartLocButton;
 	
 	//autre
@@ -204,11 +204,11 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		panelDroit.add(this.validationPosition);
 		this.validationPosition.addActionListener(this);
 		
-		this.localisationBouton = new JButton("Localisation");
+		/*this.localisationBouton = new JButton("Localisation");
 		this.localisationBouton.setFont(new Font("book antiqua", Font.PLAIN, 11));
 		this.localisationBouton.setBounds(162, 327, 96, 25);
 		panelDroit.add(this.localisationBouton);
-		this.localisationBouton.addActionListener(this);
+		this.localisationBouton.addActionListener(this);*/
 		
 		this.restartLocButton = new JButton("Reset");
 		this.restartLocButton.setFont(new Font("book antiqua", Font.PLAIN, 10));
@@ -417,13 +417,13 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			this.choixUtilisateur = this.envoyerCoordonnees();
 			this.leChoixEstFait = true;
 		}
-		else if(e.getSource() == this.localisationBouton)
+		/*else if(e.getSource() == this.localisationBouton)
 		{
 			this.choixUtilisateur = Ordre_robot.DEMANDE_POSITION.toString();
 			this.leChoixEstFait = true;
 			
 			this.localisation.setText(donneesDePose());
-		}
+		}*/
 		
 		else if(e.getSource() == this.restartLocButton)
 		{
@@ -489,9 +489,9 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 
 	
 	@Override
-	public InformationConnexion demandeInformationsConnexion()
+	public InformationConnexion demandeInformationsConnexion(String client)
 	{
-		this.pageConnexion = new PageConnexion(this);
+		this.pageConnexion = new PageConnexion(this, client);
 		InformationConnexion info = pageConnexion.lanceDialogue();
 		
 		return info;
@@ -506,18 +506,12 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	@Override
 	public String demandeAction()
 	{
-		this.leChoixEstFait = false;
-		
-		while (!leChoixEstFait) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		};
-		
-		return this.choixUtilisateur;
+		String ret = "";
+		if(this.leChoixEstFait)
+			ret = this.choixUtilisateur;
+			this.choixUtilisateur = "";
+			this.leChoixEstFait = false;
+		return ret;
 	}
 
 	/**
@@ -531,6 +525,12 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	@Override
 	public void nouvelleInfo(String information) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void affichageLoc(String substring) {
+		this.localisation.setText("("+substring+"°)");
 		
 	}
 }

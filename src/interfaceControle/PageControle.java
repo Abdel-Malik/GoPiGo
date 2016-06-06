@@ -21,6 +21,9 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JTextField;
 
+import transfertTrames.ConstructionCode;
+import transfertTrames.StructureTrame;
+
 /**
  * Classe permettant le contrôle du robot
  */
@@ -245,12 +248,12 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 		this.afficheDistance = new JLabel("_ cm");
 		this.afficheDistance.setFont(new Font("book antiqua", Font.PLAIN, 15));
-		this.afficheDistance.setBounds(166, 78, 100, 14);
+		this.afficheDistance.setBounds(166, 78, 115, 14);
 		panelDroit.add(this.afficheDistance);
 		
 		this.localisation = new JLabel("( _ , _ )");
 		this.localisation.setFont(new Font("book antiqua", Font.PLAIN, 14));
-		this.localisation.setBounds(72, 326, 100, 25);
+		this.localisation.setBounds(72, 326, 115, 25);
 		panelDroit.add(this.localisation);
 		
 		this.tensionBatterie = new JLabel("_V");
@@ -390,7 +393,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			String obtenirDonneesLues = application.obtenirDonneesLues();
+			String obtenirDonneesLues = lireDonnees();
 			this.afficheDistance.setText((obtenirDonneesLues+" cm"));
 		}
 		
@@ -436,8 +439,9 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		{
 			this.choixUtilisateur = Ordre_robot.DEMANDE_TENSION.toString();
 			this.leChoixEstFait = true;
-			
-			this.tensionBatterie.setText((lireDonnees()+"V"));
+			String U = lireDonnees();
+			U = partieTension(U);
+			this.tensionBatterie.setText((U.substring(0, (U.length()-1))+"V"));
 		}
 		
 		
@@ -446,7 +450,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			this.choixUtilisateur = Ordre_robot.BREAK.toString();
 			this.leChoixEstFait = true;
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(800);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -456,13 +460,22 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		
 	}
 
+	private String partieTension(String u) {
+		String tension = u;
+		int index = u.indexOf(StructureTrame.SEPARATEUR_ENS_DONNEES.toString());
+		int ln = u.length(); 
+		if(index+1 <= ln)
+			tension = u.substring(index+1, u.length());
+		return tension;
+	}
+
 	/**
 	 * Attend un certain temps avant de récupérer des données transmis par le wi-fi
 	 * @return la chaine de caractères reçue
 	 */
 	private String lireDonnees() {
 		try {
-			Thread.sleep(1200);
+			Thread.sleep(1000);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -484,7 +497,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	 * @return la chaine de caractères structurée
 	 */
 	private String envoyerCoordonnees() {
-		return (Ordre_robot.POSITION.toString()+":"+this.abscisse.getText()+":"+this.ordonnee.getText()+":");
+		return (Ordre_robot.POSITION.toString()+StructureTrame.SEPARATEUR_ELEMENT.toString()+ConstructionCode.ORDRE.getValue()+StructureTrame.SEPARATEUR_ELEMENT.toString()+this.abscisse.getText()+StructureTrame.SEPARATEUR_ELEMENT.toString()+this.ordonnee.getText()+StructureTrame.SEPARATEUR_ENS_DONNEES.toString());
 	}
 
 	

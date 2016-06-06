@@ -10,7 +10,7 @@ import javax.swing.SwingUtilities;
 
 public class Main 
 {
-	public static void main(String[] args) throws IOException 
+	public static void main(String[] args) throws IOException, InterruptedException 
 	{
 		Application application;
 		PageChoix choix = new PageChoix();
@@ -31,7 +31,6 @@ public class Main
 				application = new Application(pageControle);
 				pageControle.setApplication(application);
 				application.creationCommunication();
-				application.envoyerDonnees("la connexion avec un client est etablie\n");
 				application.lireDonneesServeur();
 				application.fonctionner();
 			break;

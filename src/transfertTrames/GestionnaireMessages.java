@@ -6,10 +6,6 @@ import gopigo.Sens_deplacement;
 
 
 public class GestionnaireMessages {
-
-	public final static char SEPARATEUR_ELEMENT = ':';
-	public final static char SEPARATEUR_ENS_DONNEES = ';';
-	public final static short NON_STRUCTUREE = 0xFF;
 	
 	private short taille_donnees;
 	private short code_fonction;
@@ -43,8 +39,8 @@ public class GestionnaireMessages {
 		
 		if(entete != (StructureTrame.ENTETE.getValue())){
 			this.taille_donnees = (short) message.length();
-			this.code_fonction = NON_STRUCTUREE;
-			this.code_sous_fonction = NON_STRUCTUREE;
+			this.code_fonction = StructureTrame.NON_STRUCTUREE.getValue();
+			this.code_sous_fonction = StructureTrame.NON_STRUCTUREE.getValue();
 			this.contenu = message;
 			this.affichage = "";
 			succes = true;
@@ -78,8 +74,7 @@ public class GestionnaireMessages {
 		if(message.length() < debut+nbOctetsARecuperer)
 			return -1;
 		String extrait = parcoursString(message, debut, nbOctetsARecuperer);
-		short somme = (short)((extrait.charAt(0)<<8)|(extrait.charAt(1)&0xFF));
-		return somme;
+		return (short)((extrait.charAt(0)<<8)|(extrait.charAt(1)&0xFF));
 	}
 
 	/**
@@ -93,8 +88,7 @@ public class GestionnaireMessages {
 		if(message.length() < debut+nbOctetsARecuperer)
 			return -1;
 		String extrait =  parcoursString(message, debut, nbOctetsARecuperer);
-		short somme = (short)((extrait.charAt(0)<<8)|(extrait.charAt(1)&0xFF));
-		return somme;
+		return (short)((extrait.charAt(0)<<8)|(extrait.charAt(1)&0xFF));
 	}
 
 	/**
@@ -107,8 +101,7 @@ public class GestionnaireMessages {
 		if(message.length() < debut+nbOctetsARecuperer)
 			return -1;
 		String extrait = parcoursString(message, debut, nbOctetsARecuperer);
-		short somme = (short)extrait.charAt(0);
-		return somme;
+		return (short)extrait.charAt(0);
 	}
 	
 	/**
@@ -121,8 +114,7 @@ public class GestionnaireMessages {
 		if(message.length() < debut+nbOctetsARecuperer)
 			return -1;
 		String extrait = parcoursString(message, debut, nbOctetsARecuperer);
-		short somme = (short)extrait.charAt(0);
-		return somme;
+		return (short)extrait.charAt(0);
 	}
 
 
@@ -153,8 +145,18 @@ public class GestionnaireMessages {
 	 * @return un booléen true si la trame semble complete, false sinon
 	 */
 	private boolean testChecksum(String message) {
-		// TODO Auto-generated method stub
-		return true;
+		boolean result = true;
+		if(this.checksum != calculChecksum())
+			result = false;
+		return result;
+	}
+	
+	private short calculChecksum(){
+		short somme = this.checksum;
+		/*short somme = 0;
+		**TODO checksum
+		*/
+		return somme;
 	}
 	
 	/************************************************************/
@@ -168,20 +170,21 @@ public class GestionnaireMessages {
 	private String messagePourAgent(){
 		String message = "";
 		preparationAffichage();
-		if((this.code_fonction == ConstructionCode.INITIALISATION.getValue())){
+		if((this.code_fonction == ConstructionCode.INITIALISATION.getValue()))
 			message = constructionMessageTypeInitialisation();
 			
-		}else if((this.code_fonction == ConstructionCode.INFORMATION.getValue())){
+		else if((this.code_fonction == ConstructionCode.INFORMATION.getValue()))
 			message = constructionMessageTypeInformation();
 			
-		}else if((this.code_fonction == ConstructionCode.ORDRE.getValue())){
+		else if((this.code_fonction == ConstructionCode.ORDRE.getValue()))
 			message = constructionMessageTypeOrdre();
 		
-		}else if((this.code_fonction == ConstructionCode.ENVIRONNEMENT.getValue())){
+		else if((this.code_fonction == ConstructionCode.ENVIRONNEMENT.getValue()))
 			message = constructionMessageTypeEnvironnement();
-		}else if(this.code_fonction == ControleGopigo.CODE_FONCTION.getValue()){
+			
+		else if(this.code_fonction == ControleGopigo.CODE_FONCTION.getValue())
 			message = constructionMessageControleGopico();
-		}
+		
 				
 		return (message+"\n");	
 	}
@@ -194,7 +197,7 @@ public class GestionnaireMessages {
 	 */
 	private String constructionMessageTypeInitialisation() {
 		String message;
-		message = SEPARATEUR_ELEMENT+(Integer.toString(this.code_fonction))+SEPARATEUR_ELEMENT+this.contenu.substring(0, this.contenu.indexOf(SEPARATEUR_ENS_DONNEES))+SEPARATEUR_ENS_DONNEES;
+		message = StructureTrame.SEPARATEUR_ELEMENT.toString()+(Integer.toString(this.code_fonction))+StructureTrame.SEPARATEUR_ELEMENT.toString()+this.contenu.substring(0, this.contenu.indexOf(StructureTrame.SEPARATEUR_ENS_DONNEES.toString()))+StructureTrame.SEPARATEUR_ENS_DONNEES.toString();
 		if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
 			message = Ordre_robot.ID.toString() + message;
 		else if(this.code_sous_fonction == (ConstructionCode.POSITION.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
@@ -209,17 +212,22 @@ public class GestionnaireMessages {
 	 */
 	private String constructionMessageTypeInformation() {
 		String message;
-		message = SEPARATEUR_ELEMENT+(Integer.toString(this.code_fonction))+SEPARATEUR_ENS_DONNEES;
+		message = StructureTrame.SEPARATEUR_ELEMENT.toString()+(Integer.toString(this.code_fonction))+StructureTrame.SEPARATEUR_ENS_DONNEES.toString();
 		if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
 			message = Ordre_robot.DEMANDE_ID.toString() + message;
+		
 		else if(this.code_sous_fonction == (ConstructionCode.POSITION.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
 			message = Ordre_robot.DEMANDE_POSITION.toString() + message;
+		
 		else if(this.code_sous_fonction == (ConstructionCode.COMPORTEMENT.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
 			message = Ordre_robot.DEMANDE_COMPORTEMENT.toString() + message;
+		
 		else if(this.code_sous_fonction == (ConstructionCode.VITESSE.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
 			message = Ordre_robot.DEMANDE_VITESSE.toString() + message;
+		
 		else if(this.code_sous_fonction == (ConstructionCode.VITESSE.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
 			message = Ordre_robot.DEMANDE_VITESSE.toString() + message;
+		
 		else if(this.code_sous_fonction == (ConstructionCode.TENSION_BATTERIE.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
 			message = Ordre_robot.DEMANDE_TENSION.toString() + message;
 		return message;
@@ -233,7 +241,8 @@ public class GestionnaireMessages {
 	 */
 	private String constructionMessageTypeOrdre() {
 		String message;
-		message = SEPARATEUR_ELEMENT+(Integer.toString(this.code_fonction))+SEPARATEUR_ELEMENT+this.contenu.substring(0, this.contenu.indexOf(SEPARATEUR_ENS_DONNEES))+SEPARATEUR_ENS_DONNEES;
+		message = StructureTrame.SEPARATEUR_ELEMENT.toString()+(Integer.toString(this.code_fonction));
+		message += StructureTrame.SEPARATEUR_ELEMENT.toString()+this.contenu.substring(0, this.contenu.indexOf(StructureTrame.SEPARATEUR_ENS_DONNEES.toString())+1);
 		if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
 			message = Ordre_robot.ID.toString()+message;
 		else if(this.code_sous_fonction == (ConstructionCode.POSITION.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
@@ -312,30 +321,32 @@ public class GestionnaireMessages {
 	
 	/**
 	 * Transforme la trame reçu en un message compréhensible par le simulateur
+	 * Découpage de la chaine de caractère reçu : 
+	 * 1er -> Récupération du code fonction (type)
+	 * 2e -> Récupération du code sous fonction (sous forme de code ou de commande executé par le robot)
 	 * @return un message traduit
 	 */
 	private String messagePourSimulation(){
 		
-		String message = "";
 		String type = "";
 		String commande = "";
 		
-		int indexSeparation =  this.contenu.indexOf(SEPARATEUR_ELEMENT);
+		int indexSeparation =  this.contenu.indexOf(StructureTrame.SEPARATEUR_ELEMENT.toString());
 		type = this.contenu.substring(0, indexSeparation);
 		
 		this.contenu = this.contenu.substring((indexSeparation+1), this.contenu.length());
-	
-		indexSeparation =  this.contenu.indexOf(SEPARATEUR_ELEMENT);
+		
+		indexSeparation =  this.contenu.indexOf(StructureTrame.SEPARATEUR_ELEMENT.toString());
+		
 		if(indexSeparation == -1){
-			commande = this.contenu.substring(0, this.contenu.indexOf(SEPARATEUR_ENS_DONNEES));
-			this.contenu = " ";
+			commande = this.contenu.substring(0, this.contenu.indexOf(StructureTrame.SEPARATEUR_ENS_DONNEES.toString()));
+			this.contenu = "";
 		}else{
 			commande = this.contenu.substring(0, indexSeparation);
 			this.contenu = this.contenu.substring((indexSeparation+1), this.contenu.length());
 		}		
-		determinerInformations(type, commande, message);
-		message = creationTrame();
-		return message;
+		determinerInformations(type, commande, this.contenu);
+		return creationTrame();
 	}
 	
 	
@@ -353,7 +364,7 @@ public class GestionnaireMessages {
 	 * @param message le contenu du message envoyé
 	 */
 	private void determinerTailleDonnees(String message) {
-		this.taille_donnees = (short) message.length();
+		this.taille_donnees = (short)(message.length());
 	}
 
 	
@@ -418,7 +429,7 @@ public class GestionnaireMessages {
 		}
 		maxFor = this.taille_donnees;
 		for(int i = 1; i <= maxFor; i++){
-			trame[index] = (byte)this.contenu.charAt(i);
+			trame[index] = (byte)this.contenu.charAt(i-1);
 					index++;
 		}
 		maxFor = StructureTrame.TAILLE_CHECKSUM.getValue();
@@ -451,8 +462,8 @@ public class GestionnaireMessages {
 		String traduit = this.contenu;
 		if(this.estStructuree()){
 			traduit = this.messagePourAgent();
-			this.code_fonction = NON_STRUCTUREE;
-			this.code_sous_fonction = NON_STRUCTUREE;
+			//this.code_fonction = StructureTrame.NON_STRUCTUREE.getValue();
+			//this.code_sous_fonction = StructureTrame.NON_STRUCTUREE.getValue();
 		}else
 			traduit = this.messagePourSimulation();
 		return traduit;
@@ -461,7 +472,7 @@ public class GestionnaireMessages {
 
 	public boolean estStructuree(){
 		boolean struct = true;
-		if( (this.code_fonction == NON_STRUCTUREE) || (this.code_sous_fonction == NON_STRUCTUREE) ){
+		if( (this.code_fonction == StructureTrame.NON_STRUCTUREE.getValue()) || (this.code_sous_fonction == StructureTrame.NON_STRUCTUREE.getValue()) ){
 			struct = false;
 		}
 		return struct;

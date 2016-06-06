@@ -86,27 +86,31 @@ public class Application {
 	
 	/**
 	 * Fonction qui donne la main à l'utilisateur, c'est cette fonction qui tourne tout au long de l'exécution du programme
+	 * @throws InterruptedException 
 	 */
-	public void fonctionner()
+	public void fonctionner() throws InterruptedException
 	{
 		while (true)
 		{
 			String choix = this.interfaceEntree.demandeAction();
 			choix += '\n';
-			if(!choix.equals("\n"))
+			if(!choix.equals("\n")){
 				this.envoyerDonnees(choix);
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			try {
 				if(this.comWifiRobot.isAvailable()){
 					this.comWifiRobot.lireDonneesServeur();
 					String localisation = this.comWifiRobot.obtenirDonneesLues();
-					if((localisation.substring(0, 5)).equals("2:52:"))
-						this.interfaceEntree.affichageLoc(localisation.substring(5, localisation.length()));
+					if(localisation.length() > 5){
+						if((localisation.substring(0, 5)).equals("2:52:"))
+							this.interfaceEntree.affichageLoc(localisation.substring(5, localisation.length()-2));
+					}
 				}
 			} catch (IOException e1) {
 
@@ -148,7 +152,7 @@ public class Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        System.exit(1);
+        //System.exit(1);
 	}	
 	
 	/**

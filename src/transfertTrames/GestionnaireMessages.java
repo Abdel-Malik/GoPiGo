@@ -2,6 +2,7 @@ package transfertTrames;
 
 
 import gopigo.Ordre_robot;
+import gopigo.Sens_deplacement;
 
 
 public class GestionnaireMessages {
@@ -179,7 +180,7 @@ public class GestionnaireMessages {
 		}else if((this.code_fonction == ConstructionCode.ENVIRONNEMENT.getValue())){
 			message = constructionMessageTypeEnvironnement();
 		}else if(this.code_fonction == ControleGopigo.CODE_FONCTION.getValue()){
-			
+			message = constructionMessageControleGopico();
 		}
 				
 		return (message+"\n");	
@@ -224,35 +225,25 @@ public class GestionnaireMessages {
 		return message;
 	}
 	
-	
+
+
 	/**
-	 * Transforme la trame reçu en un message compréhensible par le simulateur
+	 * Prépare un message avec la trame reçu en un message compréhensible par l'agent pour le code fonction ordre
 	 * @return un message traduit
 	 */
-	private String messagePourSimulation(){
-		
-		String message = "";
-		String type = "";
-		String commande = "";
-		
-		int indexSeparation =  this.contenu.indexOf(SEPARATEUR_ELEMENT);
-		type = this.contenu.substring(0, indexSeparation);
-		
-		this.contenu = this.contenu.substring((indexSeparation+1), this.contenu.length());
-	
-		indexSeparation =  this.contenu.indexOf(SEPARATEUR_ELEMENT);
-		if(indexSeparation == -1){
-			commande = this.contenu.substring(0, this.contenu.indexOf(SEPARATEUR_ENS_DONNEES));
-			this.contenu = " ";
-		}else{
-			commande = this.contenu.substring(0, indexSeparation);
-			this.contenu = this.contenu.substring((indexSeparation+1), this.contenu.length());
-		}		
-		determinerInformations(type, commande, message);
-		message = creationTrame();
+	private String constructionMessageTypeOrdre() {
+		String message;
+		message = SEPARATEUR_ELEMENT+(Integer.toString(this.code_fonction))+SEPARATEUR_ELEMENT+this.contenu.substring(0, this.contenu.indexOf(SEPARATEUR_ENS_DONNEES))+SEPARATEUR_ENS_DONNEES;
+		if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
+			message = Ordre_robot.ID.toString()+message;
+		else if(this.code_sous_fonction == (ConstructionCode.POSITION.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
+			message = Ordre_robot.POSITION.toString()+message;
+		else if(this.code_sous_fonction == (ConstructionCode.COMPORTEMENT.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
+			message = Ordre_robot.COMPORTEMENT.toString()+message;
 		return message;
 	}
-
+	
+	
 	/**
 	 * Prépare un message avec la trame reçu en un message compréhensible par l'agent pour le code fonction environnement
 	 * @return un message traduit
@@ -282,21 +273,68 @@ public class GestionnaireMessages {
 			message = "";
 		return message;
 	}
-
+	
 
 	/**
-	 * Prépare un message avec la trame reçu en un message compréhensible par l'agent pour le code fonction ordre
+	 * Prépare un message avec la trame reçu en une commande de contrôle compréhensible par l'agent
 	 * @return un message traduit
 	 */
-	private String constructionMessageTypeOrdre() {
-		String message;
-		message = SEPARATEUR_ELEMENT+(Integer.toString(this.code_fonction))+SEPARATEUR_ELEMENT+this.contenu.substring(0, this.contenu.indexOf(SEPARATEUR_ENS_DONNEES))+SEPARATEUR_ENS_DONNEES;
-		if(this.code_sous_fonction == (ConstructionCode.ID.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-			message = Ordre_robot.ID.toString()+message;
-		else if(this.code_sous_fonction == (ConstructionCode.POSITION.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-			message = Ordre_robot.POSITION.toString()+message;
-		else if(this.code_sous_fonction == (ConstructionCode.COMPORTEMENT.getValue() | ConstructionCode.ENVOI_MASH.getValue()))
-			message = Ordre_robot.COMPORTEMENT.toString()+message;
+	private String constructionMessageControleGopico() {
+		String message = "";
+		if(this.code_sous_fonction == ControleGopigo.AVANCER.getValue())
+			message = Sens_deplacement.AVANT.toString();
+		else if(this.code_sous_fonction == ControleGopigo.RECULER.getValue())
+			message = Sens_deplacement.ARRIERE.toString();
+		else if(this.code_sous_fonction == ControleGopigo.GAUCHE.getValue())
+			message = Sens_deplacement.GAUCHE.toString();
+		else if(this.code_sous_fonction == ControleGopigo.DROITE.getValue())
+			message = Sens_deplacement.DROITE.toString();
+		else if(this.code_sous_fonction == ControleGopigo.STOP.getValue())
+			message = Sens_deplacement.STOP.toString();
+		else if(this.code_sous_fonction == ControleGopigo.ROTATION_GAUCHE.getValue())
+			message = Sens_deplacement.ROTATION_GAUCHE.toString();
+		else if(this.code_sous_fonction == ControleGopigo.ROTATION_DROITE.getValue())
+			message = Sens_deplacement.ROTATION_DROITE.toString();
+		else if(this.code_sous_fonction == ControleGopigo.ACCELERER.getValue())
+			message = Ordre_robot.VITESSE_PLUS.toString();
+		else if(this.code_sous_fonction == ControleGopigo.RALENTIR.getValue())
+			message = Ordre_robot.VITESSE_MOINS.toString();
+		else if(this.code_sous_fonction == ControleGopigo.ACTIONNER_SERVO_GAUCHE.getValue())
+			message = Ordre_robot.TOURNER_SERVO_G.toString();
+		else if(this.code_sous_fonction == ControleGopigo.ACTINNER_SERVO_DROITE.getValue())
+			message = Ordre_robot.TOURNER_SERVO_D.toString();
+		else if(this.code_sous_fonction == ControleGopigo.RE_AXEE_SERVO.getValue())
+			message = Ordre_robot.POS_SERVO_AXE.toString();
+
+		return message;
+	}
+	
+	
+	/**
+	 * Transforme la trame reçu en un message compréhensible par le simulateur
+	 * @return un message traduit
+	 */
+	private String messagePourSimulation(){
+		
+		String message = "";
+		String type = "";
+		String commande = "";
+		
+		int indexSeparation =  this.contenu.indexOf(SEPARATEUR_ELEMENT);
+		type = this.contenu.substring(0, indexSeparation);
+		
+		this.contenu = this.contenu.substring((indexSeparation+1), this.contenu.length());
+	
+		indexSeparation =  this.contenu.indexOf(SEPARATEUR_ELEMENT);
+		if(indexSeparation == -1){
+			commande = this.contenu.substring(0, this.contenu.indexOf(SEPARATEUR_ENS_DONNEES));
+			this.contenu = " ";
+		}else{
+			commande = this.contenu.substring(0, indexSeparation);
+			this.contenu = this.contenu.substring((indexSeparation+1), this.contenu.length());
+		}		
+		determinerInformations(type, commande, message);
+		message = creationTrame();
 		return message;
 	}
 	
@@ -429,7 +467,7 @@ public class GestionnaireMessages {
 		return struct;
 	}
 	
-	
+
 
 
 	@Override

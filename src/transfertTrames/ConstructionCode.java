@@ -4,10 +4,10 @@ package transfertTrames;
 public enum ConstructionCode {
 
 	/** Codes fonctions **/
-	INITIALISATION(0x01),
-	INFORMATION(0x02),
-	ORDRE(0x03),
-	ENVIRONNEMENT(0x04),
+	INITIALISATION(0x10),
+	INFORMATION(0x20),
+	ORDRE(0x30),
+	ENVIRONNEMENT(0x40),
 	
 	/** Codes sous-fonctions **/
 	//type de messages

@@ -58,7 +58,7 @@ public class Dialogue extends Thread {
 			this.destroy();
 			e1.printStackTrace();
 		}
-		if(reception.length() != 0){
+		if(!reception.isEmpty()){
 			if(!traitement.setGestionnaireMessages(reception))
 				this.interfaceVisualisation.nouvelleInfo("probleme initialisation"+this.getName());
 			
@@ -119,7 +119,7 @@ public class Dialogue extends Thread {
 		if(nbBytesLues > 0){
 			for(int i=0; i < nbBytesLues; i++)
 				envoi += (char)receptionTube[i];
-			envoi += 0x00;
+			//envoi += 0x00;
 			this.comWifi.envoyerDonnees(envoi);
 		}
 	}

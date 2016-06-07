@@ -462,8 +462,6 @@ public class GestionnaireMessages {
 		String traduit = this.contenu;
 		if(this.estStructuree()){
 			traduit = this.messagePourAgent();
-			//this.code_fonction = StructureTrame.NON_STRUCTUREE.getValue();
-			//this.code_sous_fonction = StructureTrame.NON_STRUCTUREE.getValue();
 		}else
 			traduit = this.messagePourSimulation();
 		return traduit;

@@ -86,9 +86,9 @@ public class Application {
 	
 	/**
 	 * Fonction qui donne la main à l'utilisateur, c'est cette fonction qui tourne tout au long de l'exécution du programme
-	 * @throws InterruptedException 
+	 * 
 	 */
-	public void fonctionner() throws InterruptedException
+	public void fonctionner()
 	{
 		while (true)
 		{
@@ -96,12 +96,6 @@ public class Application {
 			choix += '\n';
 			if(!choix.equals("\n")){
 				this.envoyerDonnees(choix);
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			}
 			try {
 				if(this.comWifiRobot.isAvailable()){
@@ -152,7 +146,7 @@ public class Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        //System.exit(1);
+        System.exit(1);
 	}	
 	
 	/**

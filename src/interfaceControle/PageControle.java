@@ -419,15 +419,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		{
 			this.choixUtilisateur = this.envoyerCoordonnees();
 			this.leChoixEstFait = true;
-		}
-		/*else if(e.getSource() == this.localisationBouton)
-		{
-			this.choixUtilisateur = Ordre_robot.DEMANDE_POSITION.toString();
-			this.leChoixEstFait = true;
-			
-			this.localisation.setText(donneesDePose());
-		}*/
-		
+		}		
 		else if(e.getSource() == this.restartLocButton)
 		{
 			this.choixUtilisateur = Ordre_robot.REINITIALISATION_POSITION.toString();
@@ -435,13 +427,14 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			this.localisation.setText(donneesDePose());
 		}
 		
+		//autre
 		else if(e.getSource() == this.recuperationTension)
 		{
 			this.choixUtilisateur = Ordre_robot.DEMANDE_TENSION.toString();
 			this.leChoixEstFait = true;
 			String U = lireDonnees();
 			U = partieTension(U);
-			this.tensionBatterie.setText((U.substring(0, (U.length()-1))+"V"));
+			this.tensionBatterie.setText((U+"V"));
 		}
 		
 		
@@ -461,14 +454,17 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	}
 
 	private String partieTension(String u) {
-		String tension = u;
-		int index = u.indexOf(StructureTrame.SEPARATEUR_ENS_DONNEES.toString());
-		int ln = u.length(); 
-		if(index+1 <= ln)
-			tension = u.substring(index+1, u.length());
+		String tension = u.substring(0,u.indexOf(StructureTrame.SEPARATEUR_ELEMENT.toString(), 1+u.indexOf(StructureTrame.SEPARATEUR_ELEMENT.toString())));
+		String s = (Integer.toHexString(ConstructionCode.INFORMATION.getValue())+StructureTrame.SEPARATEUR_ELEMENT+Integer.toHexString(ConstructionCode.RETOUR_AGENT.getValue()|ConstructionCode.TENSION_BATTERIE.getValue()));
+		if(tension.equals(s)){
+			tension = u.substring(s.length()+1, u.indexOf(StructureTrame.SEPARATEUR_ENS_DONNEES.toString()));
+			System.out.print(tension);
+		}else{
+			System.out.println(tension.equals(s)+" "+u);
+			tension = u.substring(u.indexOf(StructureTrame.SEPARATEUR_ENS_DONNEES.toString()), u.length());
+		}
 		return tension;
 	}
-
 	/**
 	 * Attend un certain temps avant de récupérer des données transmis par le wi-fi
 	 * @return la chaine de caractères reçue

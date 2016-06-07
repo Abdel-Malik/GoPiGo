@@ -54,7 +54,6 @@ public class Communication_wifi {
 	{
 		try 
 		{
-				//System.out.println(str.charAt(str.length()-1));
 				this.versLeServeur.writeBytes(str);
 		} 
 		catch (IOException e) 
@@ -76,12 +75,9 @@ public class Communication_wifi {
 			byte[] data = new byte[80];
 			
 			int count = this.provenanceDuServeur.read(data);
-			//System.out.println("nbbytes lus : "+count);
-			//System.out.println("Donees lues : " + data.toString());
 			
 			for(int i=0; i < count; i++)
 			       this.chaine += (char) data[i];
-			//System.out.println("chaine lue: " + chaine);
 		}
 		catch (IOException e) {
 			e.printStackTrace();

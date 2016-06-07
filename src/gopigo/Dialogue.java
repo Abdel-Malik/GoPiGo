@@ -7,6 +7,7 @@ import java.io.PipedOutputStream;
 import transfertTrames.GestionnaireMessages;
 
 public class Dialogue extends Thread {
+	private boolean run;
 	private Communication_wifi comWifi;
 	private InterfaceEntree interfaceVisualisation;
 	private GestionnaireMessages traitement;
@@ -22,6 +23,7 @@ public class Dialogue extends Thread {
 	 * @param sortie permet l'envoi d'information à un autre thread
 	 */
 	public Dialogue(InterfaceEntree visu, Communication_wifi reseauAssoc,PipedInputStream entree, PipedOutputStream sortie){
+		this.run = true;
 		this.interfaceVisualisation = visu;
 		this.comWifi = reseauAssoc;
 		this.lectureInfos = entree;
@@ -34,7 +36,7 @@ public class Dialogue extends Thread {
 	 */
 	public void run(){
 		
-		while(true){
+		while(this.run){
 			
 			this.transfertAutreThread();
 			this.aiguillage();
@@ -45,7 +47,6 @@ public class Dialogue extends Thread {
 	/***
 	 * En présence de données sur la socket, celles-ci sont affiché, traité et renvoyé par la pipe. 
 	 */
-	@SuppressWarnings("deprecation")
 	private void transfertAutreThread(){
 		String reception = "";
 		
@@ -55,7 +56,7 @@ public class Dialogue extends Thread {
 				reception = this.comWifi.obtenirDonneesLues();
 			}
 		} catch (IOException e1) {
-			this.destroy();
+			this.run = false;
 			e1.printStackTrace();
 		}
 		if(!reception.isEmpty()){
@@ -69,7 +70,7 @@ public class Dialogue extends Thread {
 					ecritureInfos.write(reception.charAt(i));
 				} catch (IOException e){
 					this.comWifi.fermerConnexion();
-					this.destroy();
+					this.run = false;
 					e.printStackTrace();
 				}
 			}
@@ -119,7 +120,6 @@ public class Dialogue extends Thread {
 		if(nbBytesLues > 0){
 			for(int i=0; i < nbBytesLues; i++)
 				envoi += (char)receptionTube[i];
-			//envoi += 0x00;
 			this.comWifi.envoyerDonnees(envoi);
 		}
 	}

@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 
+import transfertTrames.ConstructionCode;
+import transfertTrames.ControleGopigo;
+import transfertTrames.StructureTrame;
+
 public class Application {
 	
 	private Communication_wifi comWifiRobot;
@@ -102,8 +106,8 @@ public class Application {
 					this.comWifiRobot.lireDonneesServeur();
 					String localisation = this.comWifiRobot.obtenirDonneesLues();
 					if(localisation.length() > 5){
-						if((localisation.substring(0, 5)).equals("2:52:"))
-							this.interfaceEntree.affichageLoc(localisation.substring(5, localisation.length()-2));
+						if((localisation.substring(0, 5)).equals(Integer.toHexString(ConstructionCode.INFORMATION.getValue())+StructureTrame.SEPARATEUR_ELEMENT.toString()+(Integer.toHexString(ConstructionCode.PONCTUEL_AGENT.getValue()|ConstructionCode.POSITION.getValue()))))
+							this.interfaceEntree.affichageLoc(localisation.substring(6, localisation.length()-2));
 					}
 				}
 			} catch (IOException e1) {

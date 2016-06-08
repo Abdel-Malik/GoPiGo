@@ -5,6 +5,7 @@ import interfaceControle.PageVisualisation;
 
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 
@@ -32,6 +33,9 @@ public class Main
 				pageControle.setApplication(application);
 				application.creationCommunication();
 				application.lireDonneesServeur();
+				String  retour = application.obtenirDonneesLues();
+				if(!retour.equals(" "))
+					JOptionPane.showMessageDialog(pageControle, application,retour+"impossibilité d'utiliser la balise UWB.\nLa localisation durant un commande de positionnement ne fonctionnera pas",JOptionPane.ERROR_MESSAGE);
 				application.fonctionner();
 			break;
 			
@@ -41,6 +45,10 @@ public class Main
 				application = new Application(visualisation);
 				visualisation.setApplication(application);
 				application.creationCommunicationSimu();
+				application.lireDonneesServeur();
+				String  ret = application.obtenirDonneesLues();
+				if(!ret.isEmpty())
+					JOptionPane.showMessageDialog(visualisation, ret+"impossibilité d'utiliser la balise UWB.\nLa localisation durant un commande de positionnement ne fonctionnera pas","message d'erreur", JOptionPane.ERROR_MESSAGE);
 				application.fonctionnementAutonome();
 			break;
 		}

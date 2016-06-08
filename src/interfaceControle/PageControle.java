@@ -410,7 +410,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		}
 		else if(e.getSource() == this.rotationServoDroite)
 		{
-			this.choixUtilisateur = Ordre_robot.TOURNER_SERVO_G.toString();
+			this.choixUtilisateur = Ordre_robot.TOURNER_SERVO_D.toString();
 			this.leChoixEstFait = true;
 		}
 		

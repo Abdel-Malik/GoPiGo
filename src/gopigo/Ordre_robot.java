@@ -3,6 +3,7 @@ package gopigo;
 public enum Ordre_robot {
 	
 	ID ("i"),
+	
 	DEMANDE_ID ("I"),
 	
 	POSITION ("p"),

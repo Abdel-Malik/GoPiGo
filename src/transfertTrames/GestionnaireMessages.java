@@ -8,11 +8,11 @@ import gopigo.Sens_deplacement;
 public class GestionnaireMessages {
 	
 	private short taille_donnees;
-	private short code_fonction;
-	private short code_sous_fonction;
+	private int code_fonction;
+	private int code_sous_fonction;
 	public String contenu;
 	public String affichage;
-	private short checksum;
+	private int checksum;
 	
 	
 	public GestionnaireMessages(){
@@ -49,8 +49,8 @@ public class GestionnaireMessages {
 		this.checksum = recuperationChecksum(message);
 		if(testChecksum(message)){
 			this.taille_donnees = recuperationTailleDonnees(message);
-			this.code_fonction = recuperationCodeFonction(message);
-			this.code_sous_fonction = recuperationCodeSousFonction(message);
+			this.code_fonction = (recuperationCodeFonction(message)&0xFF);
+			this.code_sous_fonction = (recuperationCodeSousFonction(message)&0xFF);
 			this.contenu = recuperationContenu(message);
 			this.affichage = "";
 			succes = true;
@@ -74,7 +74,7 @@ public class GestionnaireMessages {
 		if(message.length() < debut+nbOctetsARecuperer)
 			return -1;
 		String extrait = parcoursString(message, debut, nbOctetsARecuperer);
-		return (short)((extrait.charAt(0)<<8)|(extrait.charAt(1)&0xFF));
+		return (short) ((extrait.charAt(0)<<8)|(extrait.charAt(1)&0xFF));
 	}
 
 	/**
@@ -82,39 +82,39 @@ public class GestionnaireMessages {
 	 * @param message la trame reçu
 	 * @return la valeur du checkSum de la trame lors de l'envoi
 	 */
-	private short recuperationChecksum(String message) {
+	private int recuperationChecksum(String message) {
 		int debut = (message.length()-1)-(StructureTrame.TAILLE_ENQUEUX.getValue()+StructureTrame.TAILLE_CHECKSUM.getValue());
 		int nbOctetsARecuperer = StructureTrame.TAILLE_CHECKSUM.getValue();
 		if(message.length() < debut+nbOctetsARecuperer)
 			return -1;
 		String extrait =  parcoursString(message, debut, nbOctetsARecuperer);
-		return (short)((extrait.charAt(0)<<8)|(extrait.charAt(1)&0xFF));
+		return ((extrait.charAt(0)<<8)|(extrait.charAt(1)&0xFF));
 	}
 
 	/**
 	 * @param message la trame reçu
 	 * @return le code fonction contenu dans la trame
 	 */
-	private short recuperationCodeFonction(String message) {
+	private int recuperationCodeFonction(String message) {
 		int debut = StructureTrame.TAILLE_ENTETE.getValue()+StructureTrame.TAILLE_TAILLE_DONNEES.getValue();
 		int nbOctetsARecuperer = StructureTrame.TAILLE_CODE_FONCTION.getValue();
 		if(message.length() < debut+nbOctetsARecuperer)
 			return -1;
 		String extrait = parcoursString(message, debut, nbOctetsARecuperer);
-		return (short)extrait.charAt(0);
+		return extrait.charAt(0);
 	}
 	
 	/**
 	 * @param message la trame reçu
 	 * @return le code sous fonction contenu dans la trame
 	 */
-	private short recuperationCodeSousFonction(String message) {
+	private int recuperationCodeSousFonction(String message) {
 		int debut = StructureTrame.TAILLE_ENTETE.getValue()+StructureTrame.TAILLE_TAILLE_DONNEES.getValue()+StructureTrame.TAILLE_CODE_FONCTION.getValue();
 		int nbOctetsARecuperer = StructureTrame.TAILLE_CODE_SOUS_FONCTION.getValue();
 		if(message.length() < debut+nbOctetsARecuperer)
 			return -1;
 		String extrait = parcoursString(message, debut, nbOctetsARecuperer);
-		return (short)extrait.charAt(0);
+		return extrait.charAt(0);
 	}
 
 
@@ -151,8 +151,8 @@ public class GestionnaireMessages {
 		return result;
 	}
 	
-	private short calculChecksum(){
-		short somme = this.checksum;
+	private int calculChecksum(){
+		int somme = this.checksum;
 		/*short somme = 0;
 		**TODO checksum
 		*/
@@ -170,6 +170,7 @@ public class GestionnaireMessages {
 	private String messagePourAgent(){
 		String message = "";
 		preparationAffichage();
+
 		if((this.code_fonction == ConstructionCode.INITIALISATION.getValue()))
 			message = constructionMessageTypeInitialisation();
 			
@@ -182,8 +183,8 @@ public class GestionnaireMessages {
 		else if((this.code_fonction == ConstructionCode.ENVIRONNEMENT.getValue()))
 			message = constructionMessageTypeEnvironnement();
 			
-		else if(this.code_fonction == ControleGopigo.CODE_FONCTION.getValue())
-			message = constructionMessageControleGopico();
+		else if(this.code_fonction == ControleGopigo.CODE_FONCTION.getValue()){
+			message = constructionMessageControleGopico();}
 		
 				
 		return (message+"\n");	
@@ -332,21 +333,24 @@ public class GestionnaireMessages {
 		String commande = "";
 		
 		int indexSeparation =  this.contenu.indexOf(StructureTrame.SEPARATEUR_ELEMENT.toString());
-		type = this.contenu.substring(0, indexSeparation);
-		
-		this.contenu = this.contenu.substring((indexSeparation+1), this.contenu.length());
-		
-		indexSeparation =  this.contenu.indexOf(StructureTrame.SEPARATEUR_ELEMENT.toString());
-		
-		if(indexSeparation == -1){
-			commande = this.contenu.substring(0, this.contenu.indexOf(StructureTrame.SEPARATEUR_ENS_DONNEES.toString()));
-			this.contenu = "";
-		}else{
-			commande = this.contenu.substring(0, indexSeparation);
+		if(indexSeparation != -1){
+			type = this.contenu.substring(0, indexSeparation);
+			
 			this.contenu = this.contenu.substring((indexSeparation+1), this.contenu.length());
-		}		
-		determinerInformations(type, commande, this.contenu);
-		return creationTrame();
+			
+			indexSeparation =  this.contenu.indexOf(StructureTrame.SEPARATEUR_ELEMENT.toString());
+			
+			if(indexSeparation == -1){
+				commande = this.contenu.substring(0, this.contenu.indexOf(StructureTrame.SEPARATEUR_ENS_DONNEES.toString()));
+				this.contenu = "";
+			}else{
+				commande = this.contenu.substring(0, indexSeparation);
+				this.contenu = this.contenu.substring((indexSeparation+1), this.contenu.length());
+			}		
+			determinerInformations(type, commande, this.contenu);
+			return creationTrame();
+		}
+		return "";
 	}
 	
 	
@@ -375,7 +379,7 @@ public class GestionnaireMessages {
 	 * @param message
 	 */
 	private void determinerCodes(String type, String commande, String message) {
-		short type_short = (short)Integer.parseInt(type);
+		short type_short = (short)Integer.parseInt(type, 16); 
 		this.code_fonction = type_short;
 		if(message.isEmpty())
 			this.code_sous_fonction = ConstructionCode.CONFIRMATION_AGENT.getValue();
@@ -388,7 +392,7 @@ public class GestionnaireMessages {
 			this.code_sous_fonction = (short)(this.code_sous_fonction | ConstructionCode.POSITION.getValue());
 		}else if(commande.equals(Ordre_robot.COMPORTEMENT.toString())||commande.equals(Ordre_robot.DEMANDE_COMPORTEMENT.toString())){
 			this.code_sous_fonction = (short)(this.code_sous_fonction | ConstructionCode.COMPORTEMENT.getValue());
-		}else if(Integer.parseInt(commande) == (ConstructionCode.PONCTUEL_AGENT.getValue() |ConstructionCode.POSITION.getValue())){
+		}else if(Integer.parseUnsignedInt(commande,16) == (ConstructionCode.PONCTUEL_AGENT.getValue() |ConstructionCode.POSITION.getValue())){
 			this.code_sous_fonction = (short)(ConstructionCode.PONCTUEL_AGENT.getValue() |ConstructionCode.POSITION.getValue());
 		}
 	}

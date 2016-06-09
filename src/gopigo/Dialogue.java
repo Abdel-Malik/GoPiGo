@@ -77,7 +77,6 @@ public class Dialogue extends Thread {
 			try {
 				ecritureInfos.write(0x00);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -106,15 +105,14 @@ public class Dialogue extends Thread {
 							receptionTube[nbBytesLues] = (byte)lectureInfos.read();
 							nbBytesLues++;
 						} catch (IOException e) {
-								// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 				}
 			}
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			this.run = false;
 		}
 		
 		if(nbBytesLues > 0){

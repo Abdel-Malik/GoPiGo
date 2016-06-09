@@ -390,7 +390,6 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			try {
 				Thread.sleep(800);
 			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			String obtenirDonneesLues = lireDonnees();
@@ -445,7 +444,6 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 			try {
 				Thread.sleep(800);
 			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			System.exit(0);
@@ -473,7 +471,6 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		return application.obtenirDonneesLues();
@@ -532,9 +529,7 @@ public class PageControle extends JFrame implements ActionListener, InterfaceEnt
 	}
 
 	@Override
-	public void nouvelleInfo(String information) {
-		// TODO Auto-generated method stub
-		
+	public void nouvelleInfo(String information) {		
 	}
 
 	@Override

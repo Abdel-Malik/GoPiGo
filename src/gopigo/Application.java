@@ -5,7 +5,6 @@ import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 
 import transfertTrames.ConstructionCode;
-import transfertTrames.ControleGopigo;
 import transfertTrames.StructureTrame;
 
 public class Application {
@@ -140,17 +139,15 @@ public class Application {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
         try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        System.exit(1);
+        //System.exit(1);
 	}	
 	
 	/**
